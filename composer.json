@@ -1,0 +1,46 @@
+{
+    "name": "syntro/silverstripe-seo-meta",
+    "description": "Silverstripe module handling meta tags for pages.",
+    "type": "silverstripe-vendormodule",
+    "authors": [
+        {
+            "name": "Matthias Leutenegger",
+            "email": "hello@syntro.ch"
+        }
+    ],
+    "require": {
+        "silverstripe/cms": "^4.5",
+        "silverstripe/framework": "^4.0",
+        "jonom/silverstripe-text-target-length": "^2.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.0",
+        "symbiote/silverstripe-phpstan": "^4",
+        "phpstan/phpstan-shim": "~0.11.0",
+        "phpunit/phpunit": "^5.7"
+    },
+    "keywords": [
+        "silverstripe SEO",
+        "silverstripe",
+        "silverstripe 4",
+        "search engine optimisation",
+        "seo",
+        "meta"
+    ],
+    "license": "BSD-3-Clause",
+    "autoload": {
+        "psr-4": {
+            "Syntro\\SEOMeta\\": "src/",
+            "Syntro\\SEOMeta\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "phpcs": "~/.composer/vendor/bin/phpcs src/ tests/php/",
+        "phpcbf": "~/.composer/vendor/bin/phpcbf src/ tests/php/",
+        "phpstan": "../../bin/phpstan analyse src/ --memory-limit=1G -c phpstan-dev.neon -a ../../symbiote/silverstripe-phpstan/bootstrap.php --no-ansi --level 4",
+        "phpunit": "../../bin/phpunit",
+        "phpunit-flush": "../../bin/phpunit . '' flush=1"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

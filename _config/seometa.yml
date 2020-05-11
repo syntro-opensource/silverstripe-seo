@@ -1,0 +1,3 @@
+Page:
+    extensions:
+        - Syntro\SEOMeta\Extension\SEOPageExtension
