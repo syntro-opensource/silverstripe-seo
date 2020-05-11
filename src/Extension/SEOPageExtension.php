@@ -22,13 +22,24 @@ class SEOPageExtension extends DataExtension {
      */
     private $optimal_title_length = 50;
 
-    // /**
-    //  * Database fields
-    //  * @var array
-    //  */
-    // private static $db = [
-    //     'SEOImage' => Image::class,
-    // ];
+    /**
+     * Database fields
+     * @var array
+     */
+    private static $db = [
+        'OGMetaType' => 'Varchar(20)',
+        'OGMetaTitle' => 'Varchar',
+        'OGMetaDescription' => 'Varchar',
+        'OGMetaImage' => Image::class
+    ];
+
+    /**
+     * Add default values to database
+     * @var array
+     */
+    private static $defaults = [
+        'OGMetaType' => 'website'
+    ];
 
 
     /**
@@ -76,14 +87,14 @@ class SEOPageExtension extends DataExtension {
                 'OpenGraph',
                 _t(__CLASS__.'.OpenGraphToggle', 'OpenGraph SEO (Facebook)'),
                 [
-                    $ogType = DropdownField::create('OGType','Type',
+                    $ogType = DropdownField::create('OGMetaType','Type',
                         $types
                     ),
-                    $ogTitle = TextField::create('OGTitle','Title'),
-                    $ogImage = UploadField::create('OGImage','Image'),
-                    $ogDescription = TextareaField::create('OGDescription','Description'),
+                    $ogTitle = TextField::create('OGMetaTitle','Title'),
+                    $ogImage = UploadField::create('OGMetaImage','Image'),
+                    $ogDescription = TextareaField::create('OGMetaDescription','Description'),
                 ]
-            )->setHeadingLevel(4)->setRightTitle('<i>test</i>')
+            )->setHeadingLevel(4)
         );
         $ogTitle->setAttribute('placeholder', $owner->Title)->setTargetLength(50);
         $ogDescription->setAttribute('placeholder', $owner->MetaDescription);
@@ -100,7 +111,7 @@ class SEOPageExtension extends DataExtension {
                     $twitterImage = UploadField::create('TwitterImage','Image'),
                     $twitterDescription = TextareaField::create('TwitterDescription','Description'),
                 ]
-            )->setHeadingLevel(4)->setRightTitle('<i>test</i>')
+            )->setHeadingLevel(4)
         );
         $twitterTitle->setAttribute('placeholder', $owner->Title)->setTargetLength(50);
         $twitterDescription->setAttribute('placeholder', $owner->MetaDescription);
