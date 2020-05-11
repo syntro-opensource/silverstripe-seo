@@ -1,3 +1,6 @@
 Page:
     extensions:
         - Syntro\SEOMeta\Extension\SEOPageExtension
+Silverstripe\SiteConfig\SiteConfig:
+    extensions:
+        - Syntro\SEOMeta\Extension\SEOSiteConfigExtension
