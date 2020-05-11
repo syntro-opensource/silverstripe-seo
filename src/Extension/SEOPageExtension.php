@@ -11,6 +11,7 @@ use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\Assets\Image;
 use Silverstripe\SiteConfig\SiteConfig;
 
+use Syntro\SEOMeta\Seo;
 use Syntro\SEOMeta\Generator\OGMetaGenerator;
 
 
@@ -29,8 +30,23 @@ class SEOPageExtension extends DataExtension {
     private static $db = [
         'OGMetaType' => 'Varchar(20)',
         'OGMetaTitle' => 'Varchar',
-        'OGMetaDescription' => 'Varchar',
+        'OGMetaDescription' => 'Varchar'
+    ];
+
+    /**
+     * Has_one relationship
+     * @var array
+     */
+    private static $has_one = [
         'OGMetaImage' => Image::class
+    ];
+
+    /**
+     * Relationship version ownership
+     * @var array
+     */
+    private static $owns = [
+        'OGMetaImage'
     ];
 
     /**
@@ -49,7 +65,7 @@ class SEOPageExtension extends DataExtension {
     public function updateCMSFields(FieldList $fields)
     {
         $owner = $this->owner;
-
+        $seoManager = Seo::create($owner);
         // calculate optimal title length
         $config = SiteConfig::current_site_config();
         $titleLength = $this->optimal_title_length - strlen($config->Title) - strlen($config->Tagline);
@@ -69,12 +85,19 @@ class SEOPageExtension extends DataExtension {
                 'Metadata',
                 _t(__CLASS__.'.MetadataToggle', 'Metadata'),
                 [
+
+                    $metaDefaultImage = UploadField::create('MetaImageDefault','Image'),
                     $metaDescriptionField,
                     $metaExtraField
                 ]
             )->setHeadingLevel(4)
         );
         $metaDescriptionField->setTargetLength(125);
+        $metaDefaultImage
+            ->setReadOnly(true)
+            ->setValue($seoManager->getOGImage())
+            ->setRightTitle(_t(__CLASS__ . '.DefaultImageInfo', 'The Image which is currently displayed by crawlers. You can set a global default under "Settings" or add a custom image in the OpenGraph box.'));
+
 
         // Add Opengraph Meta
         $types = [];
@@ -101,20 +124,20 @@ class SEOPageExtension extends DataExtension {
 
 
         // Add Twitter Meta
-        $fields->addFieldToTab(
-            'Root.SEO',
-            ToggleCompositeField::create(
-                'Twitter',
-                _t(__CLASS__.'.OpenGraphToggle', 'Twitter SEO'),
-                [
-                    $twitterTitle = TextField::create('TwitterTitle','Title'),
-                    $twitterImage = UploadField::create('TwitterImage','Image'),
-                    $twitterDescription = TextareaField::create('TwitterDescription','Description'),
-                ]
-            )->setHeadingLevel(4)
-        );
-        $twitterTitle->setAttribute('placeholder', $owner->Title)->setTargetLength(50);
-        $twitterDescription->setAttribute('placeholder', $owner->MetaDescription);
+        // $fields->addFieldToTab(
+        //     'Root.SEO',
+        //     ToggleCompositeField::create(
+        //         'Twitter',
+        //         _t(__CLASS__.'.OpenGraphToggle', 'Twitter SEO'),
+        //         [
+        //             $twitterTitle = TextField::create('TwitterTitle','Title'),
+        //             $twitterImage = UploadField::create('TwitterImage','Image'),
+        //             $twitterDescription = TextareaField::create('TwitterDescription','Description'),
+        //         ]
+        //     )->setHeadingLevel(4)
+        // );
+        // $twitterTitle->setAttribute('placeholder', $owner->Title)->setTargetLength(50);
+        // $twitterDescription->setAttribute('placeholder', $owner->MetaDescription);
 
 
 
