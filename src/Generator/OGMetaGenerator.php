@@ -25,12 +25,26 @@ class OGMetaGenerator
     protected $OGName;
 
     /**
+     * @var string|null
+     */
+    protected $OGTitle;
+
+    /**
      * getOGName
      * @return string
      */
     public function getOGName()
     {
         return $this->OGName;
+    }
+
+    /**
+     * getOGName
+     * @return string
+     */
+    public function getOGTitle()
+    {
+        return $this->OGTitle;
     }
 
     /**
@@ -52,6 +66,16 @@ class OGMetaGenerator
             ];
         }
 
+        // og:title
+        if ($this->getOGName()) {
+            $tags['og:title'] = [
+                'attributes' => [
+                    'property' => 'og:title',
+                    'content' => $this->getOGTitle(),
+                ],
+            ];
+        }
+
         return $tags;
 
     }
@@ -66,6 +90,18 @@ class OGMetaGenerator
     public function setOGName($value)
     {
         $this->OGName = $value;
+        return $this;
+    }
+
+    /**
+     * setOGName
+     *
+     * @param  $value the value
+     * @return OGMetaGenerator
+     */
+    public function setOGTitle($value)
+    {
+        $this->OGTitle = $value;
         return $this;
     }
 

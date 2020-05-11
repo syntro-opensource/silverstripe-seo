@@ -50,17 +50,36 @@ class Seo
     {
         $OGGenerator = OGMetaGenerator::create();
         $OGGenerator->setOGName($this->getOGName());
+        $OGGenerator->setOGTitle($this->getOGTitle());
 
         return $OGGenerator->process();
     }
 
 
+    /**
+     * getOGName - returns the OG Name
+     *
+     * @return string
+     */
     public function getOGName()
     {
         // if(SiteConfig::current_site_config()->OGSiteName) {
         //     return SiteConfig::current_site_config()->OGSiteName;
         // }
         return SiteConfig::current_site_config()->Title;
+    }
+
+    /**
+     * getOGTitle - returns the OG Title for the record
+     *
+     * @return string
+     */
+    public function getOGTitle()
+    {
+        if ($this->object->OGMetaTitle) {
+            return $this->object->OGMetaTitle;
+        }
+        return $this->object->Title;
     }
 
     /**
