@@ -52,6 +52,7 @@ class Seo
         $OGGenerator->setOGName($this->getOGName());
         $OGGenerator->setOGTitle($this->getOGTitle());
         $OGGenerator->setOGUrl($this->object->AbsoluteLink());
+        $OGGenerator->setOGDescription($this->getOGDescription());
 
         return $OGGenerator->process();
     }
@@ -81,6 +82,29 @@ class Seo
             return $this->object->OGMetaTitle;
         }
         return $this->object->Title;
+    }
+
+    /**
+     * getOGDescription - returns the OG Description for the record
+     *
+     * @return string
+     */
+    public function getOGDescription()
+    {
+        if ($this->object->OGMetaDescription) {
+            return $this->object->OGMetaDescription;
+        } elseif (
+            class_exists(BlogPost::class) &&
+            get_class($this->object) == BlogPost::class
+        ) {
+            if ($this->object->Summary) {
+                return $this->object->Summary;
+            } elseif ($this->object->MetaDescription) {
+                return $this->object->MetaDescription;
+            }
+            return $this->object->Excerpt();
+        }
+        return $this->object->MetaDescription;
     }
 
     /**

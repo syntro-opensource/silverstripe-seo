@@ -2,6 +2,7 @@
 namespace Syntro\SEOMeta\Generator;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 
 /**
  * Responsible for generating the open graph meta information
@@ -35,6 +36,11 @@ class OGMetaGenerator
     protected $OGUrl;
 
     /**
+     * @var string|null
+     */
+    protected $OGDescription;
+
+    /**
      * getOGName
      * @return string
      */
@@ -59,6 +65,21 @@ class OGMetaGenerator
     public function getOGUrl()
     {
         return $this->OGUrl;
+    }
+
+    /**
+     * getOGDescription
+     * @return string
+     */
+    public function getOGDescription()
+    {
+        $obj = DBHTMLText::create();
+
+        if (!$this->OGDescription) {
+            return null;
+        }
+
+        return $obj->setValue($this->OGDescription)->LimitCharacters(297);
     }
 
     /**
@@ -96,6 +117,16 @@ class OGMetaGenerator
                 'attributes' => [
                     'property' => 'og:url',
                     'content' => $this->getOGUrl(),
+                ],
+            ];
+        }
+
+        // og:description
+        if ($this->getOGDescription()) {
+            $tags['og:description'] = [
+                'attributes' => [
+                    'property' => 'og:description',
+                    'content' => $this->getOGDescription(),
                 ],
             ];
         }
@@ -138,6 +169,18 @@ class OGMetaGenerator
     public function setOGUrl($value)
     {
         $this->OGUrl = $value;
+        return $this;
+    }
+
+    /**
+     * setOGDescription
+     *
+     * @param  $value the value
+     * @return OGMetaGenerator
+     */
+    public function setOGDescription($value)
+    {
+        $this->OGDescription = $value;
         return $this;
     }
 
