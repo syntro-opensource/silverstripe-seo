@@ -53,6 +53,7 @@ class Seo
         $OGGenerator->setOGTitle($this->getOGTitle());
         $OGGenerator->setOGUrl($this->object->AbsoluteLink());
         $OGGenerator->setOGDescription($this->getOGDescription());
+        $OGGenerator->setOGType($this->getOGType());
 
         return $OGGenerator->process();
     }
@@ -105,6 +106,24 @@ class Seo
             return $this->object->Excerpt();
         }
         return $this->object->MetaDescription;
+    }
+
+    /**
+     * getOGType - returns the OG Type for the record
+     *
+     * @return string|null
+     */
+    public function getOGType()
+    {
+        if (
+            class_exists(BlogPost::class) &&
+            get_class($this->object) == BlogPost::class
+        ) {
+            return 'article';
+        } elseif ($this->object->OGMetaType) {
+            return $this->object->OGMetaType;
+        }
+        return null;
     }
 
     /**

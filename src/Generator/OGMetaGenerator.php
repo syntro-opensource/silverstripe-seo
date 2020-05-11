@@ -41,8 +41,13 @@ class OGMetaGenerator
     protected $OGDescription;
 
     /**
+     * @var string|null
+     */
+    protected $OGType;
+
+    /**
      * getOGName
-     * @return string
+     * @return string|null
      */
     public function getOGName()
     {
@@ -51,7 +56,7 @@ class OGMetaGenerator
 
     /**
      * getOGTitle
-     * @return string
+     * @return string|null
      */
     public function getOGTitle()
     {
@@ -60,7 +65,7 @@ class OGMetaGenerator
 
     /**
      * getOGUrl
-     * @return string
+     * @return string|null
      */
     public function getOGUrl()
     {
@@ -69,7 +74,7 @@ class OGMetaGenerator
 
     /**
      * getOGDescription
-     * @return string
+     * @return string|null
      */
     public function getOGDescription()
     {
@@ -80,6 +85,18 @@ class OGMetaGenerator
         }
 
         return $obj->setValue($this->OGDescription)->LimitCharacters(297);
+    }
+
+    /**
+     * getOGType
+     * @return string
+     */
+    public function getOGType()
+    {
+        if ($this->OGType) {
+            return $this->OGType;
+        }
+        return 'website';
     }
 
     /**
@@ -127,6 +144,16 @@ class OGMetaGenerator
                 'attributes' => [
                     'property' => 'og:description',
                     'content' => $this->getOGDescription(),
+                ],
+            ];
+        }
+
+        // og:type
+        if ($this->getOGType()) {
+            $tags['og:type'] = [
+                'attributes' => [
+                    'property' => 'og:type',
+                    'content' => $this->getOGType(),
                 ],
             ];
         }
@@ -181,6 +208,18 @@ class OGMetaGenerator
     public function setOGDescription($value)
     {
         $this->OGDescription = $value;
+        return $this;
+    }
+
+    /**
+     * setOGType
+     *
+     * @param  $value the value
+     * @return OGMetaGenerator
+     */
+    public function setOGType($value)
+    {
+        $this->OGType = $value;
         return $this;
     }
 
