@@ -144,14 +144,18 @@ class SEOPageExtension extends DataExtension {
         return $fields;
     }
 
+    /**
+     * MetaComponents - we extend the meta components in this hook.
+     *
+     * @param  {type} &$tags description
+     * @return {type}        description
+     */
     public function MetaComponents(&$tags)
     {
-        $tags['test'] = [
-            'tag' => 'meta',
-            'attributes' => [
-                'test' => 'true'
-            ],
-            'content' => null
-        ];
+        $owner = $this->owner;
+        $seoManager = Seo::create($owner);
+
+        $tags = array_merge($tags, $seoManager->getOGTags());
+        // $tags = array_merge($seoManager->getTwitterTags());
     }
 }
