@@ -54,6 +54,7 @@ class Seo
         $OGGenerator->setOGUrl($this->object->AbsoluteLink());
         $OGGenerator->setOGDescription($this->getOGDescription());
         $OGGenerator->setOGType($this->getOGType());
+        $OGGenerator->setOGImage($this->getOGImage());
 
         return $OGGenerator->process();
     }

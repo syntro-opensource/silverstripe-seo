@@ -3,6 +3,7 @@ namespace Syntro\SEOMeta\Generator;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\Assets\Image;
 
 /**
  * Responsible for generating the open graph meta information
@@ -45,6 +46,22 @@ class OGMetaGenerator
      */
     protected $OGType;
 
+
+    /**
+     * @var int|null
+     */
+    protected $OGImage_w;
+
+    /**
+     * @var int|null
+     */
+    protected $OGImage_h;
+
+    /**
+     * @var Image|null
+     */
+    protected $OGImage;
+
     /**
      * getOGName
      * @return string|null
@@ -70,6 +87,31 @@ class OGMetaGenerator
     public function getOGUrl()
     {
         return $this->OGUrl;
+    }
+
+    /**
+     * getOGImage
+     * @return Image|null
+     */
+    public function getOGImage()
+    {
+        return $this->OGImage;
+    }
+    /**
+     * getOGImage_w
+     * @return int|null
+     */
+    public function getOGImage_w()
+    {
+        return $this->OGImage_w;
+    }
+    /**
+     * getOGImage_h
+     * @return int|null
+     */
+    public function getOGImage_h()
+    {
+        return $this->OGImage_h;
     }
 
     /**
@@ -158,6 +200,36 @@ class OGMetaGenerator
             ];
         }
 
+        // og:image
+        if ($this->getOGImage()) {
+            $tags['og:image'] = [
+                'attributes' => [
+                    'property' => 'og:image',
+                    'content' => $this->getOGImage()->getAbsoluteURL(),
+                ],
+            ];
+        }
+
+        // og:image:width
+        if ($this->getOGImage() && $this->getOGImage_w()) {
+            $tags['og:image:width'] = [
+                'attributes' => [
+                    'property' => 'og:image:width',
+                    'content' => $this->getOGImage_w(),
+                ],
+            ];
+        }
+
+        // og:image:height
+        if ($this->getOGImage() && $this->getOGImage_h()) {
+            $tags['og:image:height'] = [
+                'attributes' => [
+                    'property' => 'og:image:height',
+                    'content' => $this->getOGImage_h(),
+                ],
+            ];
+        }
+
         return $tags;
 
     }
@@ -220,6 +292,48 @@ class OGMetaGenerator
     public function setOGType($value)
     {
         $this->OGType = $value;
+        return $this;
+    }
+
+    /**
+     * setOGImage_w
+     *
+     * @param  int $value the value
+     * @return OGMetaGenerator
+     */
+    public function setOGImage_w($value)
+    {
+        $this->OGImage_w = $value;
+        return $this;
+    }
+
+    /**
+     * setOGImage_h
+     *
+     * @param  int $value the value
+     * @return OGMetaGenerator
+     */
+    public function setOGImage_h($value)
+    {
+        $this->OGImage_h = $value;
+        return $this;
+    }
+
+    /**
+     * setOGImage
+     *
+     * @param  Image $value the value
+     * @return OGMetaGenerator
+     */
+    public function setOGImage($value)
+    {
+        if (is_null($value)) {
+            $this->OGImage = $value;
+            return $this;
+        }
+        $this->setOGImage_w($value->getWidth());
+        $this->setOGImage_h($value->getHeight());
+        $this->OGImage = $value;
         return $this;
     }
 
