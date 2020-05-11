@@ -30,6 +30,11 @@ class OGMetaGenerator
     protected $OGTitle;
 
     /**
+     * @var string|null
+     */
+    protected $OGUrl;
+
+    /**
      * getOGName
      * @return string
      */
@@ -39,12 +44,21 @@ class OGMetaGenerator
     }
 
     /**
-     * getOGName
+     * getOGTitle
      * @return string
      */
     public function getOGTitle()
     {
         return $this->OGTitle;
+    }
+
+    /**
+     * getOGUrl
+     * @return string
+     */
+    public function getOGUrl()
+    {
+        return $this->OGUrl;
     }
 
     /**
@@ -67,11 +81,21 @@ class OGMetaGenerator
         }
 
         // og:title
-        if ($this->getOGName()) {
+        if ($this->getOGTitle()) {
             $tags['og:title'] = [
                 'attributes' => [
                     'property' => 'og:title',
                     'content' => $this->getOGTitle(),
+                ],
+            ];
+        }
+
+        // og:url
+        if ($this->getOGUrl()) {
+            $tags['og:url'] = [
+                'attributes' => [
+                    'property' => 'og:url',
+                    'content' => $this->getOGUrl(),
                 ],
             ];
         }
@@ -102,6 +126,18 @@ class OGMetaGenerator
     public function setOGTitle($value)
     {
         $this->OGTitle = $value;
+        return $this;
+    }
+
+    /**
+     * setOGUrl
+     *
+     * @param  $value the value
+     * @return OGMetaGenerator
+     */
+    public function setOGUrl($value)
+    {
+        $this->OGUrl = $value;
         return $this;
     }
 

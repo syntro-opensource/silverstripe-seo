@@ -51,6 +51,7 @@ class Seo
         $OGGenerator = OGMetaGenerator::create();
         $OGGenerator->setOGName($this->getOGName());
         $OGGenerator->setOGTitle($this->getOGTitle());
+        $OGGenerator->setOGUrl($this->object->AbsoluteLink());
 
         return $OGGenerator->process();
     }
