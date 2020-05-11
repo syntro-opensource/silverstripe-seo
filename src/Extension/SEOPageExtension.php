@@ -13,6 +13,7 @@ use Silverstripe\SiteConfig\SiteConfig;
 
 use Syntro\SEOMeta\Seo;
 use Syntro\SEOMeta\Generator\OGMetaGenerator;
+use Syntro\SEOMeta\Generator\TwitterMetaGenerator;
 
 
 class SEOPageExtension extends DataExtension {
@@ -30,7 +31,9 @@ class SEOPageExtension extends DataExtension {
     private static $db = [
         'OGMetaType' => 'Varchar(20)',
         'OGMetaTitle' => 'Varchar',
-        'OGMetaDescription' => 'Varchar'
+        'OGMetaDescription' => 'Varchar',
+        'TwitterMetaType' => 'Varchar(20)',
+        'TwitterMetaCreator' => 'Varchar',
     ];
 
     /**
@@ -54,7 +57,8 @@ class SEOPageExtension extends DataExtension {
      * @var array
      */
     private static $defaults = [
-        'OGMetaType' => 'website'
+        'OGMetaType' => 'website',
+        'TwitterMetaType' => 'summary'
     ];
 
 
@@ -100,9 +104,9 @@ class SEOPageExtension extends DataExtension {
 
 
         // Add Opengraph Meta
-        $types = [];
+        $OGTypes = [];
         foreach (OGMetaGenerator::config()->available_types as $value) {
-            $types[$value] = _t(OGMetaGenerator::class . '.'.$value, $value);
+            $OGTypes[$value] = _t(OGMetaGenerator::class . '.'.$value, $value);
         }
         $fields->addFieldToTab(
             'Root.SEO',
@@ -111,7 +115,7 @@ class SEOPageExtension extends DataExtension {
                 _t(__CLASS__.'.OpenGraphToggle', 'OpenGraph SEO (Facebook)'),
                 [
                     $ogType = DropdownField::create('OGMetaType','Type',
-                        $types
+                        $OGTypes
                     ),
                     $ogTitle = TextField::create('OGMetaTitle','Title'),
                     $ogImage = UploadField::create('OGMetaImage','Image'),
@@ -124,20 +128,23 @@ class SEOPageExtension extends DataExtension {
 
 
         // Add Twitter Meta
-        // $fields->addFieldToTab(
-        //     'Root.SEO',
-        //     ToggleCompositeField::create(
-        //         'Twitter',
-        //         _t(__CLASS__.'.OpenGraphToggle', 'Twitter SEO'),
-        //         [
-        //             $twitterTitle = TextField::create('TwitterTitle','Title'),
-        //             $twitterImage = UploadField::create('TwitterImage','Image'),
-        //             $twitterDescription = TextareaField::create('TwitterDescription','Description'),
-        //         ]
-        //     )->setHeadingLevel(4)
-        // );
-        // $twitterTitle->setAttribute('placeholder', $owner->Title)->setTargetLength(50);
-        // $twitterDescription->setAttribute('placeholder', $owner->MetaDescription);
+        $TwitterTypes = [];
+        foreach (TwitterMetaGenerator::config()->available_types as $value) {
+            $TwitterTypes[$value] = _t(TwitterMetaGenerator::class . '.'.$value, $value);
+        }
+        $fields->addFieldToTab(
+            'Root.SEO',
+            ToggleCompositeField::create(
+                'Twitter',
+                _t(__CLASS__.'.OpenGraphToggle', 'Twitter SEO'),
+                [
+                    $twitterType = DropdownField::create('TwitterMetaType','Type',
+                        $TwitterTypes
+                    ),
+                    $twitterTitle = TextField::create('TwitterMetaCreator','Creator'),
+                ]
+            )->setHeadingLevel(4)
+        );
 
 
 
@@ -156,6 +163,6 @@ class SEOPageExtension extends DataExtension {
         $seoManager = Seo::create($owner);
 
         $tags = array_merge($tags, $seoManager->getOGTags());
-        // $tags = array_merge($seoManager->getTwitterTags());
+        $tags = array_merge($tags, $seoManager->getTwitterTags());
     }
 }

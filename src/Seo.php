@@ -6,6 +6,7 @@ use SilverStripe\Core\Injector\Injectable;
 use Silverstripe\SiteConfig\SiteConfig;
 use SilverStripe\Blog\Model\BlogPost;
 use Syntro\SEOMeta\Generator\OGMetaGenerator;
+use Syntro\SEOMeta\Generator\TwitterMetaGenerator;
 
 
 /**
@@ -58,6 +59,37 @@ class Seo
 
         return $OGGenerator->process();
     }
+
+
+    /**
+     * getTwitterTags - returns a keyed array of meta tag attributes.
+     *
+     * Array structure corresponds to arguments for HTML::create_tag(). Example:
+     * $tags['og:description'] = [
+     *     // html tag type, if omitted defaults to 'meta'
+     *     'tag' => 'meta',
+     *     // attributes of html tag
+     *     'attributes' => [
+     *         'name' => 'description',
+     *         'content' => 'content',
+     *     ],
+     *     // content of html tag. (True meta tags don't contain content)
+     *     'content' => null
+     * ];
+     *
+     * @see HTML::createTag()
+     * @return array
+     */
+    public function getTwitterTags()
+    {
+        $TwitterGenerator = TwitterMetaGenerator::create();
+        $TwitterGenerator->setTwitterType($this->getTwitterType());
+        $TwitterGenerator->setTwitterSite($this->getTwitterSite());
+        $TwitterGenerator->setTwitterCreator($this->getTwitterCreator());
+
+        return $TwitterGenerator->process();
+    }
+
 
 
     /**
@@ -153,4 +185,35 @@ class Seo
     }
 
 
+
+    /**
+     * getTwitterType
+     *
+     * @return string|null
+     */
+    public function getTwitterType()
+    {
+        return $this->object->TwitterMetaType;
+    }
+
+    /**
+     * getTwitterSite
+     *
+     * @return string|null
+     */
+    public function getTwitterSite()
+    {
+        return SiteConfig::current_site_config()->TwitterSite;
+    }
+
+
+    /**
+     * getTwitterCreator
+     *
+     * @return string|null
+     */
+    public function getTwitterCreator()
+    {
+        return $this->object->TwitterMetaCreator;
+    }
 }
