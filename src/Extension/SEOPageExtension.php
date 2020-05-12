@@ -20,12 +20,6 @@ use Syntro\SEOMeta\Generator\TwitterMetaGenerator;
 
 class SEOPageExtension extends DataExtension {
 
-
-    /**
-     * @var int
-     */
-    private $optimal_title_length = 60;
-
     /**
      * Database fields
      * @var array
@@ -73,9 +67,6 @@ class SEOPageExtension extends DataExtension {
     {
         $owner = $this->owner;
         $seoManager = Seo::create($owner);
-        // calculate optimal title length
-        $config = SiteConfig::current_site_config();
-        $titleLength = $this->optimal_title_length - strlen($config->Title);
 
         // Add the SEO Health fields
         $fields->addFieldToTab(
@@ -94,7 +85,6 @@ class SEOPageExtension extends DataExtension {
         $metaDescriptionField = $fields->dataFieldByName('MetaDescription');
         $metaExtraField = $fields->dataFieldByName('ExtraMeta');
         if (!is_null($metaDescriptionField) && !is_null($metaExtraField)) {
-            $fields->dataFieldByName('Title')->setTargetLength($titleLength);
             $fields->removeByName([
                 'MetaDescription',
                 'ExtraMeta',
@@ -179,5 +169,6 @@ class SEOPageExtension extends DataExtension {
 
         $tags = array_merge($tags, $seoManager->getOGTags());
         $tags = array_merge($tags, $seoManager->getTwitterTags());
+        $tags = array_merge($tags, $seoManager->getOtherTags());
     }
 }

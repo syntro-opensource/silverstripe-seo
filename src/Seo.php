@@ -7,6 +7,7 @@ use Silverstripe\SiteConfig\SiteConfig;
 use SilverStripe\Blog\Model\BlogPost;
 use Syntro\SEOMeta\Generator\OGMetaGenerator;
 use Syntro\SEOMeta\Generator\TwitterMetaGenerator;
+use Syntro\SEOMeta\Generator\OtherMetaGenerator;
 
 
 /**
@@ -17,12 +18,29 @@ class Seo
     use Injectable, Configurable;
 
     /**
+     * @var int
+     */
+    const GOOGLE_MAX_TITLE_LENGTH = 70;
+
+
+    /**
+     * @var int
+     */
+    const GOOGLE_MAX_DESCRIPTION_LENGTH = 160;
+
+    /**
      * Object we are working with
      * @var DataObject|SiteTree
      */
     private $object = null;
 
 
+    /**
+     * __construct - description
+     *
+     * @param  SiteTree $object the page we are working with
+     * @return void
+     */
     function __construct($object)
     {
         $this->object = $object;
@@ -30,19 +48,6 @@ class Seo
 
     /**
      * getOGTags - returns a keyed array of meta tag attributes.
-     *
-     * Array structure corresponds to arguments for HTML::create_tag(). Example:
-     * $tags['og:description'] = [
-     *     // html tag type, if omitted defaults to 'meta'
-     *     'tag' => 'meta',
-     *     // attributes of html tag
-     *     'attributes' => [
-     *         'name' => 'description',
-     *         'content' => 'content',
-     *     ],
-     *     // content of html tag. (True meta tags don't contain content)
-     *     'content' => null
-     * ];
      *
      * @see HTML::createTag()
      * @return array
@@ -64,19 +69,6 @@ class Seo
     /**
      * getTwitterTags - returns a keyed array of meta tag attributes.
      *
-     * Array structure corresponds to arguments for HTML::create_tag(). Example:
-     * $tags['og:description'] = [
-     *     // html tag type, if omitted defaults to 'meta'
-     *     'tag' => 'meta',
-     *     // attributes of html tag
-     *     'attributes' => [
-     *         'name' => 'description',
-     *         'content' => 'content',
-     *     ],
-     *     // content of html tag. (True meta tags don't contain content)
-     *     'content' => null
-     * ];
-     *
      * @see HTML::createTag()
      * @return array
      */
@@ -88,6 +80,21 @@ class Seo
         $TwitterGenerator->setTwitterCreator($this->getTwitterCreator());
 
         return $TwitterGenerator->process();
+    }
+
+    /**
+     * getOtherTags - returns a keyed array of meta tag attributes.
+     *
+     * @see HTML::createTag()
+     * @return array
+     */
+    public function getOtherTags()
+    {
+        $OtherGenerator = OtherMetaGenerator::create();
+        $OtherGenerator->setPublishDate($this->getPublishDate());
+        $OtherGenerator->setChangeDate($this->getChangeDate());
+        $OtherGenerator->setCanonicalURL($this->object->AbsoluteLink());
+        return $OtherGenerator->process();
     }
 
 
@@ -215,5 +222,25 @@ class Seo
     public function getTwitterCreator()
     {
         return $this->object->TwitterMetaCreator;
+    }
+
+    /**
+     * getPublishDate
+     *
+     * @return string
+     */
+    public function getPublishDate()
+    {
+        return $this->object->dbObject('Created')->Rfc3339();
+    }
+
+    /**
+     * getChangeDate
+     *
+     * @return string
+     */
+    public function getChangeDate()
+    {
+        return $this->object->dbObject('LastEdited')->Rfc3339();
     }
 }

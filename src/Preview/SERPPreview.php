@@ -7,22 +7,13 @@ use SilverStripe\Control\Director;
 use SilverStripe\ORM\FieldType\DBText;
 
 use Syntro\SEOMeta\Preview\Preview;
+use Syntro\SEOMeta\Seo;
 
 /**
  * Field to preview the Page as a google result
  */
 class SERPPreview extends Preview
 {
-
-    /**
-     * @var int
-     */
-    protected $google_max_title_length = 70;
-
-    /**
-     * @var int
-     */
-    protected $google_max_descr_length = 160;
 
     /**
      * Ensures that the methods are wrapped in the correct type and
@@ -42,9 +33,10 @@ class SERPPreview extends Preview
             : null;
         $container = DBText::create('Title')
             ->setValue($description)
-            ->LimitCharacters($this->google_max_descr_length,'...');
+            ->LimitCharacters(Seo::GOOGLE_MAX_DESCRIPTION_LENGTH,'...');
         return $this->highlight($container, $this->getFocus());
     }
+
 
     public function Title()
     {
@@ -54,7 +46,7 @@ class SERPPreview extends Preview
             : '';
         $container = DBText::create('Title')
             ->setValue($Title)
-            ->LimitCharacters($this->google_max_title_length,'...');
+            ->LimitCharacters(Seo::GOOGLE_MAX_TITLE_LENGTH,'...');
         return $this->highlight($container, $this->getFocus());
     }
 
