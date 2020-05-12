@@ -8,10 +8,12 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\ToggleCompositeField;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\Assets\Image;
 use Silverstripe\SiteConfig\SiteConfig;
 
 use Syntro\SEOMeta\Seo;
+use Syntro\SEOMeta\Preview\SERPPreview;
 use Syntro\SEOMeta\Generator\OGMetaGenerator;
 use Syntro\SEOMeta\Generator\TwitterMetaGenerator;
 
@@ -84,6 +86,10 @@ class SEOPageExtension extends DataExtension {
                 'ExtraMeta',
                 'Metadata'
             ]);
+            $fields->addFieldToTab(
+                'Root.SEO',
+                LiteralField::create('SERPPreview', SERPPreview::create($owner))
+            );
             $fields->addFieldToTab(
                 'Root.SEO',
                 ToggleCompositeField::create(

@@ -3,6 +3,8 @@ namespace Syntro\SEOMeta\Reports;
 
 use SilverStripe\Reports\Report;
 use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\CMS\Model\RedirectorPage;
+use SilverStripe\ErrorPage\ErrorPage;
 
 /**
  *
@@ -23,7 +25,10 @@ class MissingMetaDescriptionReport extends Report
     public function sourceRecords()
     {
         return SiteTree::get()->filter([
-            'MetaDescription' => null
+            'MetaDescription' => null,
+            'ClassName:not' => ErrorPage::class
+        ])->filter([
+            'ClassName:not' => RedirectorPage::class,
         ]);
     }
 
