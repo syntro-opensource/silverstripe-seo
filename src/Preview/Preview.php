@@ -68,6 +68,11 @@ class Preview extends ViewableData
         return $this;
     }
 
+    public function getFocus()
+    {
+        return $this->getPage()->SEOFocusKeyword;
+    }
+
     /**
      * getDom
      *
@@ -86,6 +91,24 @@ class Preview extends ViewableData
         $this->setDom($dom);
     }
 
+
+
+    /**
+     * Highlights parts of the $haystack that match the focus keyword as a whole, case insensitive
+     *
+     * @param $haystack
+     * @param $needle
+     *
+     * @return mixed
+     */
+    public function highlight($haystack, $needle)
+    {
+        if (!$needle) {
+            return $haystack;
+        }
+
+        return preg_replace('/\b(' . $needle . ')\b/i', '<strong>$0</strong>', strip_tags($haystack));
+    }
 
     /**
      * forTemplate - render function

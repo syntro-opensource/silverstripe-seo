@@ -44,9 +44,9 @@
                             font-size: 14px;
                         ">
                             <% if $MetaDescription() %>
-                                $MetaDescription().LimitCharacters(320).RAW
+                                $MetaDescription()
                             <% else_if $FirstParagraph %>
-                                $FirstParagraph.LimitCharacters(320).RAW
+                                $FirstParagraph
                             <% else %>
                                 <em class="text-secondary">
                                     No description found for this page. <br/>

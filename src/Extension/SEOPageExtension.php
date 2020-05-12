@@ -24,13 +24,14 @@ class SEOPageExtension extends DataExtension {
     /**
      * @var int
      */
-    private $optimal_title_length = 50;
+    private $optimal_title_length = 60;
 
     /**
      * Database fields
      * @var array
      */
     private static $db = [
+        'SEOFocusKeyword' => 'Varchar',
         'OGMetaType' => 'Varchar(20)',
         'OGMetaTitle' => 'Varchar',
         'OGMetaDescription' => 'Varchar',
@@ -74,7 +75,20 @@ class SEOPageExtension extends DataExtension {
         $seoManager = Seo::create($owner);
         // calculate optimal title length
         $config = SiteConfig::current_site_config();
-        $titleLength = $this->optimal_title_length - strlen($config->Title) - strlen($config->Tagline);
+        $titleLength = $this->optimal_title_length - strlen($config->Title);
+
+        // Add the SEO Health fields
+        $fields->addFieldToTab(
+            'Root.SEO',
+            $healthFocusKeywordField = TextField::create('SEOFocusKeyword','Focus Keyword')
+        );
+        $fields->addFieldToTab(
+            'Root.SEO',
+            $SERPPreviewField = LiteralField::create('SERPPreview', SERPPreview::create($owner))
+        );
+        $healthFocusKeywordField
+            ->setRightTitle(_t(__CLASS__ . '.KeyWordDesc', 'Set a Keyword which you want to focus this page around'));
+
 
         // Move meta field to the new SEO-Tab
         $metaDescriptionField = $fields->dataFieldByName('MetaDescription');
@@ -86,10 +100,6 @@ class SEOPageExtension extends DataExtension {
                 'ExtraMeta',
                 'Metadata'
             ]);
-            $fields->addFieldToTab(
-                'Root.SEO',
-                LiteralField::create('SERPPreview', SERPPreview::create($owner))
-            );
             $fields->addFieldToTab(
                 'Root.SEO',
                 ToggleCompositeField::create(
