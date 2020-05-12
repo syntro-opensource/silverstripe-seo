@@ -129,7 +129,7 @@ class Seo
             return $this->object->OGMetaDescription;
         } elseif (
             class_exists(BlogPost::class) &&
-            get_class($this->object) == BlogPost::class
+            $this->object instanceof BlogPost
         ) {
             if ($this->object->Summary) {
                 return $this->object->Summary;
