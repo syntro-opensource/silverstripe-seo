@@ -68,11 +68,6 @@ class Preview extends ViewableData
         return $this;
     }
 
-    public function getFocus()
-    {
-        return $this->getPage()->SEOFocusKeyword;
-    }
-
     /**
      * getDom
      *
@@ -83,6 +78,12 @@ class Preview extends ViewableData
         return $this->dom;
     }
 
+    /**
+     * __construct - constructor
+     *      
+     * @param  SiteTree $page the record to be tried
+     * @return void
+     */
     function __construct($page)
     {
         $this->setPage($page);

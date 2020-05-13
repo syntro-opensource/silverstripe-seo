@@ -13,6 +13,7 @@ use SilverStripe\Assets\Image;
 use Silverstripe\SiteConfig\SiteConfig;
 
 use Syntro\SEOMeta\Seo;
+use Syntro\SEOMeta\Forms\SeoAnalysisField;
 use Syntro\SEOMeta\Preview\SERPPreview;
 use Syntro\SEOMeta\Generator\OGMetaGenerator;
 use Syntro\SEOMeta\Generator\TwitterMetaGenerator;
@@ -76,6 +77,10 @@ class SEOPageExtension extends DataExtension {
         $fields->addFieldToTab(
             'Root.SEO',
             $SERPPreviewField = LiteralField::create('SERPPreview', SERPPreview::create($owner))
+        );
+        $fields->addFieldToTab(
+            'Root.SEO',
+            $SeoAnalysisField = SeoAnalysisField::create('SEOAnalysis', 'SEO Analysis', $owner)
         );
         $healthFocusKeywordField
             ->setRightTitle(_t(__CLASS__ . '.KeyWordDesc', 'Set a Keyword which you want to focus this page around'));

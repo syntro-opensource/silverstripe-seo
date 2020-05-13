@@ -22,11 +22,27 @@ class Seo
      */
     const GOOGLE_MAX_TITLE_LENGTH = 70;
 
+    /**
+     * @var int
+     */
+    const GOOGLE_OPT_TITLE_LENGTH = 40;
+
+
+    /**
+     * @var int
+     */
+    const GOOGLE_MIN_TITLE_LENGTH = 30;
+
 
     /**
      * @var int
      */
     const GOOGLE_MAX_DESCRIPTION_LENGTH = 160;
+
+    /**
+     * @var int
+     */
+    const GOOGLE_MIN_DESCRIPTION_LENGTH = 70;
 
     /**
      * Object we are working with

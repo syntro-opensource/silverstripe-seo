@@ -25,6 +25,17 @@ class SERPPreview extends Preview
         'MetaDescription' => 'HTMLText'
     ];
 
+
+    /**
+     * getFocus - returns the focus keyword
+     *
+     * @return string
+     */
+    public function getFocus()
+    {
+        return $this->getPage()->dbObject('SEOFocusKeyword');
+    }
+
     public function MetaDescription()
     {
         $description = $this->getDom()->find('meta[name=description]',0);
