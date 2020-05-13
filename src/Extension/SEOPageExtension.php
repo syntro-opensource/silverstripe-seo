@@ -1,5 +1,5 @@
 <?php
-namespace Syntro\SEOMeta\Extension;
+namespace Syntro\Seo\Extension;
 
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
@@ -14,11 +14,11 @@ use Silverstripe\SiteConfig\SiteConfig;
 use SilverStripe\Control\Controller;
 use SilverStripe\VersionedAdmin\Controllers\HistoryViewerController;
 
-use Syntro\SEOMeta\Seo;
-use Syntro\SEOMeta\Forms\SeoAnalysisField;
-use Syntro\SEOMeta\Preview\SERPPreview;
-use Syntro\SEOMeta\Generator\OGMetaGenerator;
-use Syntro\SEOMeta\Generator\TwitterMetaGenerator;
+use Syntro\Seo\Seo;
+use Syntro\Seo\Forms\SeoAnalysisField;
+use Syntro\Seo\Preview\SERPPreview;
+use Syntro\Seo\Generator\OGMetaGenerator;
+use Syntro\Seo\Generator\TwitterMetaGenerator;
 
 
 class SEOPageExtension extends DataExtension {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Syntro\SEOMeta\Analysis;
+namespace Syntro\Seo\Analysis;
 
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;

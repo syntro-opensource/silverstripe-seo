@@ -1,5 +1,5 @@
 <?php
-namespace Syntro\SEOMeta\Generator;
+namespace Syntro\Seo\Generator;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\ORM\FieldType\DBHTMLText;

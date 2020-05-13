@@ -1,5 +1,5 @@
 <?php
-namespace Syntro\SEOMeta\Analysis;
+namespace Syntro\Seo\Analysis;
 
 /**
  * Class WordCountAnalysis

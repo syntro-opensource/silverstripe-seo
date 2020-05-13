@@ -31,8 +31,8 @@
     "license": "BSD-3-Clause",
     "autoload": {
         "psr-4": {
-            "Syntro\\SEOMeta\\": "src/",
-            "Syntro\\SEOMeta\\Tests\\": "tests/"
+            "Syntro\\Seo\\": "src/",
+            "Syntro\\Seo\\Tests\\": "tests/"
         }
     },
     "scripts": {

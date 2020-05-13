@@ -1,7 +1,7 @@
 <?php
-namespace Syntro\SEOMeta\Analysis;
+namespace Syntro\Seo\Analysis;
 
-use Syntro\SEOMeta\Seo;
+use Syntro\Seo\Seo;
 
 /**
  * Class MetaDescAnalysis

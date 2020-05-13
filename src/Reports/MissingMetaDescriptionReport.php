@@ -1,5 +1,5 @@
 <?php
-namespace Syntro\SEOMeta\Reports;
+namespace Syntro\Seo\Reports;
 
 use SilverStripe\Reports\Report;
 use SilverStripe\CMS\Model\SiteTree;

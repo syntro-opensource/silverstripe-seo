@@ -1,13 +1,13 @@
 <?php
-namespace Syntro\SEOMeta;
+namespace Syntro\Seo;
 
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use Silverstripe\SiteConfig\SiteConfig;
 use SilverStripe\Blog\Model\BlogPost;
-use Syntro\SEOMeta\Generator\OGMetaGenerator;
-use Syntro\SEOMeta\Generator\TwitterMetaGenerator;
-use Syntro\SEOMeta\Generator\OtherMetaGenerator;
+use Syntro\Seo\Generator\OGMetaGenerator;
+use Syntro\Seo\Generator\TwitterMetaGenerator;
+use Syntro\Seo\Generator\OtherMetaGenerator;
 
 
 /**

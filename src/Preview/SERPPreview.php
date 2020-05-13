@@ -1,13 +1,13 @@
 <?php
-namespace Syntro\SEOMeta\Preview;
+namespace Syntro\Seo\Preview;
 
 use SilverStripe\View\ViewableData;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\Control\Director;
 use SilverStripe\ORM\FieldType\DBText;
 
-use Syntro\SEOMeta\Preview\Preview;
-use Syntro\SEOMeta\Seo;
+use Syntro\Seo\Preview\Preview;
+use Syntro\Seo\Seo;
 
 /**
  * Field to preview the Page as a google result

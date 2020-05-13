@@ -1,5 +1,5 @@
 <?php
-namespace Syntro\SEOMeta\Forms;
+namespace Syntro\Seo\Forms;
 
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\View\ArrayData;
@@ -8,7 +8,7 @@ use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Core\ClassInfo;
-use Syntro\SEOMeta\Analysis\Analysis;
+use Syntro\Seo\Analysis\Analysis;
 
 use PHPHtmlParser\Dom;
 

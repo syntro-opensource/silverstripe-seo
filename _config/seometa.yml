@@ -1,6 +1,6 @@
 Page:
     extensions:
-        - Syntro\SEOMeta\Extension\SEOPageExtension
+        - Syntro\Seo\Extension\SEOPageExtension
 Silverstripe\SiteConfig\SiteConfig:
     extensions:
-        - Syntro\SEOMeta\Extension\SEOSiteConfigExtension
+        - Syntro\Seo\Extension\SEOSiteConfigExtension

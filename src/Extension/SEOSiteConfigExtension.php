@@ -1,5 +1,5 @@
 <?php
-namespace Syntro\SEOMeta\Extension;
+namespace Syntro\Seo\Extension;
 
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Forms\TextField;

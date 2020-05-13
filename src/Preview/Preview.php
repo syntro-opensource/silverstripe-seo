@@ -1,5 +1,5 @@
 <?php
-namespace Syntro\SEOMeta\Preview;
+namespace Syntro\Seo\Preview;
 
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Core\Config\Configurable;
@@ -80,7 +80,7 @@ class Preview extends ViewableData
 
     /**
      * __construct - constructor
-     *      
+     *
      * @param  SiteTree $page the record to be tried
      * @return void
      */
