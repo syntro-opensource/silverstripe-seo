@@ -26,7 +26,7 @@ class SEOSiteConfigExtension extends DataExtension
      * @var array
      */
     private static $has_one = [
-        'OGMetaDefaultImage' => Image::class,
+        'OGDefaultImage' => Image::class,
     ];
 
     /**
@@ -34,7 +34,7 @@ class SEOSiteConfigExtension extends DataExtension
      * @var array
      */
     private static $owns = [
-        'OGMetaDefaultImage'
+        'OGDefaultImage'
     ];
 
     /**
@@ -50,7 +50,7 @@ class SEOSiteConfigExtension extends DataExtension
                 'Metadata',
                 _t(__CLASS__.'.MetadataToggle', 'SEO Metadata'),
                 [
-                    $OGMetaDefaultImageField = UploadField::create('OGMetaDefaultImage','Default Image'),
+                    $OGDefaultImageField = UploadField::create('OGDefaultImage','Default Image'),
                     $TwitterSiteField = TextField::create('TwitterSite','Twitter Site')
                 ]
             )

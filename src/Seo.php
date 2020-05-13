@@ -185,7 +185,7 @@ class Seo
     /**
      * getOGImage - returns an image to be used for the og:image tag.
      * This takes the fallback options into account in the following order:
-     * object::OGImage (> BlogPost::FeaturedImage) > SiteConfig::OGMetaDefaultImage
+     * object::OGImage (> BlogPost::FeaturedImage) > SiteConfig::OGDefaultImage
      * If no suitable image is provided, this returns null.
      *
      * @return Image|null
@@ -200,8 +200,8 @@ class Seo
             $this->object->FeaturedImageID > 0
         ) {
             return $this->object->FeaturedImage;
-        } elseif (SiteConfig::current_site_config()->OGMetaDefaultImage) {
-            return SiteConfig::current_site_config()->OGMetaDefaultImage;
+        } elseif (SiteConfig::current_site_config()->OGDefaultImage) {
+            return SiteConfig::current_site_config()->OGDefaultImage;
         } else {
             return null;
         }
