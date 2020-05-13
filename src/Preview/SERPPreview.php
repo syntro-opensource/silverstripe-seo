@@ -33,7 +33,7 @@ class SERPPreview extends Preview
      */
     public function getFocus()
     {
-        return $this->getPage()->dbObject('SEOFocusKeyword');
+        return $this->getPage()->dbObject('FocusKeyword');
     }
 
     public function MetaDescription()

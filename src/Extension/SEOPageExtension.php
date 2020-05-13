@@ -28,7 +28,7 @@ class SEOPageExtension extends DataExtension {
      * @var array
      */
     private static $db = [
-        'SEOFocusKeyword' => 'Varchar',
+        'FocusKeyword' => 'Varchar',
         'OGMetaType' => 'Varchar(20)',
         'OGMetaTitle' => 'Varchar',
         'OGMetaDescription' => 'Varchar',
@@ -77,7 +77,7 @@ class SEOPageExtension extends DataExtension {
         // Add the SEO Health fields
         $fields->addFieldToTab(
             'Root.SEO',
-            $healthFocusKeywordField = TextField::create('SEOFocusKeyword','Focus Keyword')
+            $healthFocusKeywordField = TextField::create('FocusKeyword','Focus Keyword')
         );
         $fields->addFieldToTab(
             'Root.SEO',

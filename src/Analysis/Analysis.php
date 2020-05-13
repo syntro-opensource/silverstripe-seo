@@ -80,7 +80,7 @@ abstract class Analysis
      */
     public function getKeyword()
     {
-        return strtolower($this->getPage()->SEOFocusKeyword);
+        return strtolower($this->getPage()->FocusKeyword);
     }
 
     /**
