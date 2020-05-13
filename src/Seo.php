@@ -135,8 +135,8 @@ class Seo
      */
     public function getOGTitle()
     {
-        if ($this->object->OGMetaTitle) {
-            return $this->object->OGMetaTitle;
+        if ($this->object->OGTitle) {
+            return $this->object->OGTitle;
         }
         return $this->object->Title;
     }
@@ -148,8 +148,8 @@ class Seo
      */
     public function getOGDescription()
     {
-        if ($this->object->OGMetaDescription) {
-            return $this->object->OGMetaDescription;
+        if ($this->object->OGDescription) {
+            return $this->object->OGDescription;
         } elseif (
             class_exists(BlogPost::class) &&
             $this->object instanceof BlogPost
@@ -176,8 +176,8 @@ class Seo
             get_class($this->object) == BlogPost::class
         ) {
             return 'article';
-        } elseif ($this->object->OGMetaType) {
-            return $this->object->OGMetaType;
+        } elseif ($this->object->OGType) {
+            return $this->object->OGType;
         }
         return null;
     }
@@ -185,15 +185,15 @@ class Seo
     /**
      * getOGImage - returns an image to be used for the og:image tag.
      * This takes the fallback options into account in the following order:
-     * object::OGMetaImage (> BlogPost::FeaturedImage) > SiteConfig::OGMetaDefaultImage
+     * object::OGImage (> BlogPost::FeaturedImage) > SiteConfig::OGMetaDefaultImage
      * If no suitable image is provided, this returns null.
      *
      * @return Image|null
      */
     public function getOGImage()
     {
-        if ($this->object->OGMetaImageID > 0) {
-            return $this->object->OGMetaImage;
+        if ($this->object->OGImageID > 0) {
+            return $this->object->OGImage;
         } elseif (
             class_exists(BlogPost::class) &&
             get_class($this->object) == BlogPost::class &&
@@ -216,7 +216,7 @@ class Seo
      */
     public function getTwitterType()
     {
-        return $this->object->TwitterMetaType;
+        return $this->object->TwitterType;
     }
 
     /**
@@ -237,7 +237,7 @@ class Seo
      */
     public function getTwitterCreator()
     {
-        return $this->object->TwitterMetaCreator;
+        return $this->object->TwitterCreator;
     }
 
     /**

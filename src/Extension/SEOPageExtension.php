@@ -29,11 +29,11 @@ class SEOPageExtension extends DataExtension {
      */
     private static $db = [
         'FocusKeyword' => 'Varchar',
-        'OGMetaType' => 'Varchar(20)',
-        'OGMetaTitle' => 'Varchar',
-        'OGMetaDescription' => 'Varchar',
-        'TwitterMetaType' => 'Varchar(20)',
-        'TwitterMetaCreator' => 'Varchar',
+        'OGType' => 'Varchar(20)',
+        'OGTitle' => 'Varchar',
+        'OGDescription' => 'Varchar',
+        'TwitterType' => 'Varchar(20)',
+        'TwitterCreator' => 'Varchar',
     ];
 
     /**
@@ -41,7 +41,7 @@ class SEOPageExtension extends DataExtension {
      * @var array
      */
     private static $has_one = [
-        'OGMetaImage' => Image::class
+        'OGImage' => Image::class
     ];
 
     /**
@@ -49,7 +49,7 @@ class SEOPageExtension extends DataExtension {
      * @var array
      */
     private static $owns = [
-        'OGMetaImage'
+        'OGImage'
     ];
 
     /**
@@ -57,8 +57,8 @@ class SEOPageExtension extends DataExtension {
      * @var array
      */
     private static $defaults = [
-        'OGMetaType' => 'website',
-        'TwitterMetaType' => 'summary'
+        'OGType' => 'website',
+        'TwitterType' => 'summary'
     ];
 
 
@@ -131,12 +131,12 @@ class SEOPageExtension extends DataExtension {
                     'OpenGraph',
                     _t(__CLASS__.'.OpenGraphToggle', 'OpenGraph SEO (Facebook)'),
                     [
-                        $ogType = DropdownField::create('OGMetaType','Type',
+                        $ogType = DropdownField::create('OGType','Type',
                             $OGTypes
                         ),
-                        $ogTitle = TextField::create('OGMetaTitle','Title'),
-                        $ogImage = UploadField::create('OGMetaImage','Image'),
-                        $ogDescription = TextareaField::create('OGMetaDescription','Description'),
+                        $ogTitle = TextField::create('OGTitle','Title'),
+                        $ogImage = UploadField::create('OGImage','Image'),
+                        $ogDescription = TextareaField::create('OGDescription','Description'),
                     ]
                 )->setHeadingLevel(4)
             );
@@ -155,10 +155,10 @@ class SEOPageExtension extends DataExtension {
                     'Twitter',
                     _t(__CLASS__.'.OpenGraphToggle', 'Twitter SEO'),
                     [
-                        $twitterType = DropdownField::create('TwitterMetaType','Type',
+                        $twitterType = DropdownField::create('TwitterType','Type',
                             $TwitterTypes
                         ),
-                        $twitterTitle = TextField::create('TwitterMetaCreator','Creator'),
+                        $twitterTitle = TextField::create('TwitterCreator','Creator'),
                     ]
                 )->setHeadingLevel(4)
             );
