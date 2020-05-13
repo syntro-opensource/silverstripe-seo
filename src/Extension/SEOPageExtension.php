@@ -11,6 +11,8 @@ use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Assets\Image;
 use Silverstripe\SiteConfig\SiteConfig;
+use SilverStripe\Control\Controller;
+use SilverStripe\VersionedAdmin\Controllers\HistoryViewerController;
 
 use Syntro\SEOMeta\Seo;
 use Syntro\SEOMeta\Forms\SeoAnalysisField;
@@ -66,6 +68,9 @@ class SEOPageExtension extends DataExtension {
      */
     public function updateCMSFields(FieldList $fields)
     {
+        if (Controller::curr() instanceof HistoryViewerController) { // avoid breaking the history comparison UI
+            return;
+        }
         $owner = $this->owner;
         $seoManager = Seo::create($owner);
 
