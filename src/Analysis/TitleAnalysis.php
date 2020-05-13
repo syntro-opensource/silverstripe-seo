@@ -63,23 +63,23 @@ class TitleAnalysis extends Analysis
             return static::TITLE_IS_HOME;
         }
 
-        if (strlen($title) < Seo::GOOGLE_MIN_TITLE_LENGTH) {
+        if (strlen($metaTitle) < Seo::GOOGLE_MIN_TITLE_LENGTH) {
             return static::TITLE_TOO_SHORT;
         }
 
-        if (strlen($title) < Seo::GOOGLE_OPT_TITLE_LENGTH) {
+        if (strlen($metaTitle) < Seo::GOOGLE_OPT_TITLE_LENGTH) {
             return static::TITLE_OK_BUT_SHORT;
         }
 
-        if (strlen($title) > SEO::GOOGLE_MAX_TITLE_LENGTH) {
+        if (strlen($metaTitle) > SEO::GOOGLE_MAX_TITLE_LENGTH) {
             return static::TITLE_TOO_LONG;
         }
 
-        if ($keyword && !strstr(strtolower($title), strtolower($keyword))) {
+        if ($keyword && !strstr(strtolower($metaTitle), strtolower($keyword))) {
             return static::TITLE_NO_FOCUS_KEYWORD;
         }
 
-        if ($keyword && strtolower(substr($title, 0, strlen($keyword))) !== strtolower($keyword)) {
+        if ($keyword && strtolower(substr($metaTitle, 0, strlen($keyword))) !== strtolower($keyword)) {
             return static::TITLE_FOCUS_KEYWORD_POSITION;
         }
 
