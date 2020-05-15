@@ -1,5 +1,6 @@
 Page:
     extensions:
+        - Syntro\Seo\Extension\SEOHandlerExtension
         - Syntro\Seo\Extension\SEOPageExtension
 Silverstripe\SiteConfig\SiteConfig:
     extensions:

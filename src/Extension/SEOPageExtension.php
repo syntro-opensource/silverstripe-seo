@@ -72,7 +72,6 @@ class SEOPageExtension extends DataExtension {
             return;
         }
         $owner = $this->owner;
-        $seoManager = Seo::create($owner);
 
         // Add the SEO Health fields
         $fields->addFieldToTab(
@@ -106,18 +105,12 @@ class SEOPageExtension extends DataExtension {
                     'Metadata',
                     _t(__CLASS__.'.MetadataToggle', 'Metadata'),
                     [
-
-                        $metaDefaultImage = UploadField::create('MetaImageDefault','Image'),
                         $metaDescriptionField,
                         $metaExtraField
                     ]
                 )->setHeadingLevel(4)
             );
             $metaDescriptionField->setTargetLength(125);
-            $metaDefaultImage
-                ->setReadOnly(true)
-                ->setValue($seoManager->getOGImage())
-                ->setRightTitle(_t(__CLASS__ . '.DefaultImageInfo', 'The Image which is currently displayed by crawlers. You can set a global default under "Settings" or add a custom image in the OpenGraph box.'));
 
 
             // Add Opengraph Meta
@@ -164,21 +157,5 @@ class SEOPageExtension extends DataExtension {
             );
         }
         return $fields;
-    }
-
-    /**
-     * MetaComponents - we extend the meta components in this hook.
-     *
-     * @param  {type} &$tags description
-     * @return {type}        description
-     */
-    public function MetaComponents(&$tags)
-    {
-        $owner = $this->owner;
-        $seoManager = Seo::create($owner);
-
-        $tags = array_merge($tags, $seoManager->getOGTags());
-        $tags = array_merge($tags, $seoManager->getTwitterTags());
-        $tags = array_merge($tags, $seoManager->getOtherTags());
     }
 }

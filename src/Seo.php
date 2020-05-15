@@ -48,18 +48,29 @@ class Seo
      * Object we are working with
      * @var DataObject|SiteTree
      */
-    private $object = null;
+    private $object;
 
 
     /**
-     * __construct - description
+     * __construct
      *
-     * @param  SiteTree $object the page we are working with
+     * @param  DataObject|Page $object the page we are working with
      * @return void
      */
     function __construct($object)
     {
         $this->object = $object;
+    }
+
+    /**
+     * setObject - sets the object from which
+     *
+     * @param  DataObject|Page $value description
+     * @return void
+     */
+    public function setObject($value)
+    {
+        $this->object = $value;
     }
 
     /**
