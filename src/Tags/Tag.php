@@ -59,7 +59,7 @@ class Tag
     /**
      * getData
      *
-     * @return string
+     * @return array
      */
     public function getData()
     {

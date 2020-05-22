@@ -90,6 +90,7 @@ class Preview extends ViewableData
         $dom = new Dom;
         $dom->loadFromUrl($page->AbsoluteLink());
         $this->setDom($dom);
+        parent::__construct();
     }
 
 
@@ -97,8 +98,8 @@ class Preview extends ViewableData
     /**
      * Highlights parts of the $haystack that match the focus keyword as a whole, case insensitive
      *
-     * @param $haystack what to search through
-     * @param $needle   what to search for
+     * @param string $haystack what to search through
+     * @param string $needle   what to search for
      *
      * @return mixed
      */

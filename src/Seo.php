@@ -3,11 +3,14 @@ namespace Syntro\Seo;
 
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
-use Silverstripe\SiteConfig\SiteConfig;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Blog\Model\BlogPost;
 use Syntro\Seo\Generator\OGMetaGenerator;
 use Syntro\Seo\Generator\TwitterMetaGenerator;
 use Syntro\Seo\Generator\OtherMetaGenerator;
+use SilverStripe\CMS\Model\SiteTree;
+use Page;
 
 /**
  * handles everything SEO related
@@ -44,14 +47,14 @@ class Seo
 
     /**
      * Object we are working with
-     * @var DataObject|SiteTree
+     * @var SiteTree
      */
     private $object;
 
     /**
      * __construct
      *
-     * @param  DataObject|Page $object the page we are working with
+     * @param  Page $object the page we are working with
      * @return void
      */
     function __construct($object)
@@ -62,7 +65,7 @@ class Seo
     /**
      * setObject - sets the object from which
      *
-     * @param  DataObject|Page $value description
+     * @param  Page $value description
      * @return void
      */
     public function setObject($value)

@@ -5,6 +5,7 @@ use SilverStripe\Reports\Report;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\CMS\Model\RedirectorPage;
 use SilverStripe\ErrorPage\ErrorPage;
+use SilverStripe\ORM\DataList;
 
 /**
  * Report showing Pages with missing Metadescription

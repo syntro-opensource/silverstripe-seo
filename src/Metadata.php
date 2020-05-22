@@ -7,6 +7,7 @@ use Syntro\Seo\Tags\Tag;
 use Syntro\Seo\Tags\OGTag;
 use Syntro\Seo\Tags\TwitterTag;
 use Syntro\Seo\Tags\OGImageTag;
+use Page;
 
 /**
  * Handles meta tag generation and modification
@@ -39,7 +40,7 @@ class Metadata
 
     /**
      * Object we are working with
-     * @var DataObject|SiteTree
+     * @var Page
      */
     private $source;
 
@@ -51,7 +52,7 @@ class Metadata
     /**
      * __construct
      *
-     * @param  DataObject|Page $source the page we are working with
+     * @param  Page $source the page we are working with
      * @return void
      */
     function __construct($source)
@@ -62,7 +63,7 @@ class Metadata
     /**
      * setObject - sets the source from which
      *
-     * @param  DataObject|Page $value description
+     * @param  Page $value description
      * @return Metadata
      */
     public function setSource($value)
@@ -74,7 +75,7 @@ class Metadata
     /**
      * getSource - return the current meta source
      *
-     * @return DataObject|Page
+     * @return Page
      */
     public function getSource()
     {
@@ -110,7 +111,7 @@ class Metadata
     /**
      * populateDefaultTags - populate the default tags
      *
-     * @return Metadata
+     * @return array
      */
     private function populateDefaultTags()
     {

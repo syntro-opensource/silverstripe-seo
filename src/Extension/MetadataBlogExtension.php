@@ -23,7 +23,12 @@ class MetadataBlogExtension extends DataExtension
     public function UpdateMetadata()
     {
         $metadata = $this->getOwner()->getMetadata();
-        if ($current_profile = Controller::curr()->getCurrentProfile()) {
+
+        /**
+         * @var \SilverStripe\Blog\Model\BlogController      
+         */
+        $controller = Controller::curr();
+        if ($current_profile = $controller->getCurrentProfile()) {
             $metadata->pushTag(Tag::create('og:description', [
                 'property' => 'og:description',
                 'content' => $current_profile->BlogProfileSummary

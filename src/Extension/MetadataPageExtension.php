@@ -11,7 +11,7 @@ use SilverStripe\Forms\TextareaField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 use SilverStripe\Core\ClassInfo;
-use Silverstripe\SiteConfig\SiteConfig;
+use SilverStripe\SiteConfig\SiteConfig;
 use Syntro\Seo\Metadata;
 use Page;
 
@@ -25,9 +25,9 @@ class MetadataPageExtension extends DataExtension
 {
 
     /**
-     * @var Metadata
+     * @var Metadata|null
      */
-    protected $metadata;
+    protected $metadata = null;
 
     /**
      * Database fields
@@ -77,7 +77,14 @@ class MetadataPageExtension extends DataExtension
         $owner = $this->owner;
 
         // Move meta field to the new Metadata-Tab
+
+        /**
+         * @var TextareaField|null
+         */
         $metaDescriptionField = $fields->dataFieldByName('MetaDescription');
+        /**
+         * @var TextareaField|null
+         */
         $metaExtraField = $fields->dataFieldByName('ExtraMeta');
         if (!is_null($metaDescriptionField) && !is_null($metaExtraField)) {
             $fields->removeByName([

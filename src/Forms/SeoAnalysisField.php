@@ -38,7 +38,6 @@ class SeoAnalysisField extends LiteralField
      * @param  string   $name  name of the field
      * @param  string   $title title of the field
      * @param  SiteTree $page  the analysed record
-     * @return {type}                description
      */
     function __construct($name, $title, SiteTree $page)
     {
@@ -65,7 +64,7 @@ class SeoAnalysisField extends LiteralField
 
         /** @var Analysis $class */
         foreach ($classes as $class) {
-            if ($class === Analysis::class) {
+            if ($class == Analysis::class) {
                 continue;
             }
 
@@ -98,7 +97,7 @@ class SeoAnalysisField extends LiteralField
      * setPage
      *
      * @param  SiteTree $value the page
-     * @return Preview
+     * @return SeoAnalysisField
      */
     public function setPage($value)
     {
@@ -120,7 +119,7 @@ class SeoAnalysisField extends LiteralField
      * setDom
      *
      * @param  Dom $value the dom
-     * @return Preview
+     * @return SeoAnalysisField
      */
     public function setDom($value)
     {

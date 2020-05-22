@@ -44,7 +44,11 @@ class FocusKeywordUniqueAnalysis extends Analysis
             return static::FOCUS_KEYWORD_UNSET;
         }
 
-        if (\Page::get()->filter(['FocusKeyword' => $this->getKeyword(), 'ID:not' => $this->getPage()->ID])->first()) {
+        /**
+         * @var null|\Page        
+         */
+        $page_with_same_keyword = \Page::get()->filter(['FocusKeyword' => $this->getKeyword(), 'ID:not' => $this->getPage()->ID])->first();
+        if ($page_with_same_keyword) {
             return static::FOCUS_KEYWORD_INUSE;
         }
 
