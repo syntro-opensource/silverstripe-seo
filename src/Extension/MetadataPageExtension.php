@@ -67,6 +67,8 @@ class MetadataPageExtension extends DataExtension
 
     /**
      * Update Fields
+     *
+     * @param  FieldList $fields the original fields
      * @return FieldList
      */
     public function updateCMSFields(FieldList $fields)
@@ -168,7 +170,7 @@ class MetadataPageExtension extends DataExtension
     /**
      * MetaComponents - we extend the meta components in this hook.
      *
-     * @param  array &$tags description
+     * @param  array $tags the original tags
      * @return void
      */
     public function MetaComponents(&$tags)

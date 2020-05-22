@@ -5,6 +5,7 @@ use Syntro\Seo\Seo;
 
 /**
  * Class TitleAnalysis
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
 class TitleAnalysis extends Analysis
 {

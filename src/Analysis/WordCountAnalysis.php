@@ -3,6 +3,7 @@ namespace Syntro\Seo\Analysis;
 
 /**
  * Class WordCountAnalysis
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
 class WordCountAnalysis extends Analysis
 {

@@ -97,8 +97,8 @@ class Preview extends ViewableData
     /**
      * Highlights parts of the $haystack that match the focus keyword as a whole, case insensitive
      *
-     * @param $haystack
-     * @param $needle
+     * @param $haystack what to search through
+     * @param $needle   what to search for
      *
      * @return mixed
      */
@@ -114,7 +114,7 @@ class Preview extends ViewableData
     /**
      * forTemplate - render function
      *
-     * @return
+     * @return string
      */
     public function forTemplate()
     {

@@ -5,6 +5,7 @@ use SilverStripe\View\Parsers\URLSegmentFilter;
 
 /**
  * Class FocusKeywordUrlAnalysis
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
 class FocusKeywordUrlAnalysis extends Analysis
 {

@@ -15,18 +15,19 @@ use Syntro\Seo\Tags\Tag;
 class TwitterTag extends Tag
 {
 
+
     /**
      * __construct
      *
-     * @param  string      $name     name of this tag, must be unique
-     * @param  array       $data     the data in this tag
-     * @param  null|string $tag=null the tag to use. by default, a 'meta' tag is created
+     * @param  string $name          the tag name
+     * @param  string $property_name the name value
+     * @param  string $content       the content
      * @return void
      */
-    function __construct($name, $property, $content)
+    function __construct($name, $property_name, $content)
     {
         $data = [
-            'name' => $property,
+            'name' => $property_name,
             'content' => $content
         ];
         parent::__construct($name, $data, 'meta');

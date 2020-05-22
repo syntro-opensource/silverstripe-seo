@@ -23,6 +23,15 @@ class OGTag extends Tag
      * @param  null|string $tag=null the tag to use. by default, a 'meta' tag is created
      * @return void
      */
+
+    /**
+     * __construct
+     *
+     * @param  string $name     the tag name
+     * @param  string $property the property value
+     * @param  string $content  the content value
+     * @return void
+     */
     function __construct($name, $property, $content)
     {
         $data = [

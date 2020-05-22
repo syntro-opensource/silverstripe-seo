@@ -4,6 +4,7 @@ namespace Syntro\Seo\Analysis;
 
 /**
  * Class FocusKeywordContentAnalysis
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
 class FocusKeywordContentAnalysis extends Analysis
 {
@@ -15,8 +16,11 @@ class FocusKeywordContentAnalysis extends Analysis
         'default'
     ];
 
+
     /**
+     * findOccurrences
      *
+     * @return int
      */
     public function findOccurrences()
     {

@@ -8,7 +8,7 @@ Page:
         # - Syntro\Seo\Extension\SEOPageExtension
 Silverstripe\SiteConfig\SiteConfig:
     extensions:
-        - Syntro\Seo\Extension\SEOSiteConfigExtension
+        - Syntro\Seo\Extension\MetaSiteConfigExtension
 
 
 ---

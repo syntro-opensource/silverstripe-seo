@@ -11,6 +11,8 @@ use Syntro\Seo\Seo;
 
 /**
  * Field to preview the Page as a google result
+ *
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
 class SERPPreview extends Preview
 {
@@ -36,6 +38,11 @@ class SERPPreview extends Preview
         return $this->getPage()->dbObject('FocusKeyword');
     }
 
+    /**
+     * MetaDescription - returns the meta description
+     *
+     * @return string
+     */
     public function MetaDescription()
     {
         $description = $this->getDom()->find('meta[name=description]', 0);
@@ -49,6 +56,11 @@ class SERPPreview extends Preview
     }
 
 
+    /**
+     * Title - tfinds the metatitle
+     *
+     * @return string
+     */
     public function Title()
     {
         $Title = $this->getDom()->find('title', 0);
@@ -62,11 +74,21 @@ class SERPPreview extends Preview
     }
 
 
+    /**
+     * BaseURL
+     *
+     * @return string
+     */
     public function BaseURL()
     {
         return Director::host();
     }
 
+    /**
+     * Crumbs - returns the crumbs
+     *
+     * @return ArrayList
+     */
     public function Crumbs()
     {
         $string = $this->getPage()->Link();
@@ -81,6 +103,11 @@ class SERPPreview extends Preview
         return ArrayList::create($crumbs);
     }
 
+    /**
+     * RightTitle
+     *
+     * @return string
+     */
     public function RightTitle()
     {
         return _t(__CLASS__ . '.Description', 'This is how this Page is presented by Google');

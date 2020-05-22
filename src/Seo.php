@@ -11,6 +11,7 @@ use Syntro\Seo\Generator\OtherMetaGenerator;
 
 /**
  * handles everything SEO related
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
 class Seo
 {

@@ -9,9 +9,10 @@ use SilverStripe\Assets\Image;
 use SilverStripe\Forms\ToggleCompositeField;
 
 /**
- *
+ * Adds some Meta fields to the siteconfig
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
-class SEOSiteConfigExtension extends DataExtension
+class MetaSiteConfigExtension extends DataExtension
 {
     /**
      * Database fields
@@ -39,6 +40,8 @@ class SEOSiteConfigExtension extends DataExtension
 
     /**
      * Update Fields
+     *
+     * @param  FieldList $fields the original fields
      * @return FieldList
      */
     public function updateCMSFields(FieldList $fields)

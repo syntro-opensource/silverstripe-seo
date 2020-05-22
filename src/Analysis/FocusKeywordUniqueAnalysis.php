@@ -3,6 +3,7 @@ namespace Syntro\Seo\Analysis;
 
 /**
  * Class FocusKeywordUniqueAnalysis
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
 class FocusKeywordUniqueAnalysis extends Analysis
 {

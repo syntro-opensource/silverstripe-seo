@@ -14,6 +14,7 @@ use PHPHtmlParser\Dom;
 
 /**
  * Handles the Display of the
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
 class SeoAnalysisField extends LiteralField
 {

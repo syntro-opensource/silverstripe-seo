@@ -5,6 +5,7 @@ use Syntro\Seo\Seo;
 
 /**
  * Class MetaDescAnalysis
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
 class MetaDescAnalysis extends Analysis
 {

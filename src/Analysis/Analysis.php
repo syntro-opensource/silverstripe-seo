@@ -9,7 +9,7 @@ use SilverStripe\View\ArrayData;
 use PHPHtmlParser\Dom;
 
 /**
- *
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
 abstract class Analysis
 {
@@ -58,7 +58,8 @@ abstract class Analysis
     /**
      * Analysis constructor.
      *
-     * @param SiteTree $page
+     * @param SiteTree $page the page
+     * @param Dom      $dom  the dom
      */
     public function __construct(SiteTree $page, Dom $dom)
     {
@@ -83,7 +84,7 @@ abstract class Analysis
     }
 
     /**
-     * @param SiteTree $page
+     * @param SiteTree $page the page
      * @return $this
      */
     public function setPage(SiteTree $page)
