@@ -3,6 +3,9 @@ namespace Syntro\Seo;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use Syntro\Seo\Tags\Tag;
+use Syntro\Seo\Tags\OGTag;
+use Syntro\Seo\Tags\TwitterTag;
+use Syntro\Seo\Tags\OGImageTag;
 
 /**
  * Handles meta tag generation and modification
@@ -116,38 +119,14 @@ class Metadata
                 'rel' => 'canonical',
                 'href' => $source->AbsoluteLink()
             ], 'link'),
-            'og:type' => Tag::create('og:type', [
-                'property' => 'og:type',
-                'content' => $source->OGTypeForTemplate(),
-            ], 'meta'),
-            'og:name' => Tag::create('og:name', [
-                'property' => 'og:name',
-                'content' => $source->OGNameForTemplate(),
-            ], 'meta'),
-            'og:title' => Tag::create('og:title', [
-                'property' => 'og:title',
-                'content' => $source->OGTitleForTemplate(),
-            ], 'meta'),
-            'og:url' => Tag::create('og:url', [
-                'property' => 'og:url',
-                'content' => $source->AbsoluteLink(),
-            ], 'meta'),
-            'og:description' => Tag::create('og:description', [
-                'property' => 'og:description',
-                'content' => $source->OGDescriptionForTemplate(),
-            ], 'meta'),
-            'og:image' => Tag::create('og:image', [
-                'property' => 'og:image',
-                'content' => $source->OGImageForTemplate()->Link(),
-            ], 'meta'),
-            'twitter:card' => Tag::create('twitter:card', [
-                'name' => 'twitter:card',
-                'content' => $source->TwitterCardForTemplate(),
-            ], 'meta'),
-            'twitter:site' => Tag::create('twitter:site', [
-                'name' => 'twitter:site',
-                'content' => $source->TwitterSiteForTemplate(),
-            ], 'meta'),
+            'og:type' => OGTag::create('og:type', 'og:type', $source->OGTypeForTemplate()),
+            'og:name' => OGTag::create('og:name', 'og:name', $source->OGNameForTemplate()),
+            'og:title' => OGTag::create('og:title', 'og:title', $source->OGTitleForTemplate()),
+            'og:url' => OGTag::create('og:url', 'og:url', $source->AbsoluteLink()),
+            'og:description' => OGTag::create('og:description', 'og:description', $source->OGDescriptionForTemplate()),
+            'og:image' => OGImageTag::create('og:image', $source->OGImageForTemplate()),
+            'twitter:card' => TwitterTag::create('twitter:card', 'twitter:card', $source->TwitterCardForTemplate()),
+            'twitter:site' => TwitterTag::create('twitter:site', 'twitter:site', $source->TwitterSiteForTemplate()),
             'article:published_time' => Tag::create('article:published_time', [
                 'property' => 'article:published_time',
                 'content' => $source->Created,
@@ -207,7 +186,11 @@ class Metadata
         $tagsForRender = [];
 
         foreach ($tags as $tag) {
-            $tagsForRender[] = $tag->forRender();
+            if ($tag instanceof OGImageTag) {
+                $tagsForRender = array_merge($tagsForRender, $tag->forRender());
+            } else {
+                $tagsForRender[] = $tag->forRender();
+            }
         }
         return $tagsForRender;
     }
