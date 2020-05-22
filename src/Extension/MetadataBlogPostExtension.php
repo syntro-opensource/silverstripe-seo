@@ -3,6 +3,7 @@ namespace Syntro\Seo\Extension;
 
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Control\Controller;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 
 
 /**
@@ -13,14 +14,6 @@ use SilverStripe\Control\Controller;
  */
 class MetadataBlogPostExtension extends DataExtension
 {
-    /**
-     * Ensures that the methods are wrapped in the correct type and
-     * values are safely escaped while rendering in the template.
-     * @var array
-     */
-    private static $casting = [
-        'OGDescriptionForTemplate' => 'Text'
-    ];
 
     /**
      * OGTypeForTemplate - fetches the type of this object
@@ -40,9 +33,11 @@ class MetadataBlogPostExtension extends DataExtension
      */
     public function OGDescriptionForTemplate()
     {
+
         $owner = $this->getOwner();
         if ($owner->Summary) {
-            return $owner->Summary;
+            /** @var DBHTMLText */
+            return $owner->dbObject('Summary')->Summary(500);
         }
         return $owner->Excerpt();
     }
