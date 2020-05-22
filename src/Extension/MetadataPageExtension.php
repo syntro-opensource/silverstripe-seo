@@ -86,7 +86,7 @@ class MetadataPageExtension extends DataExtension
             ]);
             $fields->addFieldToTab(
                 'Root.Metadata',
-                ToggleCompositeField::create(
+                $metaToggle = ToggleCompositeField::create(
                     'Metadata',
                     _t(__CLASS__.'.MetadataToggle', 'Metadata'),
                     [
@@ -96,6 +96,7 @@ class MetadataPageExtension extends DataExtension
                 )->setHeadingLevel(4)
             );
             $metaDescriptionField->setTargetLength(125);
+            $metaToggle->setStartClosed(false);
 
 
             // Add Opengraph Meta
