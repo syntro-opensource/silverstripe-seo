@@ -1,5 +1,9 @@
 # Silverstripe SEO
 
+[![Build Status](https://travis-ci.org/syntro-opensource/silverstripe-seo.svg?branch=master)](https://travis-ci.org/syntro-opensource/silverstripe-seo)
+[![phpstan](https://img.shields.io/badge/PHPStan-enabled-success)](https://github.com/phpstan/phpstan)
+[![composer](https://img.shields.io/packagist/dt/syntro/silverstripe-seo-meta?color=success&logo=composer)](https://packagist.org/packages/syntro/silverstripe-seo-meta)
+
 Silverstripe module for simple SEO optimization of pages
 
 > ### Disclaimer
