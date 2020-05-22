@@ -185,7 +185,7 @@ class MetadataPageExtension extends DataExtension
 
         $owner = $this->getOwner();
         if (ClassInfo::hasMethod($owner, 'UpdateMetadata')) {
-            $owner->UpdateMetadata();
+            $owner->__call('UpdateMetadata',[]);
         }
         $metadata = $this->getMetadata();
         $tags = array_merge($tags, $metadata->getTagsForRender());

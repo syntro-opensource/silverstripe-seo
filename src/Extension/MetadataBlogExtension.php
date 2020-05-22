@@ -25,7 +25,8 @@ class MetadataBlogExtension extends DataExtension
         $metadata = $this->getOwner()->getMetadata();
 
         /**
-         * @var \SilverStripe\Blog\Model\BlogController      
+         * TODO: ignore this in composer
+         * @var mixed
          */
         $controller = Controller::curr();
         if ($current_profile = $controller->getCurrentProfile()) {
