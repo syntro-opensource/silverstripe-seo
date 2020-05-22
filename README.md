@@ -34,8 +34,6 @@ current page.
 This module aims to provide a good set of default tags. By default, the
 following tags are populated for a page:
 ```html
-<!-- link -->
-<link rel="canonical" href="...">
 <!-- OpenGraph -->
 <meta property="og:type" content="...">
 <meta property="og:name" content="...">
@@ -106,19 +104,18 @@ and edit the Tag list to your liking.
 #### Editing the Default Tags
 The default tags are named as follows:
 
-| Tag Name                   | Source Method          |
-|:-------------------------- |:---------------------- |
-| `'canonical'`              | `->AbsoluteLink()`     |
+| Tag Name                   | Source Method                  |
+|:-------------------------- |:------------------------------ |
 | `'og:type'`                | `->OGTypeForTemplate()`        |
 | `'og:name'`                | `->OGNameForTemplate()`        |
 | `'og:title'`               | `->OGTitleForTemplate()`       |
-| `'og:url'`                 | `->AbsoluteLink()`     |
+| `'og:url'`                 | `->AbsoluteLink()`             |
 | `'og:description'`         | `->OGDescriptionForTemplate()` |
 | `'og:image'`               | `->OGImageForTemplate()`       |
 | `'twitter:card'`           | `->TwitterCardForTemplate()`   |
 | `'twitter:site'`           | `->TwitterSiteForTemplate()`   |
-| `'article:published_time'` | `->Created`            |
-| `'article:modified_time'`  | `->LastEdited`         |
+| `'article:published_time'` | `->Created`                    |
+| `'article:modified_time'`  | `->LastEdited`                 |
 
 You can use these names to update the list of tags. You can also overwrite the
 getter methods stated above. This allows you to control the content of these

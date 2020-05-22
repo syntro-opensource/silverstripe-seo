@@ -115,10 +115,6 @@ class Metadata
     {
         $source = $this->getSource();
         $tags = [
-            'canonical' => Tag::create('canonical', [
-                'rel' => 'canonical',
-                'href' => $source->AbsoluteLink()
-            ], 'link'),
             'og:type' => OGTag::create('og:type', 'og:type', $source->OGTypeForTemplate()),
             'og:name' => OGTag::create('og:name', 'og:name', $source->OGNameForTemplate()),
             'og:title' => OGTag::create('og:title', 'og:title', $source->OGTitleForTemplate()),
