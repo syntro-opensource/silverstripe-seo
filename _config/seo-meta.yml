@@ -1,0 +1,24 @@
+---
+Name: seo-meta
+---
+Page:
+    # metadata: '%Syntro\SeoMetadata'
+    extensions:
+        - Syntro\Seo\Extension\MetadataPageExtension
+        # - Syntro\Seo\Extension\SEOPageExtension
+Silverstripe\SiteConfig\SiteConfig:
+    extensions:
+        - Syntro\Seo\Extension\SEOSiteConfigExtension
+
+
+---
+Name: seo-meta_blog
+Only:
+  moduleexists:
+    - 'silverstripe/blog'
+After:
+    - 'seo-meta'
+---
+SilverStripe\Blog\Model\Blog:
+  extensions:
+    - Syntro\Seo\Extension\MetadataBlogExtension
