@@ -48,10 +48,10 @@ class SEOSiteConfigExtension extends DataExtension
             'Root.Main',
             ToggleCompositeField::create(
                 'Metadata',
-                _t(__CLASS__.'.MetadataToggle', 'SEO Metadata'),
+                _t(__CLASS__ . '.MetadataToggle', 'SEO Metadata'),
                 [
-                    $OGDefaultImageField = UploadField::create('OGDefaultImage','Default Image'),
-                    $TwitterSiteField = TextField::create('TwitterSite','Twitter Site')
+                    $OGDefaultImageField = UploadField::create('OGDefaultImage', 'Default Image'),
+                    $TwitterSiteField = TextField::create('TwitterSite', 'Twitter Site')
                 ]
             )
         );

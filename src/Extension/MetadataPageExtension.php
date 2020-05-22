@@ -15,7 +15,6 @@ use Silverstripe\SiteConfig\SiteConfig;
 use Syntro\Seo\Metadata;
 use Page;
 
-
 /**
  * The MetadataPageExtension applies the necessary functionality
  * to the Page object to handle automatic metadata generation
@@ -88,7 +87,7 @@ class MetadataPageExtension extends DataExtension
                 'Root.Metadata',
                 $metaToggle = ToggleCompositeField::create(
                     'Metadata',
-                    _t(__CLASS__.'.MetadataToggle', 'Metadata'),
+                    _t(__CLASS__ . '.MetadataToggle', 'Metadata'),
                     [
                         $metaDescriptionField,
                         $metaExtraField
@@ -102,20 +101,22 @@ class MetadataPageExtension extends DataExtension
             // Add Opengraph Meta
             $OGTypes = [];
             foreach (Metadata::config()->available_og_types as $value) {
-                $OGTypes[$value] = _t(Metadata::class . '.'.$value, $value);
+                $OGTypes[$value] = _t(Metadata::class . '.' . $value, $value);
             }
             $fields->addFieldToTab(
                 'Root.Metadata',
                 ToggleCompositeField::create(
                     'OpenGraph',
-                    _t(__CLASS__.'.OpenGraphToggle', 'OpenGraph Metadata (Facebook)'),
+                    _t(__CLASS__ . '.OpenGraphToggle', 'OpenGraph Metadata (Facebook)'),
                     [
-                        $ogType = DropdownField::create('OGType','Type',
+                        $ogType = DropdownField::create(
+                            'OGType',
+                            'Type',
                             $OGTypes
                         ),
-                        $ogTitle = TextField::create('OGTitle','Title'),
-                        $ogImage = UploadField::create('OGImage','Image'),
-                        $ogDescription = TextareaField::create('OGDescription','Description'),
+                        $ogTitle = TextField::create('OGTitle', 'Title'),
+                        $ogImage = UploadField::create('OGImage', 'Image'),
+                        $ogDescription = TextareaField::create('OGDescription', 'Description'),
                     ]
                 )->setHeadingLevel(4)
             );
@@ -126,18 +127,20 @@ class MetadataPageExtension extends DataExtension
             // Add Twitter Meta
             $TwitterTypes = [];
             foreach (Metadata::config()->available_twitter_types as $value) {
-                $TwitterTypes[$value] = _t(Metadata::class . '.'.$value, $value);
+                $TwitterTypes[$value] = _t(Metadata::class . '.' . $value, $value);
             }
             $fields->addFieldToTab(
                 'Root.Metadata',
                 ToggleCompositeField::create(
                     'Twitter',
-                    _t(__CLASS__.'.OpenGraphToggle', 'Twitter Metadata'),
+                    _t(__CLASS__ . '.OpenGraphToggle', 'Twitter Metadata'),
                     [
-                        $twitterType = DropdownField::create('TwitterType','Type',
+                        $twitterType = DropdownField::create(
+                            'TwitterType',
+                            'Type',
                             $TwitterTypes
                         ),
-                        $twitterTitle = TextField::create('TwitterCreator','Creator'),
+                        $twitterTitle = TextField::create('TwitterCreator', 'Creator'),
                     ]
                 )->setHeadingLevel(4)
             );
@@ -172,12 +175,11 @@ class MetadataPageExtension extends DataExtension
     {
 
         $owner = $this->getOwner();
-        if (ClassInfo::hasMethod($owner,'UpdateMetadata')) {
+        if (ClassInfo::hasMethod($owner, 'UpdateMetadata')) {
             $owner->UpdateMetadata();
         }
         $metadata = $this->getMetadata();
         $tags = array_merge($tags, $metadata->getTagsForRender());
-
     }
 
 
@@ -273,5 +275,4 @@ class MetadataPageExtension extends DataExtension
     {
         return SiteConfig::current_site_config()->TwitterSite;
     }
-
 }

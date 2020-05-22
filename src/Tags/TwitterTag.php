@@ -18,9 +18,9 @@ class TwitterTag extends Tag
     /**
      * __construct
      *
-     * @param  string $name       name of this tag, must be unique
-     * @param  array $data the data in this tag
-     * @param  null|string $tag=null   the tag to use. by default, a 'meta' tag is created
+     * @param  string      $name     name of this tag, must be unique
+     * @param  array       $data     the data in this tag
+     * @param  null|string $tag=null the tag to use. by default, a 'meta' tag is created
      * @return void
      */
     function __construct($name, $property, $content)

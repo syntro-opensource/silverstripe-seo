@@ -8,7 +8,6 @@ use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\View\ArrayData;
 use PHPHtmlParser\Dom;
 
-
 /**
  *
  */

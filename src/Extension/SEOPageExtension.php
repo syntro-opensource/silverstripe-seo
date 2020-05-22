@@ -20,8 +20,8 @@ use Syntro\Seo\Preview\SERPPreview;
 use Syntro\Seo\Generator\OGMetaGenerator;
 use Syntro\Seo\Generator\TwitterMetaGenerator;
 
-
-class SEOPageExtension extends DataExtension {
+class SEOPageExtension extends DataExtension
+{
 
     /**
      * Database fields
@@ -76,7 +76,7 @@ class SEOPageExtension extends DataExtension {
         // Add the SEO Health fields
         $fields->addFieldToTab(
             'Root.SEO',
-            $healthFocusKeywordField = TextField::create('FocusKeyword','Focus Keyword')
+            $healthFocusKeywordField = TextField::create('FocusKeyword', 'Focus Keyword')
         );
         $fields->addFieldToTab(
             'Root.SEO',
@@ -103,7 +103,7 @@ class SEOPageExtension extends DataExtension {
                 'Root.SEO',
                 ToggleCompositeField::create(
                     'Metadata',
-                    _t(__CLASS__.'.MetadataToggle', 'Metadata'),
+                    _t(__CLASS__ . '.MetadataToggle', 'Metadata'),
                     [
                         $metaDescriptionField,
                         $metaExtraField
@@ -116,20 +116,22 @@ class SEOPageExtension extends DataExtension {
             // Add Opengraph Meta
             $OGTypes = [];
             foreach (OGMetaGenerator::config()->available_types as $value) {
-                $OGTypes[$value] = _t(OGMetaGenerator::class . '.'.$value, $value);
+                $OGTypes[$value] = _t(OGMetaGenerator::class . '.' . $value, $value);
             }
             $fields->addFieldToTab(
                 'Root.SEO',
                 ToggleCompositeField::create(
                     'OpenGraph',
-                    _t(__CLASS__.'.OpenGraphToggle', 'OpenGraph SEO (Facebook)'),
+                    _t(__CLASS__ . '.OpenGraphToggle', 'OpenGraph SEO (Facebook)'),
                     [
-                        $ogType = DropdownField::create('OGType','Type',
+                        $ogType = DropdownField::create(
+                            'OGType',
+                            'Type',
                             $OGTypes
                         ),
-                        $ogTitle = TextField::create('OGTitle','Title'),
-                        $ogImage = UploadField::create('OGImage','Image'),
-                        $ogDescription = TextareaField::create('OGDescription','Description'),
+                        $ogTitle = TextField::create('OGTitle', 'Title'),
+                        $ogImage = UploadField::create('OGImage', 'Image'),
+                        $ogDescription = TextareaField::create('OGDescription', 'Description'),
                     ]
                 )->setHeadingLevel(4)
             );
@@ -140,18 +142,20 @@ class SEOPageExtension extends DataExtension {
             // Add Twitter Meta
             $TwitterTypes = [];
             foreach (TwitterMetaGenerator::config()->available_types as $value) {
-                $TwitterTypes[$value] = _t(TwitterMetaGenerator::class . '.'.$value, $value);
+                $TwitterTypes[$value] = _t(TwitterMetaGenerator::class . '.' . $value, $value);
             }
             $fields->addFieldToTab(
                 'Root.SEO',
                 ToggleCompositeField::create(
                     'Twitter',
-                    _t(__CLASS__.'.OpenGraphToggle', 'Twitter SEO'),
+                    _t(__CLASS__ . '.OpenGraphToggle', 'Twitter SEO'),
                     [
-                        $twitterType = DropdownField::create('TwitterType','Type',
+                        $twitterType = DropdownField::create(
+                            'TwitterType',
+                            'Type',
                             $TwitterTypes
                         ),
-                        $twitterTitle = TextField::create('TwitterCreator','Creator'),
+                        $twitterTitle = TextField::create('TwitterCreator', 'Creator'),
                     ]
                 )->setHeadingLevel(4)
             );

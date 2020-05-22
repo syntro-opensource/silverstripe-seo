@@ -1,5 +1,6 @@
 <?php
 namespace Syntro\Seo;
+
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use Syntro\Seo\Tags\Tag;

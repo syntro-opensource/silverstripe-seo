@@ -41,6 +41,4 @@ class MissingMetaDescriptionReport extends Report
             ],
         ];
     }
-
-
 }

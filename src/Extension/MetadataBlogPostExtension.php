@@ -5,7 +5,6 @@ use SilverStripe\ORM\DataExtension;
 use SilverStripe\Control\Controller;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 
-
 /**
  * This applies the necessary functions to retrieve the correct metadata from
  * a Blog Post

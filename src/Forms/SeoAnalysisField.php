@@ -34,9 +34,9 @@ class SeoAnalysisField extends LiteralField
     /**
      * __construct - construct a Field
      *
-     * @param  string $name          name of the field
-     * @param  string $title         title of the field
-     * @param  SiteTree $page the analysed record
+     * @param  string   $name  name of the field
+     * @param  string   $title title of the field
+     * @param  SiteTree $page  the analysed record
      * @return {type}                description
      */
     function __construct($name, $title, SiteTree $page)

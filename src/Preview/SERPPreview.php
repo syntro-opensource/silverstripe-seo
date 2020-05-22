@@ -38,26 +38,26 @@ class SERPPreview extends Preview
 
     public function MetaDescription()
     {
-        $description = $this->getDom()->find('meta[name=description]',0);
+        $description = $this->getDom()->find('meta[name=description]', 0);
         $description = !is_null($description)
             ? $description->getAttributes()['content']
             : null;
         $container = DBText::create('Title')
             ->setValue($description)
-            ->LimitCharacters(Seo::GOOGLE_MAX_DESCRIPTION_LENGTH,'...');
+            ->LimitCharacters(Seo::GOOGLE_MAX_DESCRIPTION_LENGTH, '...');
         return $this->highlight($container, $this->getFocus());
     }
 
 
     public function Title()
     {
-        $Title = $this->getDom()->find('title',0);
+        $Title = $this->getDom()->find('title', 0);
         $Title = $Title
             ? $Title->text()
             : '';
         $container = DBText::create('Title')
             ->setValue($Title)
-            ->LimitCharacters(Seo::GOOGLE_MAX_TITLE_LENGTH,'...');
+            ->LimitCharacters(Seo::GOOGLE_MAX_TITLE_LENGTH, '...');
         return $this->highlight($container, $this->getFocus());
     }
 
@@ -71,7 +71,7 @@ class SERPPreview extends Preview
     {
         $string = $this->getPage()->Link();
         $crumbs = [];
-        foreach (explode('/',$string) as $value) {
+        foreach (explode('/', $string) as $value) {
             if ($value != '') {
                 $crumbs[] = [
                     'Crumb' => $value

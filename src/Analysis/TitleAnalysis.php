@@ -41,7 +41,7 @@ class TitleAnalysis extends Analysis
                 'warning'
             ],
             static::TITLE_SUCCESS                => [
-                'The page title is between the '.Seo::GOOGLE_OPT_TITLE_LENGTH.' character minimum and the recommended '.SEO::GOOGLE_MAX_TITLE_LENGTH.' character maximum',
+                'The page title is between the ' . Seo::GOOGLE_OPT_TITLE_LENGTH . ' character minimum and the recommended ' . SEO::GOOGLE_MAX_TITLE_LENGTH . ' character maximum',
                 'success'
             ]
         ];

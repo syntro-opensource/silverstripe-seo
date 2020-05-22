@@ -9,7 +9,6 @@ use Syntro\Seo\Generator\OGMetaGenerator;
 use Syntro\Seo\Generator\TwitterMetaGenerator;
 use Syntro\Seo\Generator\OtherMetaGenerator;
 
-
 /**
  * handles everything SEO related
  */
@@ -79,6 +78,4 @@ class Seo
     {
         return $this->object;
     }
-
-
 }
