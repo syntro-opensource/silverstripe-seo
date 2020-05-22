@@ -128,7 +128,7 @@ class MetadataPageExtension extends DataExtension
                 $TwitterTypes[$value] = _t(Metadata::class . '.'.$value, $value);
             }
             $fields->addFieldToTab(
-                'Root.SEO',
+                'Root.Metadata',
                 ToggleCompositeField::create(
                     'Twitter',
                     _t(__CLASS__.'.OpenGraphToggle', 'Twitter Metadata'),
