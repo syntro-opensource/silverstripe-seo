@@ -22,3 +22,6 @@ After:
 SilverStripe\Blog\Model\Blog:
   extensions:
     - Syntro\Seo\Extension\MetadataBlogExtension
+SilverStripe\Blog\Model\BlogPost:
+  extensions:
+    - Syntro\Seo\Extension\MetadataBlogPostExtension
