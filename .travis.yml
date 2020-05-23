@@ -14,9 +14,11 @@ env:
     - PDO=1
     - SS_ENVIRONMENT_TYPE="dev"
   matrix:
-    - RECIPE_VERSION=4.3.x-dev
-    - RECIPE_VERSION=4.4.x-dev
-    - RECIPE_VERSION=4.5.x-dev
+    include:
+      - RECIPE_VERSION=4.3.x-dev PHPUNIT_TEST=1
+      - RECIPE_VERSION=4.4.x-dev PHPUNIT_TEST=1
+      - RECIPE_VERSION=4.4.x-dev PHPUNIT_COVERAGE_TEST=1
+      - RECIPE_VERSION=4.5.x-dev PHPUNIT_TEST=1
 
 
 
@@ -30,5 +32,8 @@ before_script:
 
 script:
   - vendor/bin/phpcs -n -l src/ tests/php/
-  - vendor/bin/phpunit -c "phpunit.xml" tests/php
+  - if [[ $PHPUNIT_TEST ]]; then vendor/bin/phpunit -c "phpunit.xml" tests/php; fi
+  - if [[ $PHPUNIT_COVERAGE_TEST ]]; then phpdbg -qrr vendor/bin/phpunit --coverage-clover=coverage.xml tests/php; fi
   - vendor/bin/phpstan analyse src/ tests/ -c "phpstan.neon" -a vendor/symbiote/silverstripe-phpstan/bootstrap.php --level 4
+after_success:
+  - if [[ $PHPUNIT_COVERAGE_TEST ]]; then bash <(curl -s https://codecov.io/bash) -f coverage.xml; fi
