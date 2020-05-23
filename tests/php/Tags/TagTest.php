@@ -39,7 +39,7 @@ class TagTest extends SapphireTest
                 'tag' => 'a',
                 'attributes' => ['href' => 'test']
             ],
-            $tag->getData()
+            $tag->forRender()
         );
     }
 }
