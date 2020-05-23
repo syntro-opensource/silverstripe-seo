@@ -1,5 +1,5 @@
 {
-    "name": "syntro/silverstripe-seo-meta",
+    "name": "syntro/silverstripe-seo",
     "description": "Silverstripe module handling meta tags for pages.",
     "type": "silverstripe-vendormodule",
     "authors": [
