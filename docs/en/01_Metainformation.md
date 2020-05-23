@@ -3,9 +3,9 @@
 
 - [Meta Information](#meta-information)
 	- [Editing Meta Tags](#editing-meta-tags)
-			- [On the Object Level](#on-the-object-level)
-			- [On the Action Level](#on-the-action-level)
-			- [Editing the Default Tags](#editing-the-default-tags)
+		- [On the Object Level](#on-the-object-level)
+		- [On the Action Level](#on-the-action-level)
+		- [Editing the Default Tags](#editing-the-default-tags)
 
 <!-- /TOC -->
 
@@ -57,7 +57,7 @@ $metadata
     ))
     ->removeTag('TagName');
 ```
-#### On the Object Level
+### On the Object Level
 You can change tags on the object level by defining a method called `UpdateMetadata`
 on your class:
 ```php
@@ -76,14 +76,14 @@ public function UpdateMetadata()
 ```
 This method will be executed as the last step once the page is rendered.
 
-#### On the Action Level
+### On the Action Level
 Sometimes, you might need to set specific metadata for certain Controller actions,
 for example if you are using DataObjects as pages.
 
 In these cases, you can simply use `$this->getMetadata()` inside of the action
 and edit the Tag list to your liking.
 
-#### Editing the Default Tags
+### Editing the Default Tags
 The default tags are named as follows:
 
 | Tag Name                   | Source Method                  |
