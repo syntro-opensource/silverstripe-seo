@@ -21,7 +21,7 @@ class TagTest extends SapphireTest
     {
         $tag = Tag::create('Test', ['href' => 'test'], 'a');
 
-        $this->assertEquals('Test', $tag->getName())
+        $this->assertEquals('Test', $tag->getName());
         $this->assertEquals(['href' => 'test'], $tag->getData());
         $this->assertEquals('a', $tag->getTag());
     }
