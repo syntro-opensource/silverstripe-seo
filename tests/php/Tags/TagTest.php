@@ -3,6 +3,7 @@
 namespace Syntro\Seo\Tests\Tags;
 
 use SilverStripe\Dev\SapphireTest;
+use Syntro\Seo\Tags\Tag;
 
 /**
  * Test the Tag class
@@ -12,12 +13,33 @@ class TagTest extends SapphireTest
 {
 
     /**
+     * testGetters
+     *
+     * @return void
+     */
+    public function testGetters()
+    {
+        $tag = Tag::create('Test', ['href' => 'test'], 'a');
+
+        $this->assertEquals('Test', $tag->getName())
+        $this->assertEquals(['href' => 'test'], $tag->getData());
+        $this->assertEquals('a', $tag->getTag());
+    }
+
+    /**
      * testRender
      *
      * @return void
      */
     public function testRender()
     {
-        $this->assertEquals(2, 1+1);
+        $tag = Tag::create('Test', ['href' => 'test'], 'a');
+        $this->assertEquals(
+            [
+                'tag' => 'a',
+                'attributes' => ['href' => 'test']
+            ],
+            $tag->getData()
+        );
     }
 }
