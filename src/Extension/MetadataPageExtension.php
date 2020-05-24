@@ -179,7 +179,7 @@ class MetadataPageExtension extends DataExtension
                     'MetaDescription'
                 );
                 $emptytitlelength = strlen(
-                    SSViewer::create('Title')->process(null)->__toString()
+                    SSViewer::create('Includes/Title')->process(null)->__toString()
                 );
                 $metaTitleField
                     ->setAttribute('placeholder', $owner->Title)
@@ -231,7 +231,7 @@ class MetadataPageExtension extends DataExtension
                 !is_null($owner->MetaTitle) || $owner->MetaTitle != ''
                 ? $owner->obj('MetaTitle')
                 : $owner->obj('Title');
-            $titleTag['content'] = $metatitle->renderWith(SSViewer::create('Title'));
+            $titleTag['content'] = $metatitle->renderWith(SSViewer::create('Includes/Title'));
             $tags['title'] = $titleTag;
         }
 
