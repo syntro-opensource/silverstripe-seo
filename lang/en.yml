@@ -1,5 +1,12 @@
 en:
+  Syntro\Seo\Extension\MetaSiteConfigExtension:
+    OGImageTitle: Default OpenGraph Image
+    TwitterSiteTitle: Twitter Site
+    OGImageRight: This image will be displayed, if no specific image has been defined on a page.
+    TwitterSiteRight: The name of your Twitter page.
+    TwitterSitePlaceholder: "@yourcompany"
   Syntro\Seo\Extension\MetadataPageExtension:
+    SOCIALMEDIASHARING: Social Media Sharing
     # Field titles
     OGImageTitle: OpenGraph Image
     OGTitleTitle: OpenGraph Title

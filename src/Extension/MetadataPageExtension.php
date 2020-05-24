@@ -1,6 +1,7 @@
 <?php
 namespace Syntro\Seo\Extension;
 
+use SilverStripe\Forms\HeaderField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DataExtension;
@@ -107,6 +108,7 @@ class MetadataPageExtension extends DataExtension
                 'Root.Metadata',
                 [
                     $metaDescriptionField,
+                    $SMHeaderField = HeaderField::create('SocialMediaHeader', _t(__CLASS__ . '.SOCIALMEDIASHARING', 'Social Media Sharing')),
                     $ogImage = UploadField::create('OGImage', _t(__CLASS__ . '.OGImageTitle', 'OpenGraph Image')),
                     $ogTitle = TextField::create('OGTitle', _t(__CLASS__ . '.OGTitleTitle', 'OpenGraph Title')),
                     $ogDescription = TextareaField::create('OGDescription', _t(__CLASS__ . '.OGDescriptionTitle', 'OpenGraph Description')),
@@ -121,8 +123,14 @@ class MetadataPageExtension extends DataExtension
                     )
                 ]
             );
+            // $SMHeaderField
+            //     ->addExtraClass('mt-5 mb-4')
+            //     ->setHeadingLevel(2);
             $metaDescriptionField
                 ->setTargetLength(125);
+            $SMHeaderField
+                ->addExtraClass('mt-5 mb-4')
+                ->setHeadingLevel(2);
             $ogTitle
                 ->setRightTitle(_t(__CLASS__ . '.OGTitleRight', 'The title which is shown when you share this page.'))
                 ->setAttribute('placeholder', $owner->Title)

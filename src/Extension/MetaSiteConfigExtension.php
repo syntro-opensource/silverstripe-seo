@@ -47,17 +47,18 @@ class MetaSiteConfigExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $owner = $this->owner;
-        $fields->addFieldToTab(
-            'Root.Main',
-            ToggleCompositeField::create(
-                'Metadata',
-                _t(__CLASS__ . '.MetadataToggle', 'SEO Metadata'),
-                [
-                    $OGDefaultImageField = UploadField::create('OGDefaultImage', 'Default Image'),
-                    $TwitterSiteField = TextField::create('TwitterSite', 'Twitter Site')
-                ]
-            )
+        $fields->addFieldsToTab(
+            'Root.Metadata',
+            [
+                $OGDefaultImageField = UploadField::create('OGDefaultImage', _t(__CLASS__ . '.OGImageTitle', 'Default OpenGraph Image')),
+                $TwitterSiteField = TextField::create('TwitterSite', _t(__CLASS__ . '.TwitterSiteTitle', 'Twitter Site'))
+            ]
         );
+        $OGDefaultImageField
+            ->setRightTitle(_t(__CLASS__ . '.OGImageRight', 'This image will be displayed if no page specific image has been defined.'));
+        $TwitterSiteField
+            ->setAttribute('placeholder', _t(__CLASS__ . '.TwitterSitePlaceholder', '@yourcompany'))
+            ->setRightTitle(_t(__CLASS__ . '.TwitterSiteRight', 'The handle of your Twitter page.'));
         return $fields;
     }
 }
