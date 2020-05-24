@@ -22,8 +22,7 @@ The core functionality of the module is split into two sections, Metadata
 management and SEO reporting. Metadata management is focused around the
 OpenGraph standard and is as flexible as possible, allowing any developer
 to set and edit any tag as precisely as necessary. SEO reporting is independent
-from the metadata management and uses the rendered HTML output of the
-current page.
+from the metadata management and allows to analyze the output of any page.
 
 ## Installation
 > **Disclaimer**: This module is still in alpha state and not yet registred on packagist
