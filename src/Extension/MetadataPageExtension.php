@@ -163,11 +163,11 @@ class MetadataPageExtension extends DataExtension
             $OgImageRightTitle = _t(__CLASS__ . '.OGImageRight', 'The image which is shown when you share this page.');
             if (!$owner->OGImageID && !SiteConfig::current_site_config()->OGDefaultImageID) {
                 $ogImage->setRightTitle(
-                    $OgImageRightTitle.' '._t(__CLASS__ . '.NODEAFAULTIMAGE', 'No default Image is set. This means, a crawler might select one at random.')
+                    $OgImageRightTitle . ' ' . _t(__CLASS__ . '.NODEAFAULTIMAGE', 'No default Image is set. This means, a crawler might select one at random.')
                 );
             } elseif (!$owner->OGImageID && SiteConfig::current_site_config()->OGDefaultImageID) {
                 $ogImage->setRightTitle(
-                    $OgImageRightTitle.' '._t(__CLASS__ . '.DEFAULTIMAGE', 'The default image set in the siteconfig will be used.')
+                    $OgImageRightTitle . ' ' . _t(__CLASS__ . '.DEFAULTIMAGE', 'The default image set in the siteconfig will be used.')
                 );
             }
 
@@ -175,7 +175,7 @@ class MetadataPageExtension extends DataExtension
             if ($owner->config()->use_templated_meta_title) {
                 $fields->addFieldToTab(
                     'Root.Metadata',
-                    $metaTitleField = TextField::create('MetaTitle',_t(__CLASS__ . '.MetaTitleTitle', 'Page Title')),
+                    $metaTitleField = TextField::create('MetaTitle', _t(__CLASS__ . '.MetaTitleTitle', 'Page Title')),
                     'MetaDescription'
                 );
                 $emptytitlelength = strlen(
@@ -183,10 +183,9 @@ class MetadataPageExtension extends DataExtension
                 );
                 $metaTitleField
                     ->setAttribute('placeholder', $owner->Title)
-                    ->setTargetLength(Seo::GOOGLE_MAX_TITLE_LENGTH-$emptytitlelength)
-                    ->setRightTitle(_t(__CLASS__ . '.MetaTitleRight', 'The title of this page as displayed by search engines. Try to keep it similar to the page name.'));
+                    ->setRightTitle(_t(__CLASS__ . '.MetaTitleRight', 'The title of this page as displayed by search engines. Try to keep it similar to the page name.'))
+                    ->setTargetLength(Seo::GOOGLE_MAX_TITLE_LENGTH-$emptytitlelength);
             }
-
         }
         return $fields;
     }
@@ -219,7 +218,7 @@ class MetadataPageExtension extends DataExtension
 
         $owner = $this->getOwner();
         if (ClassInfo::hasMethod($owner, 'UpdateMetadata')) {
-            $owner->__call('UpdateMetadata',[]);
+            $owner->__call('UpdateMetadata', []);
         }
         $metadata = $this->getMetadata();
 

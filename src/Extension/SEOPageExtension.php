@@ -20,6 +20,11 @@ use Syntro\Seo\Preview\SERPPreview;
 use Syntro\Seo\Generator\OGMetaGenerator;
 use Syntro\Seo\Generator\TwitterMetaGenerator;
 
+/**
+ * Extension to handle the display of an SERP field
+ *
+ * @author Matthias Leutenegger <hello@syntro.ch>
+ */
 class SEOPageExtension extends DataExtension
 {
 
@@ -34,6 +39,8 @@ class SEOPageExtension extends DataExtension
 
     /**
      * Update Fields
+     *
+     * @param FieldList $fields the original fields
      * @return FieldList
      */
     public function updateCMSFields(FieldList $fields)

@@ -45,7 +45,7 @@ class FocusKeywordUniqueAnalysis extends Analysis
         }
 
         /**
-         * @var null|\Page        
+         * @var null|\Page
          */
         $page_with_same_keyword = \Page::get()->filter(['FocusKeyword' => $this->getKeyword(), 'ID:not' => $this->getPage()->ID])->first();
         if ($page_with_same_keyword) {
