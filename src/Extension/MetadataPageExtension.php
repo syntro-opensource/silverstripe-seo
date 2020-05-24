@@ -1,6 +1,7 @@
 <?php
 namespace Syntro\Seo\Extension;
 
+use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
@@ -86,73 +87,70 @@ class MetadataPageExtension extends DataExtension
          * @var TextareaField|null
          */
         $metaExtraField = $fields->dataFieldByName('ExtraMeta');
+        // we push the Meta fields to a new tab
         if (!is_null($metaDescriptionField) && !is_null($metaExtraField)) {
             $fields->removeByName([
                 'MetaDescription',
-                'ExtraMeta',
-                'Metadata'
+                'ExtraMeta'
             ]);
-            $fields->addFieldToTab(
-                'Root.Metadata',
-                $metaToggle = ToggleCompositeField::create(
-                    'Metadata',
-                    _t(__CLASS__ . '.MetadataToggle', 'Metadata'),
-                    [
-                        $metaDescriptionField,
-                        $metaExtraField
-                    ]
-                )->setHeadingLevel(4)
-            );
-            $metaDescriptionField->setTargetLength(125);
-            $metaToggle->setStartClosed(false);
-
-
-            // Add Opengraph Meta
+            // generate available types
             $OGTypes = [];
             foreach (Metadata::config()->available_og_types as $value) {
                 $OGTypes[$value] = _t(Metadata::class . '.' . $value, $value);
             }
-            $fields->addFieldToTab(
-                'Root.Metadata',
-                ToggleCompositeField::create(
-                    'OpenGraph',
-                    _t(__CLASS__ . '.OpenGraphToggle', 'OpenGraph Metadata (Facebook)'),
-                    [
-                        $ogType = DropdownField::create(
-                            'OGType',
-                            'Type',
-                            $OGTypes
-                        ),
-                        $ogTitle = TextField::create('OGTitle', 'Title'),
-                        $ogImage = UploadField::create('OGImage', 'Image'),
-                        $ogDescription = TextareaField::create('OGDescription', 'Description'),
-                    ]
-                )->setHeadingLevel(4)
-            );
-            $ogTitle->setAttribute('placeholder', $owner->Title)->setTargetLength(50);
-            $ogDescription->setAttribute('placeholder', $owner->MetaDescription);
-
-
-            // Add Twitter Meta
             $TwitterTypes = [];
             foreach (Metadata::config()->available_twitter_types as $value) {
                 $TwitterTypes[$value] = _t(Metadata::class . '.' . $value, $value);
             }
-            $fields->addFieldToTab(
+
+            $fields->addFieldsToTab(
                 'Root.Metadata',
-                ToggleCompositeField::create(
-                    'Twitter',
-                    _t(__CLASS__ . '.OpenGraphToggle', 'Twitter Metadata'),
-                    [
-                        $twitterType = DropdownField::create(
-                            'TwitterType',
-                            'Type',
-                            $TwitterTypes
-                        ),
-                        $twitterTitle = TextField::create('TwitterCreator', 'Creator'),
-                    ]
-                )->setHeadingLevel(4)
+                [
+                    $metaDescriptionField,
+                    $ogImage = UploadField::create('OGImage', _t(__CLASS__ . '.OGImageTitle', 'OpenGraph Image')),
+                    $ogTitle = TextField::create('OGTitle', _t(__CLASS__ . '.OGTitleTitle', 'OpenGraph Title')),
+                    $ogDescription = TextareaField::create('OGDescription', _t(__CLASS__ . '.OGDescriptionTitle', 'OpenGraph Description')),
+                    $ogType = DropdownField::create('OGType', _t(__CLASS__ . '.OGTypeTitle', 'OpenGraph Type'), $OGTypes),
+                    $twitterType = DropdownField::create('TwitterType', _t(__CLASS__ . '.TwitterTypeTitle', 'Twitter Type'), $TwitterTypes),
+                    $metaToggle = ToggleCompositeField::create(
+                        'ExtraTags',
+                        _t(__CLASS__ . '.ExtraMetaTagsToggle', 'Extra Meta Tags'),
+                        [
+                            $metaExtraField
+                        ]
+                    )
+                ]
             );
+            $metaDescriptionField
+                ->setTargetLength(125);
+            $ogTitle
+                ->setRightTitle(_t(__CLASS__ . '.OGTitleRight', 'The title which is shown when you share this page.'))
+                ->setAttribute('placeholder', $owner->Title)
+                ->setTargetLength(50);
+            $ogDescription
+                ->setAttribute('placeholder', $owner->MetaDescription)
+                ->setRightTitle(_t(__CLASS__ . '.OGDescriptionRight', 'The summary which is shown when you share this page.'));
+            $ogType
+                ->setRightTitle(_t(__CLASS__ . '.OGTypeRight', 'The type which is used to display this page when shared. Most of the time, you want this to be "website"'));
+            $twitterType
+                ->setRightTitle(_t(__CLASS__ . '.TwitterTypeRight', 'The type which is used to display this page when shared on Twitter. Most of the time, you want this to be "summary"'));
+            $metaToggle
+                ->setHeadingLevel(4);
+            $metaExtraField
+                ->setRows(20);
+
+            // add some dialog to indicate image
+            $OgImageRightTitle = _t(__CLASS__ . '.OGImageRight', 'The image which is shown when you share this page.');
+            if (!$owner->OGImageID && !SiteConfig::current_site_config()->OGDefaultImageID) {
+                $ogImage->setRightTitle(
+                    $OgImageRightTitle.' '._t(__CLASS__ . '.NODEAFAULTIMAGE', 'No default Image is set. This means, a crawler might select one at random.')
+                );
+            } elseif (!$owner->OGImageID && SiteConfig::current_site_config()->OGDefaultImageID) {
+                $ogImage->setRightTitle(
+                    $OgImageRightTitle.' '._t(__CLASS__ . '.DEFAULTIMAGE', 'The default image set in the siteconfig will be used.')
+                );
+            }
+
         }
         return $fields;
     }

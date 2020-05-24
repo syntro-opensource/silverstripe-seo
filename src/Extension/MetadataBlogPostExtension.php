@@ -1,6 +1,7 @@
 <?php
 namespace Syntro\Seo\Extension;
 
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Assets\Image;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Control\Controller;
@@ -13,6 +14,22 @@ use SilverStripe\ORM\FieldType\DBHTMLText;
  */
 class MetadataBlogPostExtension extends DataExtension
 {
+
+    /**
+     * Update Fields
+     * @return FieldList
+     */
+    public function updateCMSFields(FieldList $fields)
+    {
+        $owner = $this->owner;
+        $fields->removeByName([
+            'OGImage',
+            'OGDescription',
+            'OGType',
+            'TwitterType'
+        ]);
+        return $fields;
+    }
 
     /**
      * OGTypeForTemplate - fetches the type of this object

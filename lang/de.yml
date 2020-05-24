@@ -1,0 +1,25 @@
+de:
+  Syntro\Seo\Extension\MetadataPageExtension:
+    # Field titles
+    OGImageTitle: OpenGraph Bild
+    OGTitleTitle: OpenGraph Titel
+    OGDescriptionTitle: OpenGraph Beschreibung
+    OGTypeTitle: OpenGraph Typ
+    TwitterTypeTitle: Twitter Typ
+    ExtraMetaTagsToggle: Zusätzliche Metatags
+    # field descriptions
+    OGTitleRight: Der Titel, der angezeigt wird, wenn du diese Seite teilst.
+    OGDescriptionRight: Die Zusammenfassung, welche angezeigt wird, wenn du diese Seite teilst.
+    OGTypeRight: Der Typ, der zur Anzeige dieser Seite verwendet wird, wenn sie geteilt wird. In den meisten Fällen sollte das "Webseite" sein.
+    TwitterTypeRight: Der Typ, der zur Anzeige dieser Seite verwendet wird, wenn sie auf Twitter geteilt wird. In den meisten Fällen sollte das "Zusammenfassung" sein.
+    OGImageRight: Das Bild, welches angezeigt wird, wenn du diese Seite teilst.
+    # fallback indication
+    NODEAFAULTIMAGE: Es ist kein Standardbild eingestellt. Das bedeutet, dass ein Crawler ein zufälliges Bild (meist das erste erscheinende) auswählen könnte.
+    DEFAULTIMAGE: Es wird das in den Seiteneinstellungen eingestellte Standardbild verwendet.
+  Syntro\Seo\Metadata:
+    website: Webseite
+    article: Artikel
+    summary: Zusammenfassung
+    summary_large_image: Zusammenfassung mit grossem Bild
+    app: App
+    player: Player
