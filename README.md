@@ -6,7 +6,7 @@ Silverstripe module for simple SEO optimization of pages
 [![phpstan](https://img.shields.io/badge/PHPStan-enabled-success)](https://github.com/phpstan/phpstan)
 [![composer](https://img.shields.io/packagist/dt/syntro/silverstripe-seo?color=success&logo=composer)](https://packagist.org/packages/syntro/silverstripe-seo)
 
-
+> **Disclaimer**: This module is still in alpha state and noy et registred on packagist
 
 
 ## Introduction
@@ -26,6 +26,8 @@ from the metadata management and uses the rendered HTML output of the
 current page.
 
 ## Installation
+> **Disclaimer**: This module is still in alpha state and noy et registred on packagist
+
 To install this module, run the following command:
 ```
 composer require syntro/silverstripe-seo
