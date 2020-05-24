@@ -8,6 +8,7 @@ de:
   Syntro\Seo\Extension\MetadataPageExtension:
     # Field titles
     SOCIALMEDIASHARING: Social Media Sharing
+    MetaTitleTitle: Seitentitel
     OGImageTitle: OpenGraph Bild
     OGTitleTitle: OpenGraph Titel
     OGDescriptionTitle: OpenGraph Beschreibung
@@ -15,6 +16,7 @@ de:
     TwitterTypeTitle: Twitter Typ
     ExtraMetaTagsToggle: Zusätzliche Metatags
     # field descriptions
+    MetaTitleRight: Der Titel dieser Seite, wie er von Suchmaschinen angezeigt wird. Er sollte dem Seitennamen ähnlich sein.
     OGTitleRight: Der Titel, der angezeigt wird, wenn du diese Seite teilst.
     OGDescriptionRight: Die Zusammenfassung, welche angezeigt wird, wenn du diese Seite teilst.
     OGTypeRight: Der Typ, der zur Anzeige dieser Seite verwendet wird, wenn sie geteilt wird. In den meisten Fällen sollte das "Webseite" sein.

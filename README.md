@@ -34,4 +34,5 @@ composer require syntro/silverstripe-seo
 Thats it.
 
 ## Documentation
-* [How to handle metainformation](docs/en/01_Metainformation.md)
+* [How to handle the title](docs/en/01_Title.md)
+* [How to handle metainformation](docs/en/02_Metainformation.md)

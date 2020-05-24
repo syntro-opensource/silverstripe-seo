@@ -1,6 +1,7 @@
 <?php
 namespace Syntro\Seo\Extension;
 
+use SilverStripe\View\SSViewer;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\ORM\DataObject;
@@ -15,6 +16,7 @@ use SilverStripe\Assets\Image;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\SiteConfig\SiteConfig;
 use Syntro\Seo\Metadata;
+use Syntro\Seo\Seo;
 use Page;
 
 /**
@@ -27,6 +29,13 @@ class MetadataPageExtension extends DataExtension
 {
 
     /**
+     * @config
+     * @var bool
+     */
+    private static $use_templated_meta_title = true;
+
+
+    /**
      * @var Metadata|null
      */
     protected $metadata = null;
@@ -36,6 +45,7 @@ class MetadataPageExtension extends DataExtension
      * @var array
      */
     private static $db = [
+        'MetaTitle' => 'Varchar',
         'OGType' => 'Varchar(20)',
         'OGTitle' => 'Varchar',
         'OGDescription' => 'Varchar',
@@ -127,14 +137,16 @@ class MetadataPageExtension extends DataExtension
             //     ->addExtraClass('mt-5 mb-4')
             //     ->setHeadingLevel(2);
             $metaDescriptionField
-                ->setTargetLength(125);
+                ->setTargetLength(
+                    Seo::GOOGLE_MIN_DESCRIPTION_LENGTH +
+                    (Seo::GOOGLE_MAX_DESCRIPTION_LENGTH-Seo::GOOGLE_MIN_DESCRIPTION_LENGTH)/1.5
+                );
             $SMHeaderField
                 ->addExtraClass('mt-5 mb-4')
                 ->setHeadingLevel(2);
             $ogTitle
                 ->setRightTitle(_t(__CLASS__ . '.OGTitleRight', 'The title which is shown when you share this page.'))
-                ->setAttribute('placeholder', $owner->Title)
-                ->setTargetLength(50);
+                ->setAttribute('placeholder', $owner->Title);
             $ogDescription
                 ->setAttribute('placeholder', $owner->MetaDescription)
                 ->setRightTitle(_t(__CLASS__ . '.OGDescriptionRight', 'The summary which is shown when you share this page.'));
@@ -157,6 +169,22 @@ class MetadataPageExtension extends DataExtension
                 $ogImage->setRightTitle(
                     $OgImageRightTitle.' '._t(__CLASS__ . '.DEFAULTIMAGE', 'The default image set in the siteconfig will be used.')
                 );
+            }
+
+            // add a metatitle field if configured:
+            if ($owner->config()->use_templated_meta_title) {
+                $fields->addFieldToTab(
+                    'Root.Metadata',
+                    $metaTitleField = TextField::create('MetaTitle',_t(__CLASS__ . '.MetaTitleTitle', 'Page Title')),
+                    'MetaDescription'
+                );
+                $emptytitlelength = strlen(
+                    SSViewer::create('Title')->process(null)->__toString()
+                );
+                $metaTitleField
+                    ->setAttribute('placeholder', $owner->Title)
+                    ->setTargetLength(Seo::GOOGLE_MAX_TITLE_LENGTH-$emptytitlelength)
+                    ->setRightTitle(_t(__CLASS__ . '.MetaTitleRight', 'The title of this page as displayed by search engines. Try to keep it similar to the page name.'));
             }
 
         }
@@ -194,6 +222,20 @@ class MetadataPageExtension extends DataExtension
             $owner->__call('UpdateMetadata',[]);
         }
         $metadata = $this->getMetadata();
+
+        // overwrite default page title
+        // TODO: add test
+        if ($owner->config()->use_templated_meta_title) {
+            $titleTag=$tags['title'];
+            $metatitle =
+                !is_null($owner->MetaTitle) || $owner->MetaTitle != ''
+                ? $owner->obj('MetaTitle')
+                : $owner->obj('Title');
+            $titleTag['content'] = $metatitle->renderWith(SSViewer::create('Title'));
+            $tags['title'] = $titleTag;
+        }
+
+
         $tags = array_merge($tags, $metadata->getTagsForRender());
     }
 
@@ -231,6 +273,9 @@ class MetadataPageExtension extends DataExtension
     {
         $owner = $this->getOwner();
         if ($owner->OGTitle) {
+            return $owner->OGTitle;
+        }
+        if ($owner->MetaTitle) {
             return $owner->OGTitle;
         }
         return $owner->Title;

@@ -1,4 +1,3 @@
-# Meta Information
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [Meta Information](#meta-information)
@@ -8,6 +7,8 @@
 		- [Editing the Default Tags](#editing-the-default-tags)
 
 <!-- /TOC -->
+
+# Meta Information
 
 This module aims to provide a good set of default meta tags. our philosophy
 for managing meta tags ist, that this part should be as flexible as possible

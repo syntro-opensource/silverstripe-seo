@@ -8,6 +8,7 @@ en:
   Syntro\Seo\Extension\MetadataPageExtension:
     SOCIALMEDIASHARING: Social Media Sharing
     # Field titles
+    MetaTitleTitle: Page Title
     OGImageTitle: OpenGraph Image
     OGTitleTitle: OpenGraph Title
     OGDescriptionTitle: OpenGraph Description
@@ -15,6 +16,7 @@ en:
     TwitterTypeTitle: Twitter Type
     ExtraMetaTagsToggle: Extra Meta Tags
     # field descriptions
+    MetaTitleRight: The title of this page as displayed by search engines. Try to keep it similar to the page name.
     OGTitleRight: The title which is shown when you share this page
     OGDescriptionRight: The summary which is shown when you share this page.
     OGTypeRight: The type which is used to display this page when shared. Most of the time, you want this to be "website"
