@@ -6,8 +6,6 @@ Silverstripe module for simple SEO optimization of pages
 [![phpstan](https://img.shields.io/badge/PHPStan-enabled-success)](https://github.com/phpstan/phpstan)
 [![composer](https://img.shields.io/packagist/dt/syntro/silverstripe-seo?color=success&logo=composer)](https://packagist.org/packages/syntro/silverstripe-seo)
 
-> **Disclaimer**: This module is still in alpha state and not yet registred on packagist
-
 
 ## Introduction
 This module does several things to your Silverstripe application:
@@ -25,7 +23,6 @@ to set and edit any tag as precisely as necessary. SEO reporting is independent
 from the metadata management and allows to analyze the output of any page.
 
 ## Installation
-> **Disclaimer**: This module is still in alpha state and not yet registred on packagist
 
 To install this module, run the following command:
 ```
