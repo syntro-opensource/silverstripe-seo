@@ -33,6 +33,33 @@ composer require syntro/silverstripe-seo
 ```
 Thats it.
 
+## Features
+### Meta Tag Generation / Metainformation management
+A new Tab is added to the cms, allowing any editor to tailor the important
+information on a per page basis. Aditionally, an default image to be used
+as Fallback can be set in the siteconfig
+
+The fields provide Information about what they are used for, which allows any
+editor to set those fields correctly. Aditionnally, target Lengths have been
+set for SEO relevant fields and fallbacks are shown in the fields if they apply.
+
+For Developers, there is a method available on the `Page` object, which allows
+to tailor the tag generation down to the action-level ([see docs](docs/en/02_Metainformation.md)).
+
+### SEO Analysis
+> **Disclaimer**: This Module was inspired by the
+> [quinninteractive/silverstripe-seo](https://github.com/Quinn-Interactive/silverstripe-seo)
+> module. The SEO analysis used currently is heavily inspired by the mentioned
+> module.
+>
+> While it started out as a training project, we now intend to expand
+> on this module. The key goal will be, to inject the SEO analysis in the Page
+> Rendering, independent of the backend. This way, any url on the page
+> can be checked, even if you use `DataObject`s as pages or if you have alternative
+> actions on a `PageController`.
+
+Description will follow.
+
 ## Documentation
 * [How to edit the title](docs/en/01_Title.md)
 * [How to handle metainformation](docs/en/02_Metainformation.md)
