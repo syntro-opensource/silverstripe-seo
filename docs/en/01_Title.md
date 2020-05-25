@@ -2,7 +2,7 @@
 The title of a Page is central to a good SEO Strategy. Title content and length
 are vital properties in order to be placed well in a google search.
 
-Typically, SilverStripe either uses the Page title or allows the User to create
+Typically, SilverStripe either uses the pagename or allows the User to create
 a Title as desired:
 ```html
 <!-- title provided by Silverstripe -->
@@ -13,9 +13,9 @@ $MetaTags(false)
 ```
 
 Both versions are not ideal to give the editor an incentive to set a meaningful
-title with the correct length when creating the page. Aditionally, the stock
-Title field is often used in the page layout itself, where a lengthy SEO-tailored
-title is not useful.
+title with the correct length when creating the page. Aditionally, the pagename
+field is often used in the page layout itself, where a lengthy SEO-tailored
+title would not be useful.
 
 ## How to Control Title
 This Module by default uses a template to generate a title from a meta title
