@@ -118,7 +118,7 @@ class Metadata
         $source = $this->getSource();
         $tags = [
             'og:type' => OGTag::create('og:type', 'og:type', $source->OGTypeForTemplate()),
-            'og:name' => OGTag::create('og:name', 'og:name', $source->OGNameForTemplate()),
+            'og:name' => OGTag::create('og:site_name', 'og:site_name', $source->OGNameForTemplate()),
             'og:title' => OGTag::create('og:title', 'og:title', $source->OGTitleForTemplate()),
             'og:url' => OGTag::create('og:url', 'og:url', $source->AbsoluteLink()),
             'og:description' => OGTag::create('og:description', 'og:description', $source->OGDescriptionForTemplate()),
