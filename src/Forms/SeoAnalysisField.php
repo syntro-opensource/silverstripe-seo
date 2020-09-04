@@ -9,6 +9,7 @@ use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Core\ClassInfo;
 use Syntro\Seo\Analysis\Analysis;
+use SilverStripe\View\Requirements;
 
 use PHPHtmlParser\Dom;
 
@@ -43,7 +44,9 @@ class SeoAnalysisField extends LiteralField
     {
         $this->setPage($page);
         $dom = new Dom;
-        $dom->loadFromUrl($page->AbsoluteLink());
+        Requirements::clear();
+        $dom->loadStr($page->renderWith($page->getViewerTemplates()));
+        Requirements::restore();
         $this->setDom($dom);
 
         parent::__construct($name, ArrayData::create([

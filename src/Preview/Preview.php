@@ -8,6 +8,7 @@ use SilverStripe\View\ViewableData;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Control\Session;
+use SilverStripe\View\Requirements;
 
 use PHPHtmlParser\Dom;
 
@@ -88,7 +89,9 @@ class Preview extends ViewableData
     {
         $this->setPage($page);
         $dom = new Dom;
-        $dom->loadFromUrl($page->AbsoluteLink());
+        Requirements::clear();
+        $dom->loadStr($page->renderWith($page->getViewerTemplates()));
+        Requirements::restore();
         $this->setDom($dom);
         parent::__construct();
     }
