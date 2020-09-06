@@ -51,6 +51,7 @@ image to be used as fallback can be set in the siteconfig.
 
 The fields provide Information about what they are used for, which allows any
 editor to set those fields correctly.
+
 ## Documentation
 * [How to edit the title](docs/en/01_Title.md)
 * [How to handle metainformation](docs/en/02_Metainformation.md)
