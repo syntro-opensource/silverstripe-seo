@@ -6,6 +6,8 @@ Silverstripe module for simple SEO optimization of pages
 ![Dependabot](https://img.shields.io/badge/dependabot-active-brightgreen?logo=dependabot)
 [![phpstan](https://img.shields.io/badge/PHPStan-enabled-success)](https://github.com/phpstan/phpstan)
 [![composer](https://img.shields.io/packagist/dt/syntro/silverstripe-seo?color=success&logo=composer)](https://packagist.org/packages/syntro/silverstripe-seo)
+[![Packagist Version](https://img.shields.io/packagist/v/syntro/silverstripe-seo?label=stable&logo=composer)](https://packagist.org/packages/syntro/silverstripe-seo)
+
 
 
 ## Introduction
