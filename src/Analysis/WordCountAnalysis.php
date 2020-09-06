@@ -1,5 +1,6 @@
 <?php
 namespace Syntro\Seo\Analysis;
+
 use Syntro\Seo\Seo;
 
 /**

@@ -139,7 +139,7 @@ class MetadataPageExtension extends DataExtension
     /**
      * updateFieldLabels - adds Fieldlabels
      *
-     * @param  array &$labels the original labels
+     * @param  array $labels the original labels
      * @return array
      */
     public function updateFieldLabels(&$labels)

@@ -100,8 +100,7 @@ class TitleAnalysis extends Analysis
         $pageTitle = $this->getPage()->Title;
         $keyword = $this->getKeyword();
 
-        if (
-            strtolower($pageTitle) == 'home' ||
+        if (strtolower($pageTitle) == 'home' ||
             strtolower($pageTitle) == 'startseite'
         ) {
             return static::TITLE_IS_HOME;
