@@ -29,11 +29,6 @@ use Syntro\Seo\Generator\TwitterMetaGenerator;
  */
 class SEOPageExtension extends DataExtension
 {
-    /**
-     * @config
-     * @var bool
-     */
-    private static $use_templated_meta_title = true;
 
     /**
      * Database fields
@@ -79,8 +74,9 @@ class SEOPageExtension extends DataExtension
          */
         $metaDescriptionField = $fields->dataFieldByName('MetaDescription');
         $metaDescriptionField->setTargetLength(
-            Seo::GOOGLE_MIN_DESCRIPTION_LENGTH +
-            (Seo::GOOGLE_MAX_DESCRIPTION_LENGTH-Seo::GOOGLE_MIN_DESCRIPTION_LENGTH)/1.5
+            Seo::GOOGLE_OPT_DESCRIPTION_LENGTH,
+            Seo::GOOGLE_MIN_DESCRIPTION_LENGTH,
+            Seo::GOOGLE_MAX_DESCRIPTION_LENGTH
         );
         /**
          * @var TextareaField|null
@@ -101,13 +97,17 @@ class SEOPageExtension extends DataExtension
                 $metaExtraField
             ]
         );
-        $emptytitlelength = strlen(
-            SSViewer::create('Includes/Title')->process(null)->__toString()
-        );
+        // $emptytitlelength = strlen(
+        //     SSViewer::create('Includes/Title')->process(null)->__toString()
+        // );
         $metaTitleField
             ->setAttribute('placeholder', $owner->Title)
             ->setRightTitle(_t(__CLASS__ . '.MetaTitleRight', 'The title of this page as displayed by search engines. Try to keep it similar to the page name.'))
-            ->setTargetLength(Seo::GOOGLE_MAX_TITLE_LENGTH-$emptytitlelength);
+            ->setTargetLength(
+                Seo::GOOGLE_OPT_TITLE_LENGTH,
+                Seo::GOOGLE_MIN_TITLE_LENGTH,
+                Seo::GOOGLE_MAX_TITLE_LENGTH
+            );
 
 
 
@@ -116,6 +116,29 @@ class SEOPageExtension extends DataExtension
         ]);
 
         return $fields;
+    }
+
+    /**
+     * MetaComponents - we extend the meta components in this hook.
+     *
+     * @param  array $tags the original tags
+     * @return void
+     */
+    public function MetaComponents(&$tags)
+    {
+
+        $owner = $this->getOwner();
+        // overwrite default page title
+        // TODO: add test
+        // if ($owner->config()->use_templated_meta_title) {
+        $titleTag=$tags['title'];
+        $metatitle =
+            !is_null($owner->MetaTitle) || $owner->MetaTitle != ''
+            ? $owner->obj('MetaTitle')
+            : $owner->obj('Title');
+        $titleTag['content'] = $metatitle->forTemplate();//= $metatitle->renderWith(SSViewer::create('Includes/Title'));
+        $tags['title'] = $titleTag;
+        // }
     }
 
     /**

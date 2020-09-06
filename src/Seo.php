@@ -38,6 +38,11 @@ class Seo
     /**
      * @var int
      */
+    const GOOGLE_OPT_DESCRIPTION_LENGTH = 100;
+
+    /**
+     * @var int
+     */
     const GOOGLE_MAX_DESCRIPTION_LENGTH = 160;
 
     /**

@@ -79,7 +79,7 @@ class TitleAnalysis extends Analysis
                     __CLASS__ . '.SUCCES',
                     'The page title is between the recommended {min} character count and the recommended {max} character maximum',
                     [
-                        'min' => Seo::GOOGLE_OPT_TITLE_LENGTH,
+                        'min' => Seo::GOOGLE_MIN_TITLE_LENGTH,
                         'max' => SEO::GOOGLE_MAX_TITLE_LENGTH
                     ]
                 ),

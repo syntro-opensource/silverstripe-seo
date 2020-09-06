@@ -180,17 +180,17 @@ class MetadataPageExtension extends DataExtension
         }
         $metadata = $this->getMetadata();
 
-        // overwrite default page title
-        // TODO: add test
-        if ($owner->config()->use_templated_meta_title) {
-            $titleTag=$tags['title'];
-            $metatitle =
-                !is_null($owner->MetaTitle) || $owner->MetaTitle != ''
-                ? $owner->obj('MetaTitle')
-                : $owner->obj('Title');
-            $titleTag['content'] = $metatitle->renderWith(SSViewer::create('Includes/Title'));
-            $tags['title'] = $titleTag;
-        }
+        // // overwrite default page title
+        // // TODO: add test
+        // if ($owner->config()->use_templated_meta_title) {
+        //     $titleTag=$tags['title'];
+        //     $metatitle =
+        //         !is_null($owner->MetaTitle) || $owner->MetaTitle != ''
+        //         ? $owner->obj('MetaTitle')
+        //         : $owner->obj('Title');
+        //     $titleTag['content'] = $metatitle->renderWith(SSViewer::create('Includes/Title'));
+        //     $tags['title'] = $titleTag;
+        // }
 
 
         $tags = array_merge($tags, $metadata->getTagsForRender());
