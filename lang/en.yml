@@ -14,6 +14,7 @@ en:
     OGTypeTitle: Shared type
     TwitterTypeTitle: Twitter type
     ExtraMetaTagsToggle: Extra meta tags
+    RENDERTYPES: Render types
     # field descriptions
     OGTitleRight: The title which is shown when you share this page
     OGDescriptionRight: The summary which is shown when you share this page.
