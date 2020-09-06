@@ -102,4 +102,5 @@ The default tags are named as follows:
 
 You can use these names to update the list of tags. You can also overwrite the
 getter methods stated above. This allows you to control the content of these
-tags on the class level.
+tags on the class level, i.e. disabling the `published_time` and `modified_time`
+in your `Page` class.
