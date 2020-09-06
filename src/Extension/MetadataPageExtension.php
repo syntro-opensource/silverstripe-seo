@@ -27,14 +27,6 @@ use Page;
  */
 class MetadataPageExtension extends DataExtension
 {
-
-    /**
-     * @config
-     * @var bool
-     */
-    private static $use_templated_meta_title = true;
-
-
     /**
      * @var Metadata|null
      */
@@ -45,7 +37,6 @@ class MetadataPageExtension extends DataExtension
      * @var array
      */
     private static $db = [
-        'MetaTitle' => 'Varchar',
         'OGType' => 'Varchar(20)',
         'OGTitle' => 'Varchar',
         'OGDescription' => 'Varchar',
@@ -88,106 +79,73 @@ class MetadataPageExtension extends DataExtension
 
         $owner = $this->owner;
 
-        // Move meta field to the new Metadata-Tab
+        $OGTypes = [];
+        foreach (Metadata::config()->available_og_types as $value) {
+            $OGTypes[$value] = _t(Metadata::class . '.' . $value, $value);
+        }
+        $TwitterTypes = [];
+        foreach (Metadata::config()->available_twitter_types as $value) {
+            $TwitterTypes[$value] = _t(Metadata::class . '.' . $value, $value);
+        }
+        $fields->findOrMakeTab(
+            "Root.SocialSharing",
+            $owner->fieldLabel('Root.SocialSharing')
+        );
+        $fields->addFieldsToTab(
+            'Root.SocialSharing',
+            [
+                $ogImage = UploadField::create('OGImage', _t(__CLASS__ . '.OGImageTitle', 'OpenGraph Image')),
+                $ogTitle = TextField::create('OGTitle', _t(__CLASS__ . '.OGTitleTitle', 'OpenGraph Title')),
+                $ogDescription = TextareaField::create('OGDescription', _t(__CLASS__ . '.OGDescriptionTitle', 'OpenGraph Description')),
+                $toggleTypesField = ToggleCompositeField::create(
+                    'Types',
+                    _t(
+                        __CLASS__ . '.RENDERTYPES',
+                        'Render Types'
+                    ),
+                    [
+                        $ogType = DropdownField::create('OGType', _t(__CLASS__ . '.OGTypeTitle', 'OpenGraph Type'), $OGTypes),
+                        $twitterType = DropdownField::create('TwitterType', _t(__CLASS__ . '.TwitterTypeTitle', 'Twitter Type'), $TwitterTypes)
+                    ]
+                )
+            ]
+        );
 
-        /**
-         * @var TextareaField|null
-         */
-        $metaDescriptionField = $fields->dataFieldByName('MetaDescription');
-        /**
-         * @var TextareaField|null
-         */
-        $metaExtraField = $fields->dataFieldByName('ExtraMeta');
-        // we push the Meta fields to a new tab
-        if (!is_null($metaDescriptionField) && !is_null($metaExtraField)) {
-            $fields->removeByName([
-                'MetaDescription',
-                'ExtraMeta'
-            ]);
-            // generate available types
-            $OGTypes = [];
-            foreach (Metadata::config()->available_og_types as $value) {
-                $OGTypes[$value] = _t(Metadata::class . '.' . $value, $value);
-            }
-            $TwitterTypes = [];
-            foreach (Metadata::config()->available_twitter_types as $value) {
-                $TwitterTypes[$value] = _t(Metadata::class . '.' . $value, $value);
-            }
+        $ogTitle
+            ->setRightTitle(_t(__CLASS__ . '.OGTitleRight', 'The title which is shown when you share this page.'))
+            ->setAttribute('placeholder', $owner->Title);
+        $ogDescription
+            ->setAttribute('placeholder', $owner->MetaDescription)
+            ->setRightTitle(_t(__CLASS__ . '.OGDescriptionRight', 'The summary which is shown when you share this page.'));
+        $ogType
+            ->setRightTitle(_t(__CLASS__ . '.OGTypeRight', 'The type which is used to display this page when shared. Most of the time, you want this to be "website"'));
+        $twitterType
+            ->setRightTitle(_t(__CLASS__ . '.TwitterTypeRight', 'The type which is used to display this page when shared on Twitter. Most of the time, you want this to be "summary"'));
 
-            $fields->addFieldsToTab(
-                'Root.Metadata',
-                [
-                    $metaDescriptionField,
-                    $SMHeaderField = HeaderField::create('SocialMediaHeader', _t(__CLASS__ . '.SOCIALMEDIASHARING', 'Social Media Sharing')),
-                    $ogImage = UploadField::create('OGImage', _t(__CLASS__ . '.OGImageTitle', 'OpenGraph Image')),
-                    $ogTitle = TextField::create('OGTitle', _t(__CLASS__ . '.OGTitleTitle', 'OpenGraph Title')),
-                    $ogDescription = TextareaField::create('OGDescription', _t(__CLASS__ . '.OGDescriptionTitle', 'OpenGraph Description')),
-                    $ogType = DropdownField::create('OGType', _t(__CLASS__ . '.OGTypeTitle', 'OpenGraph Type'), $OGTypes),
-                    $twitterType = DropdownField::create('TwitterType', _t(__CLASS__ . '.TwitterTypeTitle', 'Twitter Type'), $TwitterTypes),
-                    $metaToggle = ToggleCompositeField::create(
-                        'ExtraTags',
-                        _t(__CLASS__ . '.ExtraMetaTagsToggle', 'Extra Meta Tags'),
-                        [
-                            $metaExtraField
-                        ]
-                    )
-                ]
+        // add some dialog to indicate image
+        $OgImageRightTitle = _t(__CLASS__ . '.OGImageRight', 'The image which is shown when you share this page.');
+        if (!$owner->OGImageID && !SiteConfig::current_site_config()->OGDefaultImageID) {
+            $ogImage->setRightTitle(
+                $OgImageRightTitle . ' ' . _t(__CLASS__ . '.NODEAFAULTIMAGE', 'No default Image is set. This means, a crawler might select one at random.')
             );
-            // $SMHeaderField
-            //     ->addExtraClass('mt-5 mb-4')
-            //     ->setHeadingLevel(2);
-            $metaDescriptionField
-                ->setTargetLength(
-                    Seo::GOOGLE_MIN_DESCRIPTION_LENGTH +
-                    (Seo::GOOGLE_MAX_DESCRIPTION_LENGTH-Seo::GOOGLE_MIN_DESCRIPTION_LENGTH)/1.5
-                );
-            $SMHeaderField
-                ->addExtraClass('mt-5 mb-4')
-                ->setHeadingLevel(2);
-            $ogTitle
-                ->setRightTitle(_t(__CLASS__ . '.OGTitleRight', 'The title which is shown when you share this page.'))
-                ->setAttribute('placeholder', $owner->Title);
-            $ogDescription
-                ->setAttribute('placeholder', $owner->MetaDescription)
-                ->setRightTitle(_t(__CLASS__ . '.OGDescriptionRight', 'The summary which is shown when you share this page.'));
-            $ogType
-                ->setRightTitle(_t(__CLASS__ . '.OGTypeRight', 'The type which is used to display this page when shared. Most of the time, you want this to be "website"'));
-            $twitterType
-                ->setRightTitle(_t(__CLASS__ . '.TwitterTypeRight', 'The type which is used to display this page when shared on Twitter. Most of the time, you want this to be "summary"'));
-            $metaToggle
-                ->setHeadingLevel(4);
-            $metaExtraField
-                ->setRows(20);
-
-            // add some dialog to indicate image
-            $OgImageRightTitle = _t(__CLASS__ . '.OGImageRight', 'The image which is shown when you share this page.');
-            if (!$owner->OGImageID && !SiteConfig::current_site_config()->OGDefaultImageID) {
-                $ogImage->setRightTitle(
-                    $OgImageRightTitle . ' ' . _t(__CLASS__ . '.NODEAFAULTIMAGE', 'No default Image is set. This means, a crawler might select one at random.')
-                );
-            } elseif (!$owner->OGImageID && SiteConfig::current_site_config()->OGDefaultImageID) {
-                $ogImage->setRightTitle(
-                    $OgImageRightTitle . ' ' . _t(__CLASS__ . '.DEFAULTIMAGE', 'The default image set in the siteconfig will be used.')
-                );
-            }
-
-            // add a metatitle field if configured:
-            if ($owner->config()->use_templated_meta_title) {
-                $fields->addFieldToTab(
-                    'Root.Metadata',
-                    $metaTitleField = TextField::create('MetaTitle', _t(__CLASS__ . '.MetaTitleTitle', 'Page Title')),
-                    'MetaDescription'
-                );
-                $emptytitlelength = strlen(
-                    SSViewer::create('Includes/Title')->process(null)->__toString()
-                );
-                $metaTitleField
-                    ->setAttribute('placeholder', $owner->Title)
-                    ->setRightTitle(_t(__CLASS__ . '.MetaTitleRight', 'The title of this page as displayed by search engines. Try to keep it similar to the page name.'))
-                    ->setTargetLength(Seo::GOOGLE_MAX_TITLE_LENGTH-$emptytitlelength);
-            }
+        } elseif (!$owner->OGImageID && SiteConfig::current_site_config()->OGDefaultImageID) {
+            $ogImage->setRightTitle(
+                $OgImageRightTitle . ' ' . _t(__CLASS__ . '.DEFAULTIMAGE', 'The default image set in the siteconfig will be used.')
+            );
         }
         return $fields;
+    }
+
+    /**
+     * updateFieldLabels - adds Fieldlabels
+     *
+     * @param  array $labels the original labels
+     * @return array
+     */
+    public function updateFieldLabels(&$labels)
+    {
+        $labels['Root.SocialSharing'] = _t(__CLASS__ . '.Socialsharing', 'Social sharing');
+        return $labels;
     }
 
 
@@ -222,17 +180,17 @@ class MetadataPageExtension extends DataExtension
         }
         $metadata = $this->getMetadata();
 
-        // overwrite default page title
-        // TODO: add test
-        if ($owner->config()->use_templated_meta_title) {
-            $titleTag=$tags['title'];
-            $metatitle =
-                !is_null($owner->MetaTitle) || $owner->MetaTitle != ''
-                ? $owner->obj('MetaTitle')
-                : $owner->obj('Title');
-            $titleTag['content'] = $metatitle->renderWith(SSViewer::create('Includes/Title'));
-            $tags['title'] = $titleTag;
-        }
+        // // overwrite default page title
+        // // TODO: add test
+        // if ($owner->config()->use_templated_meta_title) {
+        //     $titleTag=$tags['title'];
+        //     $metatitle =
+        //         !is_null($owner->MetaTitle) || $owner->MetaTitle != ''
+        //         ? $owner->obj('MetaTitle')
+        //         : $owner->obj('Title');
+        //     $titleTag['content'] = $metatitle->renderWith(SSViewer::create('Includes/Title'));
+        //     $tags['title'] = $titleTag;
+        // }
 
 
         $tags = array_merge($tags, $metadata->getTagsForRender());

@@ -12,30 +12,27 @@ $MetaTags
 $MetaTags(false)
 ```
 
-Both versions are not ideal to give the editor an incentive to set a meaningful
-title with the correct length when creating the page. Aditionally, the pagename
+Both versions are not ideal to give the editor a good way to set a meaningful
+title with the correct length and content when creating the page.  The pagename
 field is often used in the page layout itself, where a lengthy SEO-tailored
-title would not be useful.
+title would not be useful and hardcoding a title combination in the page layout
+makes it impossible to actually craft a meaningful title in a good word limit.
 
-## How to Control Title
-This Module by default uses a template to generate a title from a meta title
-set alongside the page title (and falls back to the page title), which you can
-overwrite in your page. The advantage of using a template is, that we can render
-the template and set a target length on the title field to motivate the
-creation of a meaningful title.
+## The way we do it
+To solve the issues discussed above, this module introduces an additional field,
+the metatitle. The basic idea behind this field is to give the editor a way
+to create a good title for displaying in search results while still allowing the
+title to be set to a default value in the `Page.ss` template.
 
-The default Title uses the following template:
+The way we use and also recommend to use this in a template looks as follows:
 ```html
-$Value | $SiteConfig.Title
+<% if MetaTitle %>
+    <title>$MetaTitle</title>
+<% else %>
+    <title>$Title | $SiteConfig.Title</title>
+<% end_if %>
+$MetaTags(false)
 ```
-You can provide your own template under `templates/Includes/Title.ss`.
-
-
-## Use Default Title Handling
-You can also just generate a custom title the same way you are used to. In this
-case, we would recommend to disable the `MetaTitle` field and template functionality
-via config to not confuse potential users:
-```yaml
-Syntro\Seo\Extension\MetadataPageExtension:
-    use_templated_meta_title: false
-```
+This way, the title falls back to one displaying the page name when no custom
+metatitle is set. Using `$MetaTags` by itself is also possible, but will only
+fall back to the pagename.

@@ -36,8 +36,8 @@
         }
     },
     "scripts": {
-        "phpcs": "~/.composer/vendor/bin/phpcs src/ tests/php/",
-        "phpcbf": "~/.composer/vendor/bin/phpcbf src/ tests/php/",
+        "phpcs": "../../bin/phpcs src/ tests/php/",
+        "phpcbf": "../../bin/phpcbf src/ tests/php/",
         "phpstan": "../../bin/phpstan analyse src/ --memory-limit=1G -c phpstan-dev.neon -a ../../symbiote/silverstripe-phpstan/bootstrap.php --no-ansi --level 4",
         "phpunit": "../../bin/phpunit",
         "phpunit-flush": "../../bin/phpunit . '' flush=1"

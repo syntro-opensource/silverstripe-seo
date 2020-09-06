@@ -6,11 +6,11 @@
         <%-- Analyses go here --%>
         <% loop $Results %>
             <% if not $Hidden %>
-                <div class="health-analysis text-$Level d-flex align-items-center mb-2">
-                    <div class="health-indicator bg-secondary bg-$Level rounded-circle d-inline-block mr-2" style="width:9px;height:9px;"></div>
-                    <div class="d-inline-block" style="max-width: 80%">$Response.RAW</div>
+                <div style="border: 0; border-left-width: 5px; border-left-style: solid;" class="rounded-0 border-$Level alert alert-$Level shadow-sm p-2  my-2">
+                    $Response.RAW
                 </div>
             <% end_if %>
         <% end_loop %>
     </div>
+    <p class="form__field-extra-label">$RightTitle</p>
 </div>

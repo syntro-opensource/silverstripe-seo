@@ -23,28 +23,42 @@ class MetaDescAnalysis extends Analysis
         return [
             static::META_DESC_UNSET
                 => [
-                    'The meta description has not been set; ' .
-                    'a potentially unwanted snippet may be taken from the page and displayed instead',
+                    _t(
+                        __CLASS__ . '.UNSET',
+                        'The meta description has not been set; a potentially unwanted snippet may be taken from the page and displayed instead'
+                    ),
                     'danger'
                 ],
             static::META_DESC_TOO_SHORT
                 => [
-                    'The meta description is too short',
+                    _t(
+                        __CLASS__ . '.TOO_SHORT',
+                        'The meta description is too short'
+                    ),
                     'warning'
             ],
             static::META_DESC_TOO_LONG
                 => [
-                    'The meta description is too long',
+                    _t(
+                        __CLASS__ . '.TOO_LONG',
+                        'The meta description is too long'
+                    ),
                     'danger'
                 ],
             static::META_DESC_NO_FOCUS_KEYWORD
                 => [
-                    'The meta description does not contain the focus keyword',
+                    _t(
+                        __CLASS__ . '.NO_FOCUS_KEYWORD',
+                        'The meta description does not contain the focus keyword'
+                    ),
                     'warning'
                 ],
             static::META_DESC_SUCCESS
                 => [
-                    'The meta description is perfect!',
+                    _t(
+                        __CLASS__ . '.SUCCESS',
+                        'The meta description is perfect!'
+                    ),
                     'success'
                 ]
         ];

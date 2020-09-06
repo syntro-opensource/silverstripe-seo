@@ -9,6 +9,7 @@ use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Core\ClassInfo;
 use Syntro\Seo\Analysis\Analysis;
+use SilverStripe\View\Requirements;
 
 use PHPHtmlParser\Dom;
 
@@ -35,19 +36,24 @@ class SeoAnalysisField extends LiteralField
     /**
      * __construct - construct a Field
      *
-     * @param  string   $name  name of the field
-     * @param  string   $title title of the field
-     * @param  SiteTree $page  the analysed record
+     * @param  string   $name name of the field
+     * @param  SiteTree $page the analysed record
      */
-    function __construct($name, $title, SiteTree $page)
+    function __construct($name, SiteTree $page)
     {
         $this->setPage($page);
         $dom = new Dom;
-        $dom->loadFromUrl($page->AbsoluteLink());
+        Requirements::clear();
+        $dom->loadStr($page->renderWith($page->getViewerTemplates()));
+        Requirements::restore();
         $this->setDom($dom);
 
         parent::__construct($name, ArrayData::create([
-            'FieldTitle' => $title,
+            'FieldTitle' => _t(__CLASS__ . '.Title', 'SEO Analysis'),
+            'RightTitle' => _t(
+                __CLASS__ . '.Description',
+                'We have found these points on this page. Please try to correct any errors.'
+            ),
             'Results'    => $this->runAnalyses(),
         ])->renderWith(self::class));
     }

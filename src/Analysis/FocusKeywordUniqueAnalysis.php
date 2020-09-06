@@ -20,15 +20,27 @@ class FocusKeywordUniqueAnalysis extends Analysis
     {
         return [
             static::FOCUS_KEYWORD_UNSET   => [
-                'The focus keyword has not been set, consider setting this to improve content analysis',
+                _t(
+                    __CLASS__ . '.UNSET',
+                    'The focus keyword has not been set, consider setting this to improve content analysis'
+                ),
                 'default'
             ],
             static::FOCUS_KEYWORD_INUSE   => [
-                'The focus keyword you want this page to rank for is already being used on another page; ' .
-                'consider changing that if you truly want this page to rank',
+                _t(
+                    __CLASS__ . '.INUSE',
+                    'The focus keyword you want this page to rank for is already being used on another page; ' .
+                    'consider changing that if you truly want this page to rank'
+                ),
                 'danger'
             ],
-            static::FOCUS_KEYWORD_SUCCESS => ['The focus keyword has never been used before—nice!', 'success']
+            static::FOCUS_KEYWORD_SUCCESS => [
+                _t(
+                    __CLASS__ . '.SUCCESS',
+                    'The focus keyword has never been used before—nice!'
+                ),
+                'success'
+            ]
         ];
     }
 

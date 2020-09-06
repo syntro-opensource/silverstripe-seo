@@ -38,12 +38,22 @@ class Seo
     /**
      * @var int
      */
+    const GOOGLE_OPT_DESCRIPTION_LENGTH = 100;
+
+    /**
+     * @var int
+     */
     const GOOGLE_MAX_DESCRIPTION_LENGTH = 160;
 
     /**
      * @var int
      */
     const GOOGLE_MIN_DESCRIPTION_LENGTH = 70;
+
+    /**
+     * @var int
+     */
+    const GOOGLE_MIN_CONTENT_LENGTH = 300;
 
     /**
      * Object we are working with

@@ -1,22 +1,21 @@
 de:
   Syntro\Seo\Extension\MetaSiteConfigExtension:
-    OGImageTitle: Standard OpenGraph Bild
-    TwitterSiteTitle: Twitter Site
+    OGImageTitle: Standarddild beim Teilen
+    TwitterSiteTitle: Twitter Seite
     OGImageRight: Dieses Bild wird angezeigt, wenn kein bestimmtes Bild auf einer Seite definiert wurde.
     TwitterSiteRight: Der Name Ihrer Twitter-Seite.
     TwitterSitePlaceholder: "@deinefirma"
   Syntro\Seo\Extension\MetadataPageExtension:
     # Field titles
-    SOCIALMEDIASHARING: Social Media Sharing
-    MetaTitleTitle: Seitentitel
-    OGImageTitle: OpenGraph Bild
-    OGTitleTitle: OpenGraph Titel
-    OGDescriptionTitle: OpenGraph Beschreibung
-    OGTypeTitle: OpenGraph Typ
+    Socialsharing: Social Sharing
+    OGImageTitle: Geteiltes Bild
+    OGTitleTitle: Geteilter Titel
+    OGDescriptionTitle: Geteilte Beschreibung
+    OGTypeTitle: Geteilter Typ
     TwitterTypeTitle: Twitter Typ
     ExtraMetaTagsToggle: Zusätzliche Metatags
+    RENDERTYPES: Render Typen
     # field descriptions
-    MetaTitleRight: Der Titel dieser Seite, wie er von Suchmaschinen angezeigt wird. Er sollte dem Seitennamen ähnlich sein.
     OGTitleRight: Der Titel, der angezeigt wird, wenn du diese Seite teilst.
     OGDescriptionRight: Die Zusammenfassung, welche angezeigt wird, wenn du diese Seite teilst.
     OGTypeRight: Der Typ, der zur Anzeige dieser Seite verwendet wird, wenn sie geteilt wird. In den meisten Fällen sollte das "Webseite" sein.
@@ -25,6 +24,15 @@ de:
     # fallback indication
     NODEAFAULTIMAGE: Es ist kein Standardbild eingestellt. Das bedeutet, dass ein Crawler ein zufälliges Bild (meist das erste erscheinende) auswählen könnte.
     DEFAULTIMAGE: Es wird das in den Seiteneinstellungen eingestellte Standardbild verwendet.
+  Syntro\Seo\Extension\SEOPageExtension:
+    SEO_Analysis: SEO Analyse
+    SEO_Meta: SEO Metadaten
+    # Field titles
+    FocusKeywordTitle: Fokus-Schlüsselwort
+    MetaTitleTitle: Seitentitel
+    # field descriptions
+    KeyWordRight: Legen Sie ein Schlüsselwort fest, auf welches Sie diese Seite fokussieren möchten.
+    MetaTitleRight: Der Titel dieser Seite, wie er von Suchmaschinen angezeigt wird. Er sollte dem Seitennamen ähnlich sein.
   Syntro\Seo\Metadata:
     website: Webseite
     article: Artikel
@@ -32,3 +40,37 @@ de:
     summary_large_image: Zusammenfassung mit grossem Bild
     app: App
     player: Player
+  Syntro\Seo\Analysis\FocusKeywordContentAnalysis:
+    UNSET: Das Fokus-Schlüsselwort wurde nicht festgelegt; Sie sollten dieses zur Optimierung der Inhaltsanalyse festlegen.
+    NOTFOUND: Das Fokus-Schlüsselwort wurde im Inhalt dieser Seite nicht gefunden.
+    SUCCESS: Das Fokus-Schlüsselwort wurde <strong>{occurences}</strong> mal gefunden.
+  Syntro\Seo\Analysis\FocusKeywordUniqueAnalysis:
+    UNSET: Das Fokus-Schlüsselwort wurde nicht festgelegt; Sie sollten dieses zur Optimierung der Inhaltsanalyse festlegen.
+    INUSE: Das Fokus-Schlüsselwort, nach dem diese Seite gelistet werden soll, wird bereits auf einer anderen Seite verwendet; wenn Sie wirklich wollen, dass diese Seite gelistet wird, sollten Sie dies ändern.
+    SUCCESS: Das Fokus-Schlüsselwort wurde noch nie zuvor verwendet - wunderbar!
+  Syntro\Seo\Analysis\FocusKeywordUrlAnalysis:
+    UNSET: Das Fokus-Schlüsselwort wurde nicht festgelegt; Sie sollten dieses zur Optimierung der Inhaltsanalyse festlegen.
+    NOT_IN_URL: Das Fokus-Schlüsselwort wurde nicht im URL-Segment gefunden; Sie sollten dieses zur Optimierung der Inhaltsanalyse festlegen!
+  Syntro\Seo\Analysis\MetaDescAnalysis:
+    UNSET: Die Meta Beschreibung wurde nicht festgelegt; ein möglicherweise unerwünschter Ausschnitt kann von der Seite genommen und stattdessen angezeigt werden
+    TOO_SHORT: Die Meta Beschreibung ist zu kurz
+    TOO_LONG: Die Meta Beschreibung ist zu lang
+    NO_FOCUS_KEYWORD: Die Metabeschreibung enthält das Fokus-Schlüsselwort nicht
+    SUCCESS: Die Meta Beschreibung ist perfekt!
+  Syntro\Seo\Analysis\TitleAnalysis:
+    IS_HOME: Der Seitentitel sollte von "{metatitle}" abgeändert werden; dieser Titel reduziert fast immer die Klickrate. Bitte behalten Sie jedoch "{title}" als Navigations-Label bei.
+    TOO_SHORT: Der Seitentitel ist zu kurz
+    OK_BUT_SHORT: Der Seitentitel ist etwas kurz, liegt aber über dem absoluten Zeichenminimum von {min} Zeichen.
+    TOO_LONG: Der Seitentitel ist zu lang
+    NO_FOCUS_KEYWORD: Der Seitentitel enthält das Fokus-Schlüsselwort nicht
+    FOCUS_KEYWORD_POSITION: Der Seitentitel enthält das Fokus-Schlüsselwort, jedoch nicht am Anfang; Ziehen Sie in Betracht, dieses an den Anfang zu verschieben.
+    SUCCES: Der Seitentitel liegt zwischen der empfohlenen Zeichenanzahl von {min} Zeichen und dem empfohlenen Zeichenmaximum von {max} Zeichen.
+  Syntro\Seo\Analysis\WordCountAnalysis:
+    BELOW_MIN: Der Inhalt dieser Seite enthält {count} Wörter, was weniger als das empfohlene Minimum von {min} Wörter ist.
+    ABOVE_MIN: Der Inhalt dieser Seite enthält {count} Wörter, was mehr als das empfohlene Minimum von {min} Wörter ist. Perfekt!
+  Syntro\Seo\Preview\SERPPreview:
+    Title: SERP Vorschau
+    Description: SERP (Search Engine Result Page) Snippets zeigen, wie diese Seite in einer Google Suche dargestellt wird.
+  Syntro\Seo\Forms\SeoAnalysisField:
+    Title: SEO Analyse
+    Description: Wir haben diese Punkte auf dieser Seite gefunden. Versuchen Sie, allfällige Fehler zu beheben.
