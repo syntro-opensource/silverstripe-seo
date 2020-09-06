@@ -110,6 +110,6 @@ class SERPPreview extends Preview
      */
     public function RightTitle()
     {
-        return _t(__CLASS__ . '.Description', 'This is how this Page is presented by Google');
+        return _t(__CLASS__ . '.Description', 'SERP (Search Engine Result Pages) snippets show how a user sees this page on Google');
     }
 }

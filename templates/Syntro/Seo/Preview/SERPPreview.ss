@@ -1,6 +1,6 @@
 <div class="form-group field text">
 
-    <label class="form__field-label">SERP Preview</label>
+<label class="form__field-label"><%t Syntro\Seo\Preview\SERPPreview.Title 'SERP Preview' %></label>
 
     <div class="form__field-holder" style="padding: 7px 1.5385rem; position: relative;">
         <div class="google-search-preview card shadow" style="background-color: #fff;">
@@ -59,5 +59,5 @@
             </div>
         </div>
     </div>
-    <p class="form__field-extra-label" id="extra-label-Form_EditForm_MetaImageDefault">$RightTitle</p>
+<p class="form__field-extra-label"><%t Syntro\Seo\Preview\SERPPreview.Description 'SERP (Search Engine Result Page) snippets show how a user sees this page on Google' %></p>
 </div>

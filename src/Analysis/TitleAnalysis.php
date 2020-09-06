@@ -22,27 +22,67 @@ class TitleAnalysis extends Analysis
      */
     public function responses()
     {
+        $metaTitle = $this->getDom()->find('title')->text();
+        $pageTitle = $this->getPage()->Title;
         return [
-            static::TITLE_IS_HOME                => [
-                'The page title should be changed from "Home"; ' .
-                'that title almost always reduces click-through rate. ' .
-                'Please retain "Home" as the Navigation Label, however.',
+            static::TITLE_IS_HOME => [
+                _t(
+                    __CLASS__ . '.IS_HOME',
+                    'The page title should be changed from "{metatitle}"; that title almost always reduces click-through rate. Please retain "{title}" as the Navigation Label, however.',
+                    [
+                        'metatitle' => $metaTitle,
+                        'title' => $pageTitle,
+                    ]
+                ),
                 'danger'
             ],
-            static::TITLE_TOO_SHORT              => ['The page title is too short', 'danger'],
-            static::TITLE_OK_BUT_SHORT           => [
-                'The page title is a little short but is above the absolute character minimum of 25',
+            static::TITLE_TOO_SHORT => [
+                _t(
+                    __CLASS__ . '.TOO_SHORT',
+                    'The page title is too short'
+                ),
+                 'danger'
+             ],
+            static::TITLE_OK_BUT_SHORT => [
+                _t(
+                    __CLASS__ . '.OK_BUT_SHORT',
+                    'The page title is a little short but is above the absolute character minimum of {min} characters.',
+                    [
+                        'min' => Seo::GOOGLE_MIN_TITLE_LENGTH
+                    ]
+                ),
                 'warning'
             ],
-            static::TITLE_TOO_LONG               => ['The page title is too long', 'danger'],
-            static::TITLE_NO_FOCUS_KEYWORD       => ['The page title does not contain the focus keyword', 'warning'],
+            static::TITLE_TOO_LONG => [
+                _t(
+                    __CLASS__ . '.TOO_LONG',
+                    'The page title is too long'
+                ),
+                'danger'
+            ],
+            static::TITLE_NO_FOCUS_KEYWORD => [
+                _t(
+                    __CLASS__ . '.NO_FOCUS_KEYWORD',
+                    'The page title does not contain the focus keyword'
+                ),
+                'warning'
+            ],
             static::TITLE_FOCUS_KEYWORD_POSITION => [
-                'The page title contains the focus keyword but is not at the beginning; ' .
-                'consider moving it to the beginning',
+                _t(
+                    __CLASS__ . '.FOCUS_KEYWORD_POSITION',
+                    'The page title contains the focus keyword but is not at the beginning; consider moving it to the beginning'
+                ),
                 'warning'
             ],
-            static::TITLE_SUCCESS                => [
-                'The page title is between the ' . Seo::GOOGLE_OPT_TITLE_LENGTH . ' character minimum and the recommended ' . SEO::GOOGLE_MAX_TITLE_LENGTH . ' character maximum',
+            static::TITLE_SUCCESS => [
+                _t(
+                    __CLASS__ . '.SUCCES',
+                    'The page title is between the recommended {min} character count and the recommended {max} character maximum',
+                    [
+                        'min' => Seo::GOOGLE_OPT_TITLE_LENGTH,
+                        'max' => SEO::GOOGLE_MAX_TITLE_LENGTH
+                    ]
+                ),
                 'success'
             ]
         ];
@@ -60,7 +100,10 @@ class TitleAnalysis extends Analysis
         $pageTitle = $this->getPage()->Title;
         $keyword = $this->getKeyword();
 
-        if (strtolower($pageTitle) == 'home') {
+        if (
+            strtolower($pageTitle) == 'home' ||
+            strtolower($pageTitle) == 'startseite'
+        ) {
             return static::TITLE_IS_HOME;
         }
 

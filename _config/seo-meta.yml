@@ -4,8 +4,8 @@ Name: seo-meta
 Page:
     # metadata: '%Syntro\SeoMetadata'
     extensions:
-        - Syntro\Seo\Extension\MetadataPageExtension
-        - Syntro\Seo\Extension\SEOPageExtension
+      - Syntro\Seo\Extension\SEOPageExtension
+      - Syntro\Seo\Extension\MetadataPageExtension
 Silverstripe\SiteConfig\SiteConfig:
     extensions:
         - Syntro\Seo\Extension\MetaSiteConfigExtension

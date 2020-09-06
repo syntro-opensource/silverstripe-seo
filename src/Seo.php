@@ -46,6 +46,11 @@ class Seo
     const GOOGLE_MIN_DESCRIPTION_LENGTH = 70;
 
     /**
+     * @var int
+     */
+    const GOOGLE_MIN_CONTENT_LENGTH = 300;
+
+    /**
      * Object we are working with
      * @var SiteTree
      */

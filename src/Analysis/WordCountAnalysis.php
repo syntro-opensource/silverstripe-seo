@@ -1,5 +1,6 @@
 <?php
 namespace Syntro\Seo\Analysis;
+use Syntro\Seo\Seo;
 
 /**
  * Class WordCountAnalysis
@@ -25,16 +26,24 @@ class WordCountAnalysis extends Analysis
     {
         return [
             static::WORD_COUNT_BELOW_MIN => [
-                sprintf(
-                    'The content of this page contains %s words which is less than the 300 recommended minimum',
-                    $this->getWordCount()
+                _t(
+                    __CLASS__ . '.BELOW_MIN',
+                    'The content of this page contains {count} words which is less than the {min} recommended minimum',
+                    [
+                        'count' => $this->getWordCount(),
+                        'min' => Seo::GOOGLE_MIN_CONTENT_LENGTH
+                    ]
                 ),
-                'danger'
+                'warning'
             ],
             static::WORD_COUNT_ABOVE_MIN => [
-                sprintf(
-                    'The content of this page contains %s words which is above the 300 recommended minimum',
-                    $this->getWordCount()
+                _t(
+                    __CLASS__ . '.ABOVE_MIN',
+                    'The content of this page contains {count} words which is above the {min} recommended minimum',
+                    [
+                        'count' => $this->getWordCount(),
+                        'min' => Seo::GOOGLE_MIN_CONTENT_LENGTH
+                    ]
                 ),
                 'success'
             ],

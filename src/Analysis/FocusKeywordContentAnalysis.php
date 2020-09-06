@@ -42,15 +42,25 @@ class FocusKeywordContentAnalysis extends Analysis
     {
         return [
             static::FOCUS_KEYWORD_UNSET     => [
-                'The focus keyword has not been set; consider setting this to improve content analysis',
+                _t(
+                    __CLASS__ . '.UNSET',
+                    'The focus keyword has not been set; consider setting this to improve content analysis'
+                ),
                 'default'
             ],
             static::FOCUS_KEYWORD_NOT_FOUND => [
-                'The focus keyword was not found in the content of this page',
+                _t(
+                    __CLASS__ . '.NOTFOUND',
+                    'The focus keyword was not found in the content of this page'
+                ),
                 'danger'
             ],
             static::FOCUS_KEYWORD_SUCCESS   => [
-                'The focus keyword was found <strong>' . $this->findOccurrences() . '</strong> times.',
+                _t(
+                    __CLASS__ . '.SUCCESS',
+                    'The focus keyword was found <strong>{occurences}</strong> times.',
+                    ['occurences' => $this->findOccurrences()]
+                ),
                 'success'
             ]
         ];

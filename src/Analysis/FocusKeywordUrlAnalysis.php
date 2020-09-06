@@ -30,12 +30,17 @@ class FocusKeywordUrlAnalysis extends Analysis
                 'default'
             ],
             static::FOCUS_KEYWORD_UNSET => [
-                'The focus keyword has not been set; consider setting this to improve content analysis',
+                _t(
+                    __CLASS__ . '.UNSET',
+                    'The focus keyword has not been set; consider setting this to improve content analysis'
+                ),
                 'default'
             ],
             static::FOCUS_KEYWORD_NOT_IN_URL => [
-                'The focus keyword is not in the url segment; ' .
-                'consider changing this!',
+                _t(
+                    __CLASS__ . '.NOT_IN_URL',
+                    'The focus keyword is not in the url segment; consider changing this!'
+                ),
                 'warning'
             ],
             static::FOCUS_KEYWORD_SUCCESS => ['The focus keyword is in the url segment; this is great!', 'success'],

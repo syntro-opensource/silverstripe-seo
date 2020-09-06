@@ -40,7 +40,7 @@ class SeoAnalysisField extends LiteralField
      * @param  string   $title title of the field
      * @param  SiteTree $page  the analysed record
      */
-    function __construct($name, $title, SiteTree $page)
+    function __construct($name, SiteTree $page)
     {
         $this->setPage($page);
         $dom = new Dom;
@@ -50,7 +50,11 @@ class SeoAnalysisField extends LiteralField
         $this->setDom($dom);
 
         parent::__construct($name, ArrayData::create([
-            'FieldTitle' => $title,
+            'FieldTitle' => _t(__CLASS__ . '.Title', 'SEO Analysis'),
+            'RightTitle' => _t(
+                __CLASS__ . '.Description',
+                'We have found these points on this page. Please try to correct any errors.'
+            ),
             'Results'    => $this->runAnalyses(),
         ])->renderWith(self::class));
     }

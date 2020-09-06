@@ -27,14 +27,6 @@ use Page;
  */
 class MetadataPageExtension extends DataExtension
 {
-
-    /**
-     * @config
-     * @var bool
-     */
-    private static $use_templated_meta_title = true;
-
-
     /**
      * @var Metadata|null
      */
@@ -45,7 +37,6 @@ class MetadataPageExtension extends DataExtension
      * @var array
      */
     private static $db = [
-        'MetaTitle' => 'Varchar',
         'OGType' => 'Varchar(20)',
         'OGTitle' => 'Varchar',
         'OGDescription' => 'Varchar',
@@ -93,17 +84,17 @@ class MetadataPageExtension extends DataExtension
         /**
          * @var TextareaField|null
          */
-        $metaDescriptionField = $fields->dataFieldByName('MetaDescription');
+        // $metaDescriptionField = $fields->dataFieldByName('MetaDescription');
         /**
          * @var TextareaField|null
          */
-        $metaExtraField = $fields->dataFieldByName('ExtraMeta');
+        // $metaExtraField = $fields->dataFieldByName('ExtraMeta');
         // we push the Meta fields to a new tab
-        if (!is_null($metaDescriptionField) && !is_null($metaExtraField)) {
-            $fields->removeByName([
-                'MetaDescription',
-                'ExtraMeta'
-            ]);
+        // if (!is_null($metaDescriptionField) && !is_null($metaExtraField)) {
+            // $fields->removeByName([
+            //     'MetaDescription',
+            //     'ExtraMeta'
+            // ]);
             // generate available types
             $OGTypes = [];
             foreach (Metadata::config()->available_og_types as $value) {
@@ -113,37 +104,45 @@ class MetadataPageExtension extends DataExtension
             foreach (Metadata::config()->available_twitter_types as $value) {
                 $TwitterTypes[$value] = _t(Metadata::class . '.' . $value, $value);
             }
-
+            $fields->findOrMakeTab(
+                "Root.SocialSharing",
+                $owner->fieldLabel('Root.SocialSharing')
+            );
             $fields->addFieldsToTab(
-                'Root.Metadata',
+                'Root.SocialSharing',
                 [
-                    $metaDescriptionField,
-                    $SMHeaderField = HeaderField::create('SocialMediaHeader', _t(__CLASS__ . '.SOCIALMEDIASHARING', 'Social Media Sharing')),
+                    // $SMHeaderField = HeaderField::create('SocialMediaHeader', _t(__CLASS__ . '.SOCIALMEDIASHARING', 'Social Media Sharing')),
                     $ogImage = UploadField::create('OGImage', _t(__CLASS__ . '.OGImageTitle', 'OpenGraph Image')),
                     $ogTitle = TextField::create('OGTitle', _t(__CLASS__ . '.OGTitleTitle', 'OpenGraph Title')),
                     $ogDescription = TextareaField::create('OGDescription', _t(__CLASS__ . '.OGDescriptionTitle', 'OpenGraph Description')),
-                    $ogType = DropdownField::create('OGType', _t(__CLASS__ . '.OGTypeTitle', 'OpenGraph Type'), $OGTypes),
-                    $twitterType = DropdownField::create('TwitterType', _t(__CLASS__ . '.TwitterTypeTitle', 'Twitter Type'), $TwitterTypes),
-                    $metaToggle = ToggleCompositeField::create(
-                        'ExtraTags',
-                        _t(__CLASS__ . '.ExtraMetaTagsToggle', 'Extra Meta Tags'),
+                    $toggleTypesField = ToggleCompositeField::create(
+                        'Types',
+                        'Render Types',
                         [
-                            $metaExtraField
+                            $ogType = DropdownField::create('OGType', _t(__CLASS__ . '.OGTypeTitle', 'OpenGraph Type'), $OGTypes),
+                            $twitterType = DropdownField::create('TwitterType', _t(__CLASS__ . '.TwitterTypeTitle', 'Twitter Type'), $TwitterTypes)
                         ]
-                    )
+                    ),
+                    // $metaToggle = ToggleCompositeField::create(
+                    //     'ExtraTags',
+                    //     _t(__CLASS__ . '.ExtraMetaTagsToggle', 'Extra Meta Tags'),
+                    //     [
+                    //         $metaExtraField
+                    //     ]
+                    // )
                 ]
             );
             // $SMHeaderField
             //     ->addExtraClass('mt-5 mb-4')
             //     ->setHeadingLevel(2);
-            $metaDescriptionField
-                ->setTargetLength(
-                    Seo::GOOGLE_MIN_DESCRIPTION_LENGTH +
-                    (Seo::GOOGLE_MAX_DESCRIPTION_LENGTH-Seo::GOOGLE_MIN_DESCRIPTION_LENGTH)/1.5
-                );
-            $SMHeaderField
-                ->addExtraClass('mt-5 mb-4')
-                ->setHeadingLevel(2);
+            // $metaDescriptionField
+            //     ->setTargetLength(
+            //         Seo::GOOGLE_MIN_DESCRIPTION_LENGTH +
+            //         (Seo::GOOGLE_MAX_DESCRIPTION_LENGTH-Seo::GOOGLE_MIN_DESCRIPTION_LENGTH)/1.5
+            //     );
+            // $SMHeaderField
+            //     ->addExtraClass('mt-5 mb-4')
+            //     ->setHeadingLevel(2);
             $ogTitle
                 ->setRightTitle(_t(__CLASS__ . '.OGTitleRight', 'The title which is shown when you share this page.'))
                 ->setAttribute('placeholder', $owner->Title);
@@ -154,10 +153,10 @@ class MetadataPageExtension extends DataExtension
                 ->setRightTitle(_t(__CLASS__ . '.OGTypeRight', 'The type which is used to display this page when shared. Most of the time, you want this to be "website"'));
             $twitterType
                 ->setRightTitle(_t(__CLASS__ . '.TwitterTypeRight', 'The type which is used to display this page when shared on Twitter. Most of the time, you want this to be "summary"'));
-            $metaToggle
-                ->setHeadingLevel(4);
-            $metaExtraField
-                ->setRows(20);
+            // $metaToggle
+            //     ->setHeadingLevel(4);
+            // $metaExtraField
+            //     ->setRows(20);
 
             // add some dialog to indicate image
             $OgImageRightTitle = _t(__CLASS__ . '.OGImageRight', 'The image which is shown when you share this page.');
@@ -172,22 +171,34 @@ class MetadataPageExtension extends DataExtension
             }
 
             // add a metatitle field if configured:
-            if ($owner->config()->use_templated_meta_title) {
-                $fields->addFieldToTab(
-                    'Root.Metadata',
-                    $metaTitleField = TextField::create('MetaTitle', _t(__CLASS__ . '.MetaTitleTitle', 'Page Title')),
-                    'MetaDescription'
-                );
-                $emptytitlelength = strlen(
-                    SSViewer::create('Includes/Title')->process(null)->__toString()
-                );
-                $metaTitleField
-                    ->setAttribute('placeholder', $owner->Title)
-                    ->setRightTitle(_t(__CLASS__ . '.MetaTitleRight', 'The title of this page as displayed by search engines. Try to keep it similar to the page name.'))
-                    ->setTargetLength(Seo::GOOGLE_MAX_TITLE_LENGTH-$emptytitlelength);
-            }
-        }
+            // if ($owner->config()->use_templated_meta_title) {
+            //     $fields->addFieldToTab(
+            //         'Root.Metadata',
+            //         $metaTitleField = TextField::create('MetaTitle', _t(__CLASS__ . '.MetaTitleTitle', 'Page Title')),
+            //         'MetaDescription'
+            //     );
+            //     $emptytitlelength = strlen(
+            //         SSViewer::create('Includes/Title')->process(null)->__toString()
+            //     );
+            //     $metaTitleField
+            //         ->setAttribute('placeholder', $owner->Title)
+            //         ->setRightTitle(_t(__CLASS__ . '.MetaTitleRight', 'The title of this page as displayed by search engines. Try to keep it similar to the page name.'))
+            //         ->setTargetLength(Seo::GOOGLE_MAX_TITLE_LENGTH-$emptytitlelength);
+            // }
+        // }
         return $fields;
+    }
+
+    /**
+     * updateFieldLabels - adds Fieldlabels
+     *
+     * @param  array &$labels the original labels
+     * @return array
+     */
+    public function updateFieldLabels(&$labels)
+    {
+        $labels['Root.SocialSharing'] = _t(__CLASS__ . '.Socialsharing', 'Social sharing');
+        return $labels;
     }
 
 
