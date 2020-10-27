@@ -18,7 +18,7 @@ jobs:
           - 7.2
           - 7.3
           - 7.4
-    container: brettt89/silverstripe-web:${{ matrix.php }}-cli
+    container: brettt89/silverstripe-web:${{ matrix.php }}-apache
     services:
       database:
         image: mysql:5.7
@@ -60,7 +60,7 @@ jobs:
   phpstan:
     name: PHPStan
     runs-on: ubuntu-latest
-    container: brettt89/silverstripe-web:7.4-cli
+    container: brettt89/silverstripe-web:7.4-apache
     steps:
       - name: Install Composer
         run: |
@@ -79,7 +79,7 @@ jobs:
   phpcs:
     name: PHPcs
     runs-on: ubuntu-latest
-    container: brettt89/silverstripe-web:7.4-cli
+    container: brettt89/silverstripe-web:7.4-apache
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
