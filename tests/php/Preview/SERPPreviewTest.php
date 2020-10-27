@@ -7,6 +7,7 @@ use Syntro\Seo\Preview\SERPPreview;
 use SilverStripe\Control\Director;
 use SilverStripe\ORM\ArrayList;
 use Page;
+use PHPHtmlParser\Dom;
 
 /**
  * Test the SERPPreview class /**
@@ -23,11 +24,13 @@ class SERPPreviewTest extends SapphireTest
     public function testMetaDescription()
     {
         $page = Page::create();
-        $page->MetaDescription = 'test';
+        $dom = new Dom;
+        $dom->loadStr('<html><head><meta[name=description]>testMetaDescription</meta></head>');
         $serpPreview = SERPPreview::create($page);
+        $serpPreview->setDom($dom);
 
         $this->assertEquals(
-            '<strong></strong>' . $page->MetaDescription . '<strong></strong>',
+            '<strong></strong>testMetaDescription<strong></strong>',
             $serpPreview->MetaDescription()
         );
     }
@@ -40,11 +43,13 @@ class SERPPreviewTest extends SapphireTest
     public function testTitle()
     {
         $page = Page::create();
+        $dom = new Dom;
+        $dom->loadStr('<html><head><title>testTitle</title></head>');
         $serpPreview = SERPPreview::create($page);
-        $serpPreview->getDom()->find('title')->firstChild()->setText('test');
-
+        $serpPreview->setDom($dom);
+        
         $this->assertEquals(
-            '<strong></strong>test<strong></strong>',
+            '<strong></strong>testTitle<strong></strong>',
             $serpPreview->Title()
         );
     }
