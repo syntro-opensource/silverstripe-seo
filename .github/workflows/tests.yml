@@ -83,3 +83,5 @@ jobs:
     steps:
       - name: PHPCS check
         uses: chekalsky/phpcs-action@v1
+        with:
+          enable_warnings: true
