@@ -1,11 +1,8 @@
 language: php
-dist: trusty
+dist: xenial
 
-
-php:
-  - 7.1
-  - 7.2
-  - 7.3
+services:
+  - mysql
 
 env:
   global:
@@ -13,11 +10,18 @@ env:
     - DB=MYSQL
     - PDO=1
     - SS_ENVIRONMENT_TYPE="dev"
+    - SS_BASE_URL="http://localhost:8080/"
   matrix:
-    - RECIPE_VERSION=4.3.x-dev PHPUNIT_TEST=1
-    - RECIPE_VERSION=4.4.x-dev PHPUNIT_TEST=1
-    - RECIPE_VERSION=4.4.x-dev PHPUNIT_COVERAGE_TEST=1
-    - RECIPE_VERSION=4.5.x-dev PHPUNIT_TEST=1
+    fast-finish: true
+    include:
+      - php: 7.1
+        env: DB=MYSQL PHPUNIT_TEST=1
+      - php: 7.2
+        env: DB=MYSQL PHPUNIT_TEST=1
+      - php: 7.3
+        env: DB=MYSQL PDO=1 PHPUNIT_COVERAGE_TEST=1
+      - php: 7.4
+        env: DB=MYSQL PHPUNIT_TEST=1
 
 
 
