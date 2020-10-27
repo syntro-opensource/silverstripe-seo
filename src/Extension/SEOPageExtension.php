@@ -16,6 +16,9 @@ use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Control\Controller;
 use SilverStripe\VersionedAdmin\Controllers\HistoryViewerController;
 use SilverStripe\View\SSViewer;
+use SilverStripe\CMS\Model\RedirectorPage;
+use SilverStripe\CMS\Model\VirtualPage;
+use SilverStripe\ErrorPage\ErrorPage;
 use Syntro\Seo\Seo;
 use Syntro\Seo\Forms\SeoAnalysisField;
 use Syntro\Seo\Preview\SERPPreview;
@@ -49,6 +52,14 @@ class SEOPageExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $owner = $this->owner;
+        // stop when we are dealing with a redirector or virtual page
+        if (
+            $owner instanceof RedirectorPage ||
+            $owner instanceof VirtualPage ||
+            $owner instanceof ErrorPage
+        ) {
+            return $fields;
+        }
 
         // avoid breaking the history comparison UI
         // when adding the Analysis field

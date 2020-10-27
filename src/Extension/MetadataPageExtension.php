@@ -15,6 +15,9 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\CMS\Model\RedirectorPage;
+use SilverStripe\CMS\Model\VirtualPage;
+use SilverStripe\ErrorPage\ErrorPage;
 use Syntro\Seo\Metadata;
 use Syntro\Seo\Seo;
 use Page;
@@ -78,6 +81,15 @@ class MetadataPageExtension extends DataExtension
     {
 
         $owner = $this->owner;
+
+        // stop when we are dealing with a redirector or virtual page
+        if (
+            $owner instanceof RedirectorPage ||
+            $owner instanceof VirtualPage ||
+            $owner instanceof ErrorPage
+        ) {
+            return $fields;
+        }
 
         $OGTypes = [];
         foreach (Metadata::config()->available_og_types as $value) {
