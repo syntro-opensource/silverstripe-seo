@@ -3,10 +3,10 @@ on:
   - push
   - pull_request
 env:
-  - DB=MYSQL
-  - PDO=1
-  - SS_ENVIRONMENT_TYPE="dev"
-  - RECIPE_CMS_VERSION=4.x-dev
+  DB: MYSQL
+  PDO: 1
+  SS_ENVIRONMENT_TYPE: "dev"
+  RECIPE_CMS_VERSION: 4.x-dev
 jobs:
   phpunit:
     name: PHPUnit
