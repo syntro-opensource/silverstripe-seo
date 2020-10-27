@@ -21,18 +21,20 @@ class SeoAnalysisFieldTest extends SapphireTest
    */
     public function testGetters()
     {
-        $page = Page::create();
+        $page = Page::singleton();
+        $dom = new Dom;
+        $dom->loadStr('<html></html>');
         $seoAnalysisField = SeoAnalysisField::create('test', $page);
+        $seoAnalysisField->setDom($dom);
 
         $this->assertEquals(
             $page,
             $seoAnalysisField->getPage()
         );
 
-        $dom = new Dom;
         $this->assertEquals(
             $dom,
-            $seoAnalysisField->setDom($dom)->getDom()
+            $seoAnalysisField->getDom()
         );
     }
 
@@ -43,10 +45,12 @@ class SeoAnalysisFieldTest extends SapphireTest
    */
     public function testSetters()
     {
-        $page = Page::create();
-        $newPage = Page::create();
+        $page = Page::singleton();
+        $newPage = Page::singleton();
         $seoAnalysisField = SeoAnalysisField::create('test', $page);
         $dom = new Dom;
+        $dom->loadStr('<html></html>');
+        $seoAnalysisField->setDom($dom);
 
         $this->assertEquals(
             $newPage,
@@ -54,7 +58,7 @@ class SeoAnalysisFieldTest extends SapphireTest
         );
         $this->assertEquals(
             $dom,
-            $seoAnalysisField->setDom($dom)->getDom()
+            $seoAnalysisField->getDom()
         );
     }
 
@@ -65,7 +69,7 @@ class SeoAnalysisFieldTest extends SapphireTest
    */
     public function testRunAnalyses()
     {
-        $page = Page::create();
+        $page = Page::singleton();
         $seoAnalysisField = SeoAnalysisField::create('test', $page);
 
         $this->assertInstanceOf(
