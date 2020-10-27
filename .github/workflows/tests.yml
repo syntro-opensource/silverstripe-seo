@@ -83,7 +83,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: PHPCS check
-        uses: chekalsky/phpcs-action@v1
+      - name: PHP Code Style (phpcs)
+        uses: chindit/actions-phpcs@master
         with:
-          installed_paths: 'src/ tests/php/'
+          # Folder to check code style
+          dir: src/
+      - name: PHP Code Style (phpcs)
+        uses: chindit/actions-phpcs@master
+        with:
+          # Folder to check code style
+          dir: tests/php/
