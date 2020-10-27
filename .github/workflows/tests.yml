@@ -9,7 +9,7 @@ env:
   RECIPE_CMS_VERSION: 4.x-dev
 jobs:
   phpunit:
-    name: PHPUnit
+    name: 🧩 PHPUnit
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -59,7 +59,7 @@ jobs:
           file: ./coverage.xml
         if: ${{ matrix.php == '7.4' }}
   phpstan:
-    name: PHPStan
+    name: 🔺 PHPStan
     runs-on: ubuntu-latest
     container: brettt89/silverstripe-web:7.4-apache
     steps:
@@ -78,7 +78,7 @@ jobs:
       - name: run phpstan
         run: vendor/bin/phpstan analyse src/ -c "phpstan.neon" -a vendor/symbiote/silverstripe-phpstan/bootstrap.php --level 4
   phpcs:
-    name: PHPcs
+    name: 🔮 PHPcs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
