@@ -16,33 +16,33 @@ class TwitterTagTest extends SapphireTest
    *
    * @return void
    */
-  public function testRendering()
-  {
-    $twitterTag = TwitterTag::create('testName', 'testProperty', 'testContent');
+    public function testRendering()
+    {
+        $twitterTag = TwitterTag::create('testName', 'testProperty', 'testContent');
 
-    $this->assertEquals(
-      [
-        'tag' => 'meta',
-        'attributes' => [
-          'name' => 'testProperty',
-          'content' => 'testContent'
-        ]
-      ],
-      $twitterTag->forRender()
-    );
-  }
+        $this->assertEquals(
+            [
+            'tag' => 'meta',
+            'attributes' => [
+            'name' => 'testProperty',
+            'content' => 'testContent'
+            ]
+            ],
+            $twitterTag->forRender()
+        );
+    }
 
   /**
    * testContentlessRendering
    *
    * @return void
    */
-  public function testContentlessRendering()
-  {
-    $twitterTag = TwitterTag::create('testName', 'testProperty', '');
-    $this->assertEquals(
-      [],
-      $twitterTag->forRender()
-    );
-  }
+    public function testContentlessRendering()
+    {
+        $twitterTag = TwitterTag::create('testName', 'testProperty', '');
+        $this->assertEquals(
+            [],
+            $twitterTag->forRender()
+        );
+    }
 }

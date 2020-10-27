@@ -6,7 +6,6 @@ use SilverStripe\Dev\SapphireTest;
 use Syntro\Seo\Seo;
 use Page;
 
-
 /**
  * Test for Seo class
  * @author Ronald Studer <ronald@syntro.ch>
@@ -19,33 +18,33 @@ class SeoTest extends SapphireTest
    *
    * @return void
    */
-  public function testGettes()
-  {
-    $page = Page::create();
-    $seo = Seo::create($page);
+    public function testGettes()
+    {
+        $page = Page::create();
+        $seo = Seo::create($page);
 
-    $this->assertEquals(
-      $page,
-      $seo->getObject()
-    );
-  }
+        $this->assertEquals(
+            $page,
+            $seo->getObject()
+        );
+    }
 
   /**
    * testSetters
    *
    * @return void
    */
-  public function testSetters()
-  {
-    $page = Page::create();
-    $seo = Seo::create($page);
-    $newPage = Page::create();
+    public function testSetters()
+    {
+        $page = Page::create();
+        $seo = Seo::create($page);
+        $newPage = Page::create();
 
-    $seo->setObject($newPage);
+        $seo->setObject($newPage);
 
-    $this->assertEquals(
-      $newPage,
-      $seo->getObject()
-    );
-  }
+        $this->assertEquals(
+            $newPage,
+            $seo->getObject()
+        );
+    }
 }

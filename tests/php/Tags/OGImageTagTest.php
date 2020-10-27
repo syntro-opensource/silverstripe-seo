@@ -18,29 +18,29 @@ class OGImageTagTest extends SapphireTest
    *
    * @return void
    */
-  public function testGetters()
-  {
-    $image = Image::create();
-    $ogImageTag = OGImageTag::create('testName', $image);
+    public function testGetters()
+    {
+        $image = Image::create();
+        $ogImageTag = OGImageTag::create('testName', $image);
 
-    $this->assertEquals(
-      $image,
-      $ogImageTag->getImage()
-    );
-  }
+        $this->assertEquals(
+            $image,
+            $ogImageTag->getImage()
+        );
+    }
   /**
    * testRendering
    *
    * @return void
    */
-  public function testRendering()
-  {
-    $image = Image::create();
-    $ogImageTag = OGImageTag::create('testName', $image);
+    public function testRendering()
+    {
+        $image = Image::create();
+        $ogImageTag = OGImageTag::create('testName', $image);
 
-    $this->assertEquals(
-      5,
-      sizeof($ogImageTag->forRender())
-    );
-  }
+        $this->assertEquals(
+            5,
+            sizeof($ogImageTag->forRender())
+        );
+    }
 }

@@ -20,66 +20,66 @@ class MissingMetaDescriptionReportTest extends SapphireTest
    *
    * @return void
    */
-  public function testTitle()
-  {
-    $missingMetaDescriptionReport = MissingMetaDescriptionReport::create();
+    public function testTitle()
+    {
+        $missingMetaDescriptionReport = MissingMetaDescriptionReport::create();
 
-    $this->assertEquals(
-      'Pages with missing meta description',
-      $missingMetaDescriptionReport->title()
-    );
-  }
+        $this->assertEquals(
+            'Pages with missing meta description',
+            $missingMetaDescriptionReport->title()
+        );
+    }
 
   /**
    * testDescription
    *
    * @return void
    */
-  public function testDescription()
-  {
-    $missingMetaDescriptionReport = MissingMetaDescriptionReport::create();
+    public function testDescription()
+    {
+        $missingMetaDescriptionReport = MissingMetaDescriptionReport::create();
 
-    $this->assertEquals(
-      '<div class="alert alert-info">It is useful to set a meta description for each page. This helps with indexing and displaying the specific page by search engines.</div>',
-      $missingMetaDescriptionReport->description()
-    );
-  }
+        $this->assertEquals(
+            '<div class="alert alert-info">It is useful to set a meta description for each page. This helps with indexing and displaying the specific page by search engines.</div>',
+            $missingMetaDescriptionReport->description()
+        );
+    }
 
   /**
    * testSourceRecords
    *
    * @return void
    */
-  public function testSourceRecords()
-  {
-    $missingMetaDescriptionReport = MissingMetaDescriptionReport::create();
+    public function testSourceRecords()
+    {
+        $missingMetaDescriptionReport = MissingMetaDescriptionReport::create();
 
-    $this->assertEquals(
-      SiteTree::get()->filter([
-          'MetaDescription' => null,
-          'ClassName:not' => ErrorPage::class
-      ])->filter([
-          'ClassName:not' => RedirectorPage::class,
-      ]),
-      $missingMetaDescriptionReport->sourceRecords()
-    );
-  }
+        $this->assertEquals(
+            SiteTree::get()->filter([
+            'MetaDescription' => null,
+            'ClassName:not' => ErrorPage::class
+            ])->filter([
+            'ClassName:not' => RedirectorPage::class,
+            ]),
+            $missingMetaDescriptionReport->sourceRecords()
+        );
+    }
 
   /**
    * testColumns
    *
    * @return void
    */
-  public function testColumns()
-  {
-    $missingMetaDescriptionReport = MissingMetaDescriptionReport::create();
+    public function testColumns()
+    {
+        $missingMetaDescriptionReport = MissingMetaDescriptionReport::create();
 
-    $this->assertEquals(
-      ["Title" => [
-          "title" => "Title",
-          "link" => true,
-      ]],
-      $missingMetaDescriptionReport->columns()
-    );
-  }
+        $this->assertEquals(
+            ["Title" => [
+            "title" => "Title",
+            "link" => true,
+            ]],
+            $missingMetaDescriptionReport->columns()
+        );
+    }
 }

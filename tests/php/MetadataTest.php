@@ -10,6 +10,11 @@ use Syntro\Seo\Tags\TwitterTag;
 use Syntro\Seo\Tags\OGImageTag;
 use Page;
 
+/**
+ * test Metadata
+ *
+ * @author Ronald Studer
+ */
 class MetadataTest extends SapphireTest
 {
 
@@ -18,69 +23,69 @@ class MetadataTest extends SapphireTest
    *
    * @return void
    */
-  public function testSetters()
-  {
-    $page = Page::create();
-    $newPage = Page::create();
-    $metadata = Metadata::create($page);
+    public function testSetters()
+    {
+        $page = Page::create();
+        $newPage = Page::create();
+        $metadata = Metadata::create($page);
 
-    $this->assertEquals(
-      $metadata,
-      $metadata->setSource($newPage)
-    );
-  }
+        $this->assertEquals(
+            $metadata,
+            $metadata->setSource($newPage)
+        );
+    }
 
   /**
    * testGetters
    *
    * @return void
    */
-  public function testGetters()
-  {
-    $page = Page::create();
-    $metadata = Metadata::create($page);
+    public function testGetters()
+    {
+        $page = Page::create();
+        $metadata = Metadata::create($page);
 
-    $this->assertEquals(
-      $page,
-      $metadata->getSource()
-    );
-  }
+        $this->assertEquals(
+            $page,
+            $metadata->getSource()
+        );
+    }
 
   /**
    * testPushTag
    *
    * @return void
    */
-  public function testPushTag()
-  {
-    $page = Page::create();
-    $tag = Tag::create('Test', ['href' => 'test'], 'a');
-    $metadata = Metadata::create($page);
+    public function testPushTag()
+    {
+        $page = Page::create();
+        $tag = Tag::create('Test', ['href' => 'test'], 'a');
+        $metadata = Metadata::create($page);
 
-    $this->assertEquals(
-      $metadata,
-      $metadata->pushTag($tag)
-    );
-  }
+        $this->assertEquals(
+            $metadata,
+            $metadata->pushTag($tag)
+        );
+    }
 
 
   /**
    * testRemoveTag
    *
-   * @return
+   * @return void
    */
-  public function testRemoveTag()
-  {
-    $page = Page::create();
-    $tag = Tag::create('Test', ['href' => 'test'], 'a');
-    $metadata = Metadata::create($page);
-    $metadata->pushTag($tag);
+    public function testRemoveTag()
+    {
+        $page = Page::create();
+        $tag = Tag::create('Test', ['href' => 'test'], 'a');
+        $metadata = Metadata::create($page);
+        $metadata->pushTag($tag);
 
-    $this->assertEquals(
-      $metadata,
-      $metadata->removeTag($tag->getName())
-    );
-  }
+        $this->assertEquals(
+            $metadata,
+            $metadata->removeTag($tag->getName())
+        );
+    }
 
 
   /**
@@ -88,16 +93,15 @@ class MetadataTest extends SapphireTest
    *
    * @return void
    */
-  public function testGetTagsForRendering()
-  {
-    $page = Page::create();
-    $metadata = Metadata::create($page);
-    $array = $metadata->getTagsForRender();
+    public function testGetTagsForRendering()
+    {
+        $page = Page::create();
+        $metadata = Metadata::create($page);
+        $array = $metadata->getTagsForRender();
 
-    $this->assertEquals(
-      $array,
-      $metadata->getTagsForRender()
-    );
-  }
-
+        $this->assertEquals(
+            $array,
+            $metadata->getTagsForRender()
+        );
+    }
 }
