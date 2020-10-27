@@ -1,7 +1,6 @@
 name: 🎭 Tests
 on:
   - push
-  - pull_request
 env:
   DB: MYSQL
   PDO: 1
