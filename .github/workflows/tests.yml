@@ -10,6 +10,7 @@ env:
 jobs:
   phpunit:
     name: PHPUnit
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         php:
@@ -58,6 +59,7 @@ jobs:
         if: ${{ matrix.php == '7.4' }}
   phpstan:
     name: PHPStan
+    runs-on: ubuntu-latest
     container: brettt89/silverstripe-web:7.4-apache
     steps:
       - name: Install Composer
@@ -76,6 +78,7 @@ jobs:
         run: vendor/bin/phpstan analyse src/ tests/ -c "phpstan.neon" -a vendor/symbiote/silverstripe-phpstan/bootstrap.php --level 4
   phpcs:
     name: PHPcs
+    runs-on: ubuntu-latest
     container: brettt89/silverstripe-web:7.4-apache
     steps:
       - name: PHPCS check
