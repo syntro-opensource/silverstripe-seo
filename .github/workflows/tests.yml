@@ -45,7 +45,7 @@ jobs:
         uses: actions/checkout@v2
       - name: install dependencies
         run: |
-          composer require --no-update silverstripe/recipe-cms:$RECIPE_CMS_VERSION &&\
+          composer require --no-update syntro/ssto &&\
           composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
       - name: run phpunit
         run: vendor/bin/phpunit -c "phpunit.xml" tests/php
@@ -72,7 +72,7 @@ jobs:
         uses: actions/checkout@v2
       - name: install dependencies
         run: |
-          composer require --no-update cwp/watea-theme silverstripe/recipe-cms:$RECIPE_CMS_VERSION &&\
+          composer require --no-update silverstripe/recipe-cms:$RECIPE_CMS_VERSION &&\
           composer install --prefer-dist --no-interaction --no-progress --no-suggest --optimize-autoloader --verbose --profile
       - name: run phpstan
         run: vendor/bin/phpstan analyse src/ -c "phpstan.neon" -a vendor/symbiote/silverstripe-phpstan/bootstrap.php --level 4
