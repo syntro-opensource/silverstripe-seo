@@ -3,6 +3,7 @@ namespace Syntro\Seo\Extension;
 
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Control\Controller;
+use SilverStripe\Core\ClassInfo;
 use Syntro\Seo\Tags\Tag;
 
 /**
@@ -29,7 +30,7 @@ class MetadataBlogExtension extends DataExtension
          * @var mixed
          */
         $controller = Controller::curr();
-        if ($current_profile = $controller->getCurrentProfile()) {
+        if (ClassInfo::hasMethod($controller, 'getCurrentProfile') && $current_profile = $controller->getCurrentProfile()) {
             $metadata->pushTag(Tag::create('og:description', [
                 'property' => 'og:description',
                 'content' => $current_profile->BlogProfileSummary
