@@ -79,7 +79,7 @@ class Preview extends ViewableData
         if(!isset($this->dom) || is_null($this->dom)) {
           $dom = new Dom;
           Requirements::clear();
-          $dom->loadStr($page->renderWith($page->getViewerTemplates()));
+          $dom->loadStr($this->getPage()->renderWith($this->getPage()->getViewerTemplates()));
           Requirements::restore();
           $this->setDom($dom);
         }
