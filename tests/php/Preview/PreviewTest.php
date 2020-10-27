@@ -22,7 +22,9 @@ class PreviewTest extends SapphireTest
     {
         $page = Page::create();
         $dom = new Dom;
+        $dom->loadStr('<html><head><meta[name=title]>testMeta</meta></head>');
         $preview = Preview::create($page);
+        $preview->setDom($dom);
 
         $this->assertEquals(
             $page,
@@ -30,7 +32,7 @@ class PreviewTest extends SapphireTest
         );
         $this->assertEquals(
             $dom,
-            $preview->setDom($dom)->getDom()
+            $preview->getDom()
         );
     }
 
@@ -44,6 +46,7 @@ class PreviewTest extends SapphireTest
         $page = Page::create();
         $newPage = Page::create();
         $dom = new Dom;
+        $dom->loadStr('<html><head><meta[name=title]>testMeta</meta></head>');
         $preview = Preview::create($page);
 
         $this->assertEquals(
