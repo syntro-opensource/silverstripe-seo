@@ -79,17 +79,14 @@ jobs:
   phpcs:
     name: PHPcs
     runs-on: ubuntu-latest
-    container: brettt89/silverstripe-web:7.4-apache
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: PHP Code Style (phpcs)
+      - name: lint source
         uses: chindit/actions-phpcs@master
         with:
-          # Folder to check code style
           dir: src/
-      - name: PHP Code Style (phpcs)
+      - name: lint tests
         uses: chindit/actions-phpcs@master
         with:
-          # Folder to check code style
           dir: tests/php/
