@@ -23,14 +23,14 @@ class SERPPreviewTest extends SapphireTest
    */
     public function testMetaDescription()
     {
-        $page = Page::create();
+        $page = Page::singleton();
         $dom = new Dom;
-        $dom->loadStr('<html><head><meta[name=description]>testMetaDescription</meta></head>');
+        $dom->loadStr('<html><head><meta name="description" content="test"></meta></head></html>');
         $serpPreview = SERPPreview::create($page);
         $serpPreview->setDom($dom);
 
         $this->assertEquals(
-            '<strong></strong>testMetaDescription<strong></strong>',
+            '<strong></strong>test<strong></strong>',
             $serpPreview->MetaDescription()
         );
     }
@@ -44,10 +44,10 @@ class SERPPreviewTest extends SapphireTest
     {
         $page = Page::create();
         $dom = new Dom;
-        $dom->loadStr('<html><head><title>testTitle</title></head>');
+        $dom->loadStr('<html><head><title>testTitle</title></head></html>');
         $serpPreview = SERPPreview::create($page);
         $serpPreview->setDom($dom);
-        
+
         $this->assertEquals(
             '<strong></strong>testTitle<strong></strong>',
             $serpPreview->Title()
