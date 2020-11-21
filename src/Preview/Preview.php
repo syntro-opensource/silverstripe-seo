@@ -76,6 +76,13 @@ class Preview extends ViewableData
      */
     public function getDom()
     {
+        if(!isset($this->dom) || is_null($this->dom)) {
+          $dom = new Dom;
+          Requirements::clear();
+          $dom->loadStr($this->getPage()->renderWith($this->getPage()->getViewerTemplates()));
+          Requirements::restore();
+          $this->setDom($dom);
+        }
         return $this->dom;
     }
 
@@ -88,11 +95,6 @@ class Preview extends ViewableData
     function __construct($page)
     {
         $this->setPage($page);
-        $dom = new Dom;
-        Requirements::clear();
-        $dom->loadStr($page->renderWith($page->getViewerTemplates()));
-        Requirements::restore();
-        $this->setDom($dom);
         parent::__construct();
     }
 

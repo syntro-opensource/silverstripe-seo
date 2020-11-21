@@ -83,8 +83,7 @@ class MetadataPageExtension extends DataExtension
         $owner = $this->owner;
 
         // stop when we are dealing with a redirector or virtual page
-        if (
-            $owner instanceof RedirectorPage ||
+        if ($owner instanceof RedirectorPage ||
             $owner instanceof VirtualPage ||
             $owner instanceof ErrorPage
         ) {

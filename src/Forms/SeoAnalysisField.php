@@ -42,11 +42,6 @@ class SeoAnalysisField extends LiteralField
     function __construct($name, SiteTree $page)
     {
         $this->setPage($page);
-        $dom = new Dom;
-        Requirements::clear();
-        $dom->loadStr($page->renderWith($page->getViewerTemplates()));
-        Requirements::restore();
-        $this->setDom($dom);
 
         parent::__construct($name, ArrayData::create([
             'FieldTitle' => _t(__CLASS__ . '.Title', 'SEO Analysis'),
@@ -140,6 +135,13 @@ class SeoAnalysisField extends LiteralField
      */
     public function getDom()
     {
+        if(!isset($this->dom) || is_null($this->dom)) {
+          $dom = new Dom;
+          Requirements::clear();
+          $dom->loadStr($this->getPage()->renderWith($this->getPage()->getViewerTemplates()));
+          Requirements::restore();
+          $this->setDom($dom);
+        }
         return $this->dom;
     }
 }
