@@ -1,0 +1,10 @@
+---
+Name: sitetree-seo
+Before:
+  - 'tractorcow/silverstripe-fluent'
+  - syntro/silvershare
+---
+
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    - Syntro\SEO\Extensions\SEOExtension
