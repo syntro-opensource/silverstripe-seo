@@ -166,7 +166,7 @@ class SEOExtension extends DataExtension
                 ->setAttribute('placeholder', $owner->Title)
                 ->setRightTitle(
                     _t(
-                        __CLASS__.'.METATITLEHELP',
+                        __CLASS__.'.MetaTitleRightTitle',
                         "This is the title used by search engines for displaying search results. Make sure to keep it similar to the <h1> tag."
                     )
             );

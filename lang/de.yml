@@ -3,6 +3,7 @@ de:
     SEO: SEO
     MetaTab: Metadaten
     KWAnalysisTab: Schlüsselwortanalyse
+    MetaTitleRightTitle: Dies ist der Titel, der von Suchmaschinen für die Anzeige von Suchergebnissen verwendet wird. Achte darauf, dass er ähnlich wie der <h1>-Tag ist.
     MetaDescription: Metabeschreibung
     ExtraMetadataToggle: Zusätzliche Metadaten
   Syntro\Seo\Analysis\FocusKeywordContentAnalysis:
