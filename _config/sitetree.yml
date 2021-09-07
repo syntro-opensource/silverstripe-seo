@@ -7,4 +7,5 @@ Before:
 
 SilverStripe\CMS\Model\SiteTree:
   extensions:
+    - Syntro\SEO\Extensions\SEOSiteTreeExtension
     - Syntro\SEO\Extensions\SEOExtension

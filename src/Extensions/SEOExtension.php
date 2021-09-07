@@ -11,6 +11,9 @@ use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\CMS\Controllers\ContentController;
 
 /**
  * The SEO extension adds a n SEO analysis Tab
@@ -19,7 +22,26 @@ use SilverStripe\ORM\DataExtension;
  */
 class SEOExtension extends DataExtension
 {
-    const ICON_STATE_WARN = "⚠️";
+    const STATE_ICON_MAP = [
+        '1' => '🟢',
+        '0' => '⚪️',
+        '-1' => '🟠',
+        '-2' => '🔴',
+        '-3' => '⚠️',
+        '-4' => '❌'
+    ];
+
+    private static $seo_use_metatitle = true;
+    private static $seo_title_fallback = 'Title';
+    private static $seo_title_template = null;
+
+    private static $seo_title_min = 40;
+    private static $seo_title_opt = 50;
+    private static $seo_title_max = 60;
+
+    private static $seo_desc_min = 100;
+    private static $seo_desc_opt = 120;
+    private static $seo_desc_max = 158;
 
     /**
      * Database fields
@@ -67,31 +89,48 @@ class SEOExtension extends DataExtension
             "{$this->getSEOIcon()} {$owner->fieldLabel('Root.SEO')}"
         );
 
-        $fields->addFieldsToTab(
+        $fields->addFieldToTab(
             'Root.SEO',
+            TabSet::create('SEORoot')
+        );
+        $fields->findOrMakeTab(
+            "Root.SEO.SEORoot.Meta",
+            "{$this->getSEOMetaIcon()} {$owner->fieldLabel('Root.SEO.SEORoot.Meta')}"
+        );
+
+        /**
+         * We add the SEO relevant metadata to a tab
+         */
+        $fields->addFieldsToTab(
+            'Root.SEO.SEORoot.Meta',
             [
-                $metatitle = TextField::create(
-                    'MetaTitle',
-                    'Meta Title'
-                ),
                 $metaFieldDesc = TextareaField::create(
                     'MetaDescription',
-                    'Meta Description'
+                    _t(__CLASS__ . '.MetaDescription', 'Meta Description')
                 ),
                 ToggleCompositeField::create(
                         'Metadata',
-                        _t(__CLASS__.'.MetadataToggle', 'Metadata'),
+                        _t(__CLASS__.'.ExtraMetadataToggle', 'Extra Metadata'),
                         [
-                            $metaFieldExtra = new TextareaField("ExtraMeta", $owner->fieldLabel('ExtraMeta'))
+                            $metaFieldExtra = new TextareaField(
+                                "ExtraMeta",
+                                $owner->fieldLabel('ExtraMeta')
+                            )
                         ]
-                    )->setHeadingLevel(4)
+                    )->setHeadingLevel(4),
+                // TextareaField::create(
+                //     'PageContent',
+                //     'PageContent',
+                // )->setReadOnly(true)->setValue(file_get_contents($owner->AbsoluteLink()))
             ]
         );
-        $metatitle
-            ->setTargetLength(50, 40, 60)
-            ->setAttribute('placeholder', $owner->Title);
+
         $metaFieldDesc
-            ->setTargetLength(120, 100, 158)
+            ->setTargetLength(
+                $owner->config()->seo_desc_opt,
+                $owner->config()->seo_desc_min,
+                $owner->config()->seo_desc_max
+            )
             ->setRows(4)
             ->setRightTitle(
                 _t(
@@ -108,6 +147,37 @@ class SEOExtension extends DataExtension
                 )
             )
             ->addExtraClass('help');
+
+        if ($owner->config()->seo_use_metatitle) {
+            $fields->addFieldToTab(
+                'Root.SEO.SEORoot.Meta',
+                $metatitle = TextField::create(
+                    'MetaTitle',
+                    'Meta Title'
+                ),
+                'MetaDescription'
+            );
+            $metatitle
+                ->setTargetLength(
+                    $owner->config()->seo_title_opt,
+                    $owner->config()->seo_title_min,
+                    $owner->config()->seo_title_max
+                )
+                ->setAttribute('placeholder', $owner->Title)
+                ->setRightTitle(
+                    _t(
+                        __CLASS__.'.METATITLEHELP',
+                        "This is the title used by search engines for displaying search results. Make sure to keep it similar to the <h1> tag."
+                    )
+            );
+        } else {
+            $fields->fieldByName('Root.Main.Title')->setTargetLength(
+                $owner->config()->seo_title_opt,
+                $owner->config()->seo_title_min,
+                $owner->config()->seo_title_max
+            );
+        }
+
         return $fields;
     }
 
@@ -120,15 +190,106 @@ class SEOExtension extends DataExtension
     public function updateFieldLabels(&$labels)
     {
         $labels['Root.SEO'] =  _t(__CLASS__ . '.SEO', 'SEO');
+        $labels['Root.SEO.SEORoot.Meta'] =  _t(__CLASS__ . '.MetaTab', 'Meta');
+        $labels['Root.SEO.SEORoot.KWAnalysis'] =  _t(__CLASS__ . '.KWAnalysisTab', 'Keyword Analysis');
         return $labels;
     }
 
+    /* --------------------------------------------------- */
+    /*                  icon Getter                        */
+    /* --------------------------------------------------- */
+
+    /**
+     * getSEOIcon - returns the icon displayed in the Root tab
+     *
+     * @return string
+     */
     public function getSEOIcon()
     {
+        $state = $this->getMetaState();
+        return $this->getIconFromState($state);
+    }
+
+    /**
+     * getSEOMetaIcon - returns the icon from the Metadata tab
+     *
+     * @return string
+     */
+    public function getSEOMetaIcon()
+    {
+        $state = $this->getMetaState();
+        return $this->getIconFromState($state);
+    }
+
+    /**
+     * getMetaState - returns the state integer which symbolizes the quality
+     * of the metadata
+     *
+     * @return int
+     */
+    public function getMetaState()
+    {
         $owner = $this->getOwner();
+        $state = 0;
         if (!$owner->MetaDescription || $owner->MetaDescription == '') {
-            return self::ICON_STATE_WARN;
+            $state =  -3;
+        } elseif (
+            strlen(utf8_decode($owner->MetaDescription)) < $owner->config()->seo_desc_min ||
+            strlen(utf8_decode($owner->MetaDescription)) > $owner->config()->seo_desc_max
+        ) {
+            $state =  -1;
+        }
+
+        return $state;
+    }
+
+    /**
+     * getIconFromState - returns a string representation of the state
+     *
+     * @param  int $state the state value
+     * @return string
+     */
+    public function getIconFromState($state)
+    {
+        if (isset(self::STATE_ICON_MAP[strval($state)])) {
+            return self::STATE_ICON_MAP[strval($state)];
+        } elseif ($state < 0) {
+            return '🚫';
         }
         return '';
     }
+
+    /* --------------------------------------------------- */
+    /*                  Getter methods for meta            */
+    /* --------------------------------------------------- */
+
+    /**
+     * getSEOTitle - returns a title for this object, which is derived from
+     * MetaTitle > Title
+     *
+     * @return string
+     */
+    public function getSEOTitle()
+    {
+        $owner = $this->getOwner();
+        $titleField = $owner->config()->seo_title_fallback;
+        $useMetaTitle = $owner->config()->seo_use_metatitle;
+        $titleObj = null;
+        if ($titleField) {
+            if ($useMetaTitle && $owner->MetaTitle && $owner->MetaTitle != '') {
+                $titleObj = $owner->obj('MetaTitle');
+            } else {
+                $titleObj = $owner->obj($titleField);
+            }
+        }
+        $titleTemplate = $owner->config()->seo_title_template;
+        if ($titleObj) {
+            if ($titleTemplate) {
+                return $titleObj->renderWith($titleTemplate);
+            }
+            return $titleObj->forTemplate();
+        }
+        return null;
+    }
+
 }

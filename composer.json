@@ -11,6 +11,7 @@
     "require": {
         "silverstripe/cms": "^4",
         "silverstripe/framework": "^4",
+        "jonom/silverstripe-text-target-length": "^2.0",
         "paquettg/php-html-parser": "^2.2"
     },
     "require-dev": {

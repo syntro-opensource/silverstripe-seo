@@ -1,45 +1,10 @@
 en:
-  Syntro\Seo\Extension\MetaSiteConfigExtension:
-    OGImageTitle: Default image when shared
-    TwitterSiteTitle: Twitter site
-    OGImageRight: This image will be rendered on posts, if no specific image has been defined on a page.
-    TwitterSiteRight: The name of your Twitter page.
-    TwitterSitePlaceholder: "@yourcompany"
-  Syntro\Seo\Extension\MetadataPageExtension:
-    Socialsharing: Social sharing
-    # Field titles
-    OGImageTitle: Shared image
-    OGTitleTitle: Shared title
-    OGDescriptionTitle: Shared description
-    OGTypeTitle: Shared type
-    TwitterTypeTitle: Twitter type
-    ExtraMetaTagsToggle: Extra meta tags
-    RENDERTYPES: Render types
-    # field descriptions
-    OGTitleRight: The title which is shown when you share this page
-    OGDescriptionRight: The summary which is shown when you share this page.
-    OGTypeRight: The type which is used to display this page when shared. Most of the time, you want this to be "website"
-    TwitterTypeRight: The type which is used to display this page when shared on Twitter. Most of the time, you want this to be "summary"
-    OGImageRight: The image which is shown when you share this page
-    # fallback indication
-    NODEAFAULTIMAGE: No default Image is set. This means, a crawler might select one at random.
-    DEFAULTIMAGE: The default image set in the siteconfig will be used.
-  Syntro\Seo\Extension\SEOPageExtension:
-    SEO_Analysis: SEO Analysis
-    SEO_Meta: SEO Metadata
-    # Field titles
-    FocusKeywordTitle: Focus Keyword
-    MetaTitleTitle: Page Title
-    # field descriptions
-    KeyWordRight: Set a Keyword which you want to focus this page around.
-    MetaTitleRight: The title of this page as displayed by search engines. Try to keep it similar to the page name.
-  Syntro\Seo\Metadata:
-    website: Website
-    article: Article
-    summary: Summary
-    summary_large_image: Summary with large image
-    app: App
-    player: Player
+  Syntro\SEO\Extensions\SEOExtension:
+    SEO: SEO
+    MetaTab: Metadata
+    KWAnalysisTab: Keyword analysis
+    MetaDescription: Meta Description
+    ExtraMetadataToggle: Extra Metadata
   Syntro\Seo\Analysis\FocusKeywordContentAnalysis:
     UNSET: The focus keyword has not been set; consider setting this to improve content analysis
     NOTFOUND: The focus keyword was not found in the content of this page

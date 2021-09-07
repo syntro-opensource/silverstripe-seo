@@ -1,45 +1,10 @@
 de:
-  Syntro\Seo\Extension\MetaSiteConfigExtension:
-    OGImageTitle: Standarddild beim Teilen
-    TwitterSiteTitle: Twitter Seite
-    OGImageRight: Dieses Bild wird angezeigt, wenn kein bestimmtes Bild auf einer Seite definiert wurde.
-    TwitterSiteRight: Der Name Ihrer Twitter-Seite.
-    TwitterSitePlaceholder: "@deinefirma"
-  Syntro\Seo\Extension\MetadataPageExtension:
-    # Field titles
-    Socialsharing: Social Sharing
-    OGImageTitle: Geteiltes Bild
-    OGTitleTitle: Geteilter Titel
-    OGDescriptionTitle: Geteilte Beschreibung
-    OGTypeTitle: Geteilter Typ
-    TwitterTypeTitle: Twitter Typ
-    ExtraMetaTagsToggle: Zusätzliche Metatags
-    RENDERTYPES: Render Typen
-    # field descriptions
-    OGTitleRight: Der Titel, der angezeigt wird, wenn du diese Seite teilst.
-    OGDescriptionRight: Die Zusammenfassung, welche angezeigt wird, wenn du diese Seite teilst.
-    OGTypeRight: Der Typ, der zur Anzeige dieser Seite verwendet wird, wenn sie geteilt wird. In den meisten Fällen sollte das "Webseite" sein.
-    TwitterTypeRight: Der Typ, der zur Anzeige dieser Seite verwendet wird, wenn sie auf Twitter geteilt wird. In den meisten Fällen sollte das "Zusammenfassung" sein.
-    OGImageRight: Das Bild, welches angezeigt wird, wenn du diese Seite teilst.
-    # fallback indication
-    NODEAFAULTIMAGE: Es ist kein Standardbild eingestellt. Das bedeutet, dass ein Crawler ein zufälliges Bild (meist das erste erscheinende) auswählen könnte.
-    DEFAULTIMAGE: Es wird das in den Seiteneinstellungen eingestellte Standardbild verwendet.
-  Syntro\Seo\Extension\SEOPageExtension:
-    SEO_Analysis: SEO Analyse
-    SEO_Meta: SEO Metadaten
-    # Field titles
-    FocusKeywordTitle: Fokus-Schlüsselwort
-    MetaTitleTitle: Seitentitel
-    # field descriptions
-    KeyWordRight: Legen Sie ein Schlüsselwort fest, auf welches Sie diese Seite fokussieren möchten.
-    MetaTitleRight: Der Titel dieser Seite, wie er von Suchmaschinen angezeigt wird. Er sollte dem Seitennamen ähnlich sein.
-  Syntro\Seo\Metadata:
-    website: Webseite
-    article: Artikel
-    summary: Zusammenfassung
-    summary_large_image: Zusammenfassung mit grossem Bild
-    app: App
-    player: Player
+  Syntro\SEO\Extensions\SEOExtension:
+    SEO: SEO
+    MetaTab: Metadaten
+    KWAnalysisTab: Schlüsselwortanalyse
+    MetaDescription: Metabeschreibung
+    ExtraMetadataToggle: Zusätzliche Metadaten
   Syntro\Seo\Analysis\FocusKeywordContentAnalysis:
     UNSET: Das Fokus-Schlüsselwort wurde nicht festgelegt; Sie sollten dieses zur Optimierung der Inhaltsanalyse festlegen.
     NOTFOUND: Das Fokus-Schlüsselwort wurde im Inhalt dieser Seite nicht gefunden.
