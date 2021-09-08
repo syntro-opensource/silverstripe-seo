@@ -49,6 +49,7 @@ class SEOExtension extends DataExtension
      */
     private static $db = [
         'MetaTitle' => 'Varchar',
+        'SEOFocusKeyword' => 'Varchar'
     ];
 
     /**
@@ -67,7 +68,8 @@ class SEOExtension extends DataExtension
         'SEOSecondaryFocus',
         'MetaTitle',
         'MetaDescription',
-        'ExtraMeta'
+        'ExtraMeta',
+        'SEOFocusKeyword'
     ];
 
     /**
@@ -82,7 +84,8 @@ class SEOExtension extends DataExtension
         $fields->removeByName([
             'Metadata',
             'MetaDescription',
-            'ExtraMeta'
+            'ExtraMeta',
+            'SEOFocusKeyword'
         ]);
         $fields->findOrMakeTab(
             "Root.SEO",
@@ -178,6 +181,24 @@ class SEOExtension extends DataExtension
             );
         }
 
+        /**
+         * Add the keyword analysis fields
+         */
+        $fields->findOrMakeTab(
+            "Root.SEO.SEORoot.KWAnalysis",
+            $owner->fieldLabel('Root.SEO.SEORoot.KWAnalysis')
+        );
+        $fields->addFieldsToTab(
+            'Root.SEO.SEORoot.KWAnalysis',
+            [
+                $focusKWField = TextField::create(
+                    'SEOFocusKeyword',
+                    _t(__CLASS__ . '.FocusKeyword', 'Focus Keyword')
+                ),
+            ]
+        );
+        $focusKWField
+            ->setRightTitle(_t(__CLASS__ . '.FocusKeywordRightTitle', 'Choose a Focus for this Page'));
         return $fields;
     }
 
