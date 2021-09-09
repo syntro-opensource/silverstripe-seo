@@ -7,6 +7,8 @@ en:
     MetaDescription: Meta Description
     ExtraMetadataToggle: Extra Metadata
     FocusKeywordRightTitle: Select a keyword on which the page is to be focused.
+    SERP: SERP
+    SERPRightTitle: This is how this page / item is displayed in a google search.
   Syntro\Seo\Analysis\FocusKeywordContentAnalysis:
     UNSET: The focus keyword has not been set; consider setting this to improve content analysis
     NOTFOUND: The focus keyword was not found in the content of this page

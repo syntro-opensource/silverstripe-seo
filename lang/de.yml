@@ -7,6 +7,8 @@ de:
     MetaDescription: Metabeschreibung
     ExtraMetadataToggle: Zusätzliche Metadaten
     FocusKeywordRightTitle: Wählen Sie ein Schlüsselwort, auf das die Seite ausgerichtet werden soll.
+    SERP: SERP
+    SERPRightTitle: So wird diese Seite / dieses Objekt in einer Google-Suche dargestellt.
   Syntro\Seo\Analysis\FocusKeywordContentAnalysis:
     UNSET: Das Fokus-Schlüsselwort wurde nicht festgelegt; Sie sollten dieses zur Optimierung der Inhaltsanalyse festlegen.
     NOTFOUND: Das Fokus-Schlüsselwort wurde im Inhalt dieser Seite nicht gefunden.

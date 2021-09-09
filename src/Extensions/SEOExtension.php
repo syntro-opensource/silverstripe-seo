@@ -9,11 +9,9 @@ use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\Tab;
-use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\DataExtension;
-use SilverStripe\ORM\FieldType\DBField;
-use SilverStripe\Control\HTTPRequest;
-use SilverStripe\CMS\Controllers\ContentController;
+use Syntro\SEO\Forms\SERPField;
+use PHPHtmlParser\Dom;
 
 /**
  * The SEO extension adds a n SEO analysis Tab
@@ -30,6 +28,8 @@ class SEOExtension extends DataExtension
         '-3' => '⚠️',
         '-4' => '❌'
     ];
+
+    protected $SEODom = null;
 
     private static $seo_use_metatitle = true;
     private static $seo_title_fallback = 'Title';
@@ -195,10 +195,18 @@ class SEOExtension extends DataExtension
                     'SEOFocusKeyword',
                     _t(__CLASS__ . '.FocusKeyword', 'Focus Keyword')
                 ),
+                $SERPField = SERPField::create(
+                    'SERP',
+                    _t(__CLASS__.'.SERP', 'SERP'),
+                    $owner->Link(),
+                    $owner->SEOFocusKeyword
+                )
             ]
         );
         $focusKWField
             ->setRightTitle(_t(__CLASS__ . '.FocusKeywordRightTitle', 'Choose a Focus for this Page'));
+        $SERPField
+            ->setRightTitle(_t(__CLASS__ . '.SERPRightTitle', 'Google preview'));
         return $fields;
     }
 
