@@ -11,6 +11,7 @@ use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\Tab;
 use SilverStripe\ORM\DataExtension;
 use Syntro\SEO\Forms\SERPField;
+use Syntro\SEO\Forms\KeywordAnalysisField;
 use PHPHtmlParser\Dom;
 
 /**
@@ -22,14 +23,16 @@ class SEOExtension extends DataExtension
 {
     const STATE_ICON_MAP = [
         '1' => '🟢',
-        '0' => '⚪️',
-        '-1' => '🟠',
+        '0' => '',
+        '-1' => '🟡',
         '-2' => '🔴',
         '-3' => '⚠️',
         '-4' => '❌'
     ];
 
     protected $SEODom = null;
+
+    protected $state_keywordanalysis = 0;
 
     private static $seo_use_metatitle = true;
     private static $seo_title_fallback = 'Title';
@@ -156,7 +159,7 @@ class SEOExtension extends DataExtension
                 'Root.SEO.SEORoot.Meta',
                 $metatitle = TextField::create(
                     'MetaTitle',
-                    'Meta Title'
+                    _t(__CLASS__.'.MetaTitle', "Meta title")
                 ),
                 'MetaDescription'
             );
@@ -200,7 +203,15 @@ class SEOExtension extends DataExtension
                     _t(__CLASS__.'.SERP', 'SERP'),
                     $owner->Link(),
                     $owner->SEOFocusKeyword
-                )
+                ),
+                $KWAnalysisField = KeywordAnalysisField::create(
+                    'KWAnalysis',
+                    _t(__CLASS__.'.KWAnalysis', 'Analysis results'),
+                    $owner->Link(),
+                    $owner->SEOFocusKeyword
+                ),
+                // ToggleCompositeField::create('Passed', 'Passed', []),
+                // ToggleCompositeField::create('NotApplicable', 'Not Applicable', []),
             ]
         );
         $focusKWField

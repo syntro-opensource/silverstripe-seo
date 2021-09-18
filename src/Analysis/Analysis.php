@@ -2,221 +2,216 @@
 
 namespace Syntro\Seo\Analysis;
 
-use SilverStripe\Core\Config\Configurable;
-use SilverStripe\Core\Injector\Injectable;
-use SilverStripe\CMS\Model\SiteTree;
-use SilverStripe\View\ArrayData;
-use PHPHtmlParser\Dom;
+use SilverStripe\View\ViewableData;
+use Syntro\SEO\Dom;
 
 /**
- * @author Matthias Leutenegger <hello@syntro.ch>
+ * allows the analysis of a link in response to a keyword
  */
-abstract class Analysis
+abstract class Analysis extends ViewableData
 {
 
-    use Injectable, Configurable;
+    const STATE_GOOD    = 1;
+    const STATE_NONE    = 0;
+    const STATE_WARN    = -1;
+    const STATE_BAD     = -2;
+    const STATE_CAUTION = -3;
+    const STATE_INVALID = -4;
+
+    const STATE_COLOR_MAP = [
+        '1' => '#58d632',
+        '0' => '#bebebe',
+        '-1' => '#feae26',
+        '-2' => '#f62236',
+    ];
+
+    const STATE_ICON_MAP = [
+        '1' => '🟢',
+        '0' => '⚪️',
+        '-1' => '🟡',
+        '-2' => '🔴',
+        '-3' => '⚠️',
+        '-4' => '❌'
+    ];
+
+    protected $link;
+
+    protected $keyword;
+
+    protected $result = null;
+    protected $hidden = null;
 
     /**
-     * @var Dom
-     */
-    protected $Dom;
-
-    /**
-     * @var SiteTree
-     */
-    protected $page;
-
-    /**
-     * @var int
-     */
-    protected $result;
-
-    /**
-     * One of: default, danger, warning or success
-     *
-     * @var string
-     */
-    protected $resultLevel;
-
-    /**
-     * Allows you to hide certain levels (default, danger, success) from appearing in the content analysis.
-     * You can specif this on a per analysis basis via YML or add the below to your own analysis instead
-     *
-     * @config
+     * Ensures that the methods are wrapped in the correct type and
+     * values are safely escaped while rendering in the template.
      * @var array
      */
-    private static $hidden_levels = [];
-
-    private static $indicator_levels = [
-        'hidden',
-        'default',
-        'warning',
-        'danger',
-        'success'
+    private static $casting = [
+        'Icon' => 'HTMLText',
+        'Hint' => 'HTMLText'
     ];
 
     /**
-     * Analysis constructor.
+     * __construct - creates an analysis
      *
-     * @param SiteTree $page the page
-     * @param Dom      $dom  the dom
+     * @param  string $link    the link to the page this analysis should check
+     * @param  string $keyword the keyword
+     * @return void
      */
-    public function __construct(SiteTree $page, Dom $dom)
+    function __construct($link, $keyword = null)
     {
-        $this->setPage($page);
-        $this->Dom = $dom;
+        $this->link = $link;
+        $this->keyword = $keyword;
     }
 
     /**
-     * @return SiteTree
-     */
-    public function getPage()
-    {
-        return $this->page;
-    }
-
-    /**
-     * @return string
-     */
-    public function getKeyword()
-    {
-        return strtolower($this->getPage()->FocusKeyword);
-    }
-
-    /**
-     * @param SiteTree $page the page
-     * @return $this
-     */
-    public function setPage(SiteTree $page)
-    {
-        $this->page = $page;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getResult()
-    {
-        return $this->result;
-    }
-
-    /**
-     * Fetches the rendered content from the dom parser. This is why it's important that your templates are semantically
-     * correct. `<div>` tags should be used for layout and positioning purposes and using `<p>` tags for content is
-     * semantically correct. Semantically correct pages tend to rank higher in search engines for various reasons (such
-     * as how effectively crawlers parse your website etc.).
+     * getDom - get the dom of the page to be analyzed
      *
-     * @return string
-     */
-    public function getContent()
-    {
-        $dom = $this->getDom();
-        foreach ($dom->find('header,footer,nav') as $item) {
-            $item->delete();
-            unset($item);
-        }
-        $output = [];
-        foreach ($dom->find('p,h1,h2,h3,h4,h5,h6,div') as $item) {
-            $output[] = strip_tags(html_entity_decode($item->text()));
-        }
-
-        $output = array_filter($output);
-        return implode(' ', $output);
-    }
-
-    /**
      * @return Dom
      */
     public function getDom()
     {
-        return $this->Dom;
+        $dom = Dom::getDom($this->link);
+        return $dom;
     }
 
     /**
-     * @throws \InvalidArgumentException
+     * getStrippedDom - returns the dom stripped of footer, header and nav components
      *
-     * @return ArrayData
+     * @return Dom
      */
-    public function inspect()
+    public function getStrippedDom()
     {
-        $result = $this->run();
-
-        if (!is_numeric($result)) {
-            throw new \InvalidArgumentException('Expected integer for response, got ' . gettype($result) . ' instead');
-        }
-        if (empty($responses = $this->responses())) {
-            throw new \InvalidArgumentException('Expected responses() to return a list of possible responses, got '
-                . '[]'
-                . ' instead');
-        }
-        if (!isset($responses[$result])) {
-            throw new \InvalidArgumentException(sprintf(
-                'Expected %s to be a key of the array that responses() returns, except the key %s does not exist',
-                $result,
-                $result
-            ));
-        }
-        if (count($responses[$result]) !== 2) {
-            throw new \InvalidArgumentException(sprintf(
-                'Expected the response for result %s to be an array containing two items: ' .
-                'first is the message & second is the indicator status: danger, warning, success, default',
-                $result
-            ));
-        }
-        if (!in_array($responses[$result][1], $this->config()->get('indicator_levels'))) {
-            throw new \InvalidArgumentException(sprintf(
-                'The specified indicator (%s) in the response for key %s is not a valid level, valid levels are: %s',
-                $responses[$result][1],
-                $result,
-                implode(', ', $this->config()->get('indicator_levels'))
-            ));
-        }
-        $this->result      = $result;
-        $this->resultLevel = $responses[$result][1];
-
-        return ArrayData::create([
-            'Analysis' => static::class,
-            'Result'   => $result,
-            'Response' => $responses[$result][0],
-            'Level'    => $this->resultLevel,
-            'Hidden'   => $this->resultLevel === 'hidden'
-                ? true
-                : in_array($this->resultLevel, $this->config()->get('hidden_levels'))
-        ]);
+        $dom = Dom::getStrippedDom($this->link);
+        return $dom;
     }
 
     /**
-     * All analyses must override the `responses()` method to provide response messages and the response level (which
-     * is used for the indicator). The returned array must contain sub-arrays like this:
-     * [
-     *   'Hoorah!!! "Hello World!" appears in the page title',
-     *   'success'
-     * ]
-     * `run()` should return an integer that matches a key in the array that `responses()` returns, for example if
-     * `run()` were to return `1`, then using the above example the message displayed would be `Hoorah!!! "Hello
-     * World!" appears in the page title` with a indicator level of `success`. The available indicator levels are:
-     * `default`, `danger`, `warning`, `success` which are grey, red, orange and green respectively.
+     * getFocus - return the focus this analysis should consider
+     *
+     * @return string
+     */
+    public function getFocus()
+    {
+        return $this->keyword;
+    }
+
+    /**
+     * rememberedResult - returns the cached result
+     *
+     * @return string
+     */
+    public function rememberedResult()
+    {
+        if (!$this->result) {
+            $this->result = $this->getResult();
+        }
+        return $this->result;
+    }
+
+    /**
+     * getRememberedHidden - returns the cached hidden value
+     *
+     * @return bool
+     */
+    public function getRememberedHidden()
+    {
+        if (!$this->hidden || $this->hidden !== false) {
+            $this->hidden = $this->isHidden();
+        }
+        return $this->hidden;
+    }
+
+    /**
+     * getIcon - returns the icon to display
+     *
+     * @return string
+     */
+    public function getIcon()
+    {
+        $state = $this->getState();
+        if (!isset(self::STATE_COLOR_MAP[strval($state)])) {
+            throw new \Exception("Tha state '$state' returned from ".__CLASS__." is not valid.", 1);
+        }
+        $color =  self::STATE_COLOR_MAP[strval($state)];
+        return <<<HTML
+            <span style="height: .8rem; width: .8rem; display: block; background-color: $color; border-radius: .8rem;"></span>
+        HTML;
+        // $state = $this->getState();
+        // if (!isset(self::STATE_ICON_MAP[strval($state)])) {
+        //     throw new \Exception("Tha state '$state' returned from ".__CLASS__." is not valid.", 1);
+        // }
+        // return self::STATE_ICON_MAP[strval($state)];
+    }
+
+    /**
+     * getOption - returns the option this test has found to apply
      *
      * @return array
      */
-    public function responses()
+    public function getOption()
     {
-        return [];
+        $options = $this->getOptions();
+        $result = $this->rememberedResult();
+        if (!isset($options[$result])) {
+            throw new \Exception("Result '$result' is not valid for ".__CLASS__.".", 1);
+        }
+        $option = $options[$result];
+        if (count($option) !== 2) {
+            throw new \Exception("option for '$result' is not formatted correctly", 1);
+        }
+        return $option;
     }
 
     /**
-     * You must override this in your subclass and perform your own checks. An integer must be returned
-     * that references an index of the array you return in your response() method override in your subclass.
+     * getState - returns the state of this analysis
      *
-     * @return int
+     * @return int|string
      */
-    public function run()
+    public function getState()
     {
-        throw new \RuntimeException(sprintf(
-            'You must override the run method in %s and return an integer as a response that references '
-            . 'a key in your array that your responses() override returns',
-            static::class
-        ));
+        return $this->getOption()[0];
     }
+
+    /**
+     * getHint - returns the hint text for this analysis
+     *
+     * @return string
+     */
+    public function getHint()
+    {
+        return $this->getOption()[1];
+    }
+
+    /**
+     * forTemplate - returns a string to render to a template
+     *
+     * @return string
+     */
+    public function forTemplate()
+    {
+        return $this->renderWith(__CLASS__);
+    }
+
+    /**
+     * isHidden - if true, this analysis should be hidden
+     *
+     * @return boolean
+     */
+    abstract public function isHidden();
+
+    /**
+     * getOptions - returns an array containing possible outcomes of this analysis
+     *
+     * @return array
+     */
+    abstract public function getOptions();
+
+    /**
+     * getResult - returns the result of this analysis. The result must correspond
+     * to a key in the getOptions() array.
+     *
+     * @return int|string
+     */
+    abstract public function getResult();
 }
