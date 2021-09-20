@@ -2,37 +2,51 @@
 The title of a Page is central to a good SEO Strategy. Title content and length
 are vital properties in order to be placed well in a google search.
 
-Typically, SilverStripe either uses the pagename or allows the User to create
-a Title as desired:
-```html
-<!-- title provided by Silverstripe -->
-$MetaTags
-<!-- or free form -->
-<title>$Title | $SiteConfig.Title</title>
-$MetaTags(false)
+With silverstripe cms, you typically let the framework render the title tag
+automatically (which corresponds to the page name) or overwrite the default
+title in the `Page.ss` template. While both strategies work, we have found that,
+especially with page objects, the title tag is often different from the page name.
+
+We therefore add an additional field to the page object, the `meta title`, which
+lets an editor overwrite the title specifically. This is the default setup when
+installing this module, but you can change this behaviour by using the following
+configuration options:
+
+## Disable the metatitle field
+
+In order to disable the meta title option entirely, set the following option:
+
+```yaml
+SilverStripe\CMS\Model\SiteTree:
+  seo_use_metatitle: false
+
+# Or with DataObjects:
+Article:
+  extensions:
+    - Syntro\SEO\Extensions\SEOExtension
+  seo_use_metatitle: false
 ```
 
-Both versions are not ideal to give the editor a good way to set a meaningful
-title with the correct length and content when creating the page.  The pagename
-field is often used in the page layout itself, where a lengthy SEO-tailored
-title would not be useful and hardcoding a title combination in the page layout
-makes it impossible to actually craft a meaningful title in a good word limit.
+The object/page will then fall back to the default way of rendering the page name
+as meta title
 
-## The way we do it
-To solve the issues discussed above, this module introduces an additional field,
-the metatitle. The basic idea behind this field is to give the editor a way
-to create a good title for displaying in search results while still allowing the
-title to be set to a default value in the `Page.ss` template.
+## Use a template to render the title
 
-The way we use and also recommend to use this in a template looks as follows:
-```html
-<% if MetaTitle %>
-    <title>$MetaTitle</title>
-<% else %>
-    <title>$Title | $SiteConfig.Title</title>
-<% end_if %>
-$MetaTags(false)
+This feature is especially useful to render titles of
+[DataObjects used as page](./02_DOAP), but it also allows you to render a
+specific title for specific pagetypes. In order to define a template per class,
+use the following option:
+
+```yaml
+SilverStripe\CMS\Model\SiteTree:
+  seo_title_template: Includes/Title
+
+# Or with DataObjects:
+Article:
+  extensions:
+    - Syntro\SEO\Extensions\SEOExtension
+  seo_title_template: Includes/BlogTitle
 ```
-This way, the title falls back to one displaying the page name when no custom
-metatitle is set. Using `$MetaTags` by itself is also possible, but will only
-fall back to the pagename.
+
+> **IMPORTANT**: Keep in mind that you have to use the built-in `$MetaTags`
+> to render the title
