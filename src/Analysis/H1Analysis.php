@@ -21,9 +21,6 @@ use Syntro\Seo\Analysis\Analysis;
      */
     public function isHidden()
     {
-        if (!$this->getFocus()) {
-            return true;
-        }
         return false;
     }
 
