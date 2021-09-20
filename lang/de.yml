@@ -62,6 +62,17 @@ de:
       Der Seitentitel ist zu lang.
     TOO_SHORT: >
       Der Seitentitel ist zu kurz.
+  Syntro\Seo\Analysis\H1Analysis:
+    NOT_FOUND: >
+      Die Seite hat keinen H1-Titel. Jede Seite sollte einen eigenen,
+      einzigartigen H1-Titel besitzen.
+    FOCUS_NOT_FOUND: >
+      Der H1-Titel enthält das Fokus-Schslüselwort nicht.
+    MULTIPLE: >
+      Die Seite hat mehrere H1-Titel. Jede Seite sollte nur einen, einzigartigen
+      H1-Titel besitzen
+    SUCCESS: >
+      Der H1-Titel ist perfekt!
   Syntro\Seo\Analysis\ContentFocusAnalysis:
     NOT_FOUND: >
       Das Fokus-Schlüsselwort wurde im Inhalt dieser Seite nicht gefunden.

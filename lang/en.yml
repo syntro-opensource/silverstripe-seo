@@ -58,6 +58,16 @@ en:
       The page title is too long.
     TOO_SHORT: >
       The page title is too short.
+  Syntro\Seo\Analysis\H1Analysis:
+    NOT_FOUND: >
+      This page has no H1-title. Each page should have a unique H1-title.
+    FOCUS_NOT_FOUND: >
+      The H1-title does not contain the focus-keyword.
+    MULTIPLE: >
+      The page contains multiple H1-titles. Each page should contain only one,
+      unique H1-title.
+    SUCCESS: >
+      The H1-title is perfect!
   Syntro\Seo\Analysis\ContentFocusAnalysis:
     NOT_FOUND: >
       The focus keyword was not found in the content of this page.
