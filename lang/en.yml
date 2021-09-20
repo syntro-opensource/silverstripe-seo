@@ -62,7 +62,8 @@ en:
     NOT_FOUND: >
       The focus keyword was not found in the content of this page.
     SUCCESS: >
-      The focus keyword was found <strong>{occurrences}</strong> times.
+      The focus keyword was found <strong>{occurrences}</strong> times in the
+      Content of this page.
   Syntro\Seo\Analysis\UrlAnalysis:
     KEYWORD_NOT_IN_URL: >
       The focus keyword was not found in the URL segment!

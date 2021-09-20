@@ -66,7 +66,8 @@ de:
     NOT_FOUND: >
       Das Fokus-Schlüsselwort wurde im Inhalt dieser Seite nicht gefunden.
     SUCCESS: >
-      Das Fokus-Schlüsselwort wurde <strong>{occurrences}</strong> mal gefunden.
+      Das Fokus-Schlüsselwort wurde <strong>{occurrences}</strong> mal im Inhalt
+      dieser Seite gefunden.
   Syntro\Seo\Analysis\UrlAnalysis:
     KEYWORD_NOT_IN_URL: >
       Das Fokus-Schlüsselwort wurde nicht im URL-Segment gefunden!
