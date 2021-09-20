@@ -9,3 +9,5 @@ SilverStripe\CMS\Model\SiteTree:
   extensions:
     - Syntro\SEO\Extensions\SEOSiteTreeExtension
     - Syntro\SEO\Extensions\SEOExtension
+  seo_use_metatitle: false
+  seo_title_template: Includes/Title
