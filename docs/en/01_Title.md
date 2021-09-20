@@ -33,7 +33,7 @@ as meta title
 ## Use a template to render the title
 
 This feature is especially useful to render titles of
-[DataObjects used as page](./02_DOAP), but it also allows you to render a
+[DataObjects used as page](./02_DOAP.md), but it also allows you to render a
 specific title for specific pagetypes. In order to define a template per class,
 use the following option:
 
