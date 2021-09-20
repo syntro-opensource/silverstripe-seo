@@ -99,6 +99,11 @@ class SEOExtension extends DataExtension
             'Root.SEO',
             TabSet::create('SEORoot')
         );
+
+       $fields->findOrMakeTab(
+           "Root.SEO.SEORoot.KWAnalysis",
+           $owner->fieldLabel('Root.SEO.SEORoot.KWAnalysis')
+       );
         $fields->findOrMakeTab(
             "Root.SEO.SEORoot.Meta",
             "{$this->getSEOMetaIcon()} {$owner->fieldLabel('Root.SEO.SEORoot.Meta')}"
@@ -187,10 +192,6 @@ class SEOExtension extends DataExtension
         /**
          * Add the keyword analysis fields
          */
-        $fields->findOrMakeTab(
-            "Root.SEO.SEORoot.KWAnalysis",
-            $owner->fieldLabel('Root.SEO.SEORoot.KWAnalysis')
-        );
         $fields->addFieldsToTab(
             'Root.SEO.SEORoot.KWAnalysis',
             [
