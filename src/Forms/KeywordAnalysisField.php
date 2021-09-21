@@ -4,7 +4,7 @@ namespace Syntro\SEO\Forms;
 
 use SilverStripe\Forms\DatalessField;
 use SilverStripe\Core\ClassInfo;
-use Syntro\Seo\Analysis\Analysis;
+use Syntro\SEO\Analysis\Analysis;
 use SilverStripe\ORM\ArrayList;
 
 /**

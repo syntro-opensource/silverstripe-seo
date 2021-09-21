@@ -1,5 +1,5 @@
 <?php
-namespace Syntro\Seo\Forms;
+namespace Syntro\SEO\Forms;
 
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\View\ArrayData;
@@ -8,7 +8,7 @@ use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Core\ClassInfo;
-use Syntro\Seo\Analysis\Analysis;
+use Syntro\SEO\Analysis\Analysis;
 use SilverStripe\View\Requirements;
 
 use PHPHtmlParser\Dom;
@@ -17,7 +17,7 @@ use PHPHtmlParser\Dom;
  * Handles the Display of the
  * @author Matthias Leutenegger <hello@syntro.ch>
  */
-class SeoAnalysisField extends LiteralField
+class SEOAnalysisField extends LiteralField
 {
 
     use Injectable, Configurable;
@@ -103,7 +103,7 @@ class SeoAnalysisField extends LiteralField
      * setPage
      *
      * @param  SiteTree $value the page
-     * @return SeoAnalysisField
+     * @return SEOAnalysisField
      */
     public function setPage($value)
     {
@@ -125,7 +125,7 @@ class SeoAnalysisField extends LiteralField
      * setDom
      *
      * @param  Dom $value the dom
-     * @return SeoAnalysisField
+     * @return SEOAnalysisField
      */
     public function setDom($value)
     {

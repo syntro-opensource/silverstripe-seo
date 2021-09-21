@@ -1,6 +1,6 @@
 <?php
 
-namespace Syntro\Silvershare\Tests;
+namespace Syntro\SEO\Tests;
 
 use SilverStripe\Dev\SapphireTest;
 use Syntro\SilverShare\Dev\SharedObject;

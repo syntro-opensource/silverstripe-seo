@@ -1,8 +1,8 @@
 <?php
 
-namespace Syntro\Seo\Analysis;
+namespace Syntro\SEO\Analysis;
 
-use Syntro\Seo\Analysis\Analysis;
+use Syntro\SEO\Analysis\Analysis;
 use SilverStripe\View\Parsers\URLSegmentFilter;
 use SilverStripe\CMS\Controllers\ContentController;
 

@@ -14,20 +14,20 @@ en:
     SERP: SERP
     SERPRightTitle: This is how this page / item is displayed in a google search.
     KWAnalysis: Analysis result
-  Syntro\Seo\Analysis\FocusKeywordAnalysis:
+  Syntro\SEO\Analysis\FocusKeywordAnalysis:
     NOT_UNIQUE: >
       The ocus keyword is already beeing used on this website. It is recommended
       to only focus one page per website on a specific topic.
     UNSET: >
       No focus keyword was set. Consider setting one to unlock further checks.
-  Syntro\Seo\Analysis\ContentWordCountAnalysis:
+  Syntro\SEO\Analysis\ContentWordCountAnalysis:
     WORDCOUNT_ABOVE_MIN: >
       The content of this page contains <b>{count} words</b>, which is more
       then the recommended minimum of {min}. Perfect!
     WORDCOUNT_BELOW_MIN: >
       The content of this page contains <b>{count} words</b>, which is less
       then the recommended minimum of {min}.
-  Syntro\Seo\Analysis\DescriptionAnalysis:
+  Syntro\SEO\Analysis\DescriptionAnalysis:
     NO_FOCUS_KEYWORD: >
       The metadescription does not contain the focus keyword.
     SUCCESS: >
@@ -39,7 +39,7 @@ en:
     UNSET: >
       The metadescription was not set. A random and possibly unwanted section
       of the content might be shown instead.
-  Syntro\Seo\Analysis\TitleAnalysis:
+  Syntro\SEO\Analysis\TitleAnalysis:
     FOCUS_KEYWORD_POSITION: >
       The page title contains the focus keyword, but not at the beginning;
       Consider moving it to the beginning.
@@ -58,7 +58,7 @@ en:
       The page title is too long.
     TOO_SHORT: >
       The page title is too short.
-  Syntro\Seo\Analysis\H1Analysis:
+  Syntro\SEO\Analysis\H1Analysis:
     NOT_FOUND: >
       This page has no H1-title. Each page should have a unique H1-title.
     FOCUS_NOT_FOUND: >
@@ -68,13 +68,13 @@ en:
       unique H1-title.
     SUCCESS: >
       The H1-title is perfect!
-  Syntro\Seo\Analysis\ContentFocusAnalysis:
+  Syntro\SEO\Analysis\ContentFocusAnalysis:
     NOT_FOUND: >
       The focus keyword was not found in the content of this page.
     SUCCESS: >
       The focus keyword was found <strong>{occurrences}</strong> times in the
       Content of this page.
-  Syntro\Seo\Analysis\UrlAnalysis:
+  Syntro\SEO\Analysis\UrlAnalysis:
     KEYWORD_NOT_IN_URL: >
       The focus keyword was not found in the URL segment!
     KEYWORD_SUCCESS: >

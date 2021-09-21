@@ -15,7 +15,7 @@ de:
     SERP: SERP
     SERPRightTitle: So wird diese Seite / dieses Objekt in einer Google-Suche dargestellt.
     KWAnalysis: Analyseresultat
-  Syntro\Seo\Analysis\FocusKeywordAnalysis:
+  Syntro\SEO\Analysis\FocusKeywordAnalysis:
     NOT_UNIQUE: >
       Das Fokus-Schlüsselwort wird auf dieser Webseite bereits
       verwendet. Es ist besser, nur eine Seite auf ein bestimmtes Thema zu
@@ -23,14 +23,14 @@ de:
     UNSET: >
       Es wurde kein Fokus-Schlüsselwort für diese Seite gesetzt. Setzen Sie ein
       Fokus-Schlüsselwort, um zusätzliche Tests freizuschalten.
-  Syntro\Seo\Analysis\ContentWordCountAnalysis:
+  Syntro\SEO\Analysis\ContentWordCountAnalysis:
     WORDCOUNT_ABOVE_MIN: >
       Der Inhalt dieser Seite enthält <b>{count} Wörter</b>, was mehr als das
       empfohlene Minimum von {min} Wörter ist. Perfekt!
     WORDCOUNT_BELOW_MIN: >
       Der Inhalt dieser Seite enthält {count} Wörter, was weniger als das
       empfohlene Minimum von {min} Wörter ist.
-  Syntro\Seo\Analysis\DescriptionAnalysis:
+  Syntro\SEO\Analysis\DescriptionAnalysis:
     NO_FOCUS_KEYWORD: >
       Die Metabeschreibung enthält das Fokus-Schlüsselwort nicht.
     SUCCESS: >
@@ -43,7 +43,7 @@ de:
       Die Meta Beschreibung wurde nicht festgelegt; ein möglicherweise
       unerwünschter Ausschnitt kann von der Seite genommen und stattdessen
       angezeigt werden.
-  Syntro\Seo\Analysis\TitleAnalysis:
+  Syntro\SEO\Analysis\TitleAnalysis:
     FOCUS_KEYWORD_POSITION: >
       Der Seitentitel enthält das Fokus-Schlüsselwort, jedoch nicht am Anfang;
       Ziehen Sie in Betracht, dieses an den Anfang zu verschieben.
@@ -62,7 +62,7 @@ de:
       Der Seitentitel ist zu lang.
     TOO_SHORT: >
       Der Seitentitel ist zu kurz.
-  Syntro\Seo\Analysis\H1Analysis:
+  Syntro\SEO\Analysis\H1Analysis:
     NOT_FOUND: >
       Die Seite hat keinen H1-Titel. Jede Seite sollte einen eigenen,
       einzigartigen H1-Titel besitzen.
@@ -73,13 +73,13 @@ de:
       H1-Titel besitzen
     SUCCESS: >
       Der H1-Titel ist perfekt!
-  Syntro\Seo\Analysis\ContentFocusAnalysis:
+  Syntro\SEO\Analysis\ContentFocusAnalysis:
     NOT_FOUND: >
       Das Fokus-Schlüsselwort wurde im Inhalt dieser Seite nicht gefunden.
     SUCCESS: >
       Das Fokus-Schlüsselwort wurde <strong>{occurrences}</strong> mal im Inhalt
       dieser Seite gefunden.
-  Syntro\Seo\Analysis\UrlAnalysis:
+  Syntro\SEO\Analysis\UrlAnalysis:
     KEYWORD_NOT_IN_URL: >
       Das Fokus-Schlüsselwort wurde nicht im URL-Segment gefunden!
     KEYWORD_SUCCESS: >

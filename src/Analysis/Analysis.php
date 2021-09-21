@@ -1,6 +1,6 @@
 <?php
 
-namespace Syntro\Seo\Analysis;
+namespace Syntro\SEO\Analysis;
 
 use SilverStripe\View\ViewableData;
 use Syntro\SEO\Dom;

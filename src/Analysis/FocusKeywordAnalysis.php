@@ -1,12 +1,12 @@
 <?php
 
-namespace Syntro\Seo\Analysis;
+namespace Syntro\SEO\Analysis;
 
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Config\Config;
 use Syntro\SEO\Extensions\SEOExtension;
-use Syntro\Seo\Analysis\Analysis;
+use Syntro\SEO\Analysis\Analysis;
 
 /**
  * checks the title
