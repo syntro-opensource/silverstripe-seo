@@ -50,3 +50,22 @@ Article:
 
 > **IMPORTANT**: Keep in mind that you have to use the built-in `$MetaTags`
 > to render the title
+
+## Change the title fallback field
+This is very useful if working with [DataObjects used as page](./02_DOAP.md),
+as it allows for configuring a decent fallback for any object without
+relying on the editor to set a title manually. Keep in mind, that the title
+for a DataObject will also fall back to the page name which is rendering the
+object by default if this is not set!
+
+```yaml
+SilverStripe\CMS\Model\SiteTree:
+  seo_title_fallback: SomeField
+
+# Or with DataObjects:
+Article:
+  extensions:
+    - Syntro\SEO\Extensions\SEOExtension
+  seo_title_template: Includes/BlogTitle
+  seo_title_fallback: Title
+```
