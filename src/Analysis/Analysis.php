@@ -4,6 +4,7 @@ namespace Syntro\SEO\Analysis;
 
 use SilverStripe\View\ViewableData;
 use Syntro\SEO\Dom;
+use PHPHtmlParser\Dom as PHPDom;
 
 /**
  * allows the analysis of a link in response to a keyword
@@ -62,7 +63,7 @@ abstract class Analysis extends ViewableData
      */
     function __construct($link, $keyword = null)
     {
-        parent::construct();
+        parent::__construct();
         $this->link = $link;
         $this->keyword = $keyword;
     }
@@ -70,7 +71,7 @@ abstract class Analysis extends ViewableData
     /**
      * getDom - get the dom of the page to be analyzed
      *
-     * @return Dom
+     * @return PHPDom
      */
     public function getDom()
     {
@@ -81,7 +82,7 @@ abstract class Analysis extends ViewableData
     /**
      * getStrippedDom - returns the dom stripped of footer, header and nav components
      *
-     * @return Dom
+     * @return PHPDom
      */
     public function getStrippedDom()
     {

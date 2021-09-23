@@ -5,6 +5,7 @@ namespace Syntro\SEO\Analysis;
 use Syntro\SEO\Analysis\Analysis;
 use SilverStripe\View\Parsers\URLSegmentFilter;
 use SilverStripe\CMS\Controllers\ContentController;
+use SilverStripe\CMS\Model\SiteTree;
 
 /**
  * checks the url
