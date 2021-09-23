@@ -22,7 +22,7 @@ class SEOSiteTreeExtension extends DataExtension
     /**
      * getSEOSource - returns the set SEO source
      *
-     * @return SiteTree|DataObject
+     * @return SiteTree
      */
     public function getSEOSource()
     {

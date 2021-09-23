@@ -46,8 +46,8 @@ class Dom
     /**
      * getDom - returns the dom for the given URL
      *
-     * @param  {type} $link description
-     * @return {type}       description
+     * @param  string $link the link to fetch
+     * @return PHPDom
      */
     public static function getDom($link)
     {
@@ -74,8 +74,8 @@ class Dom
      * getStrippedDom - returns a dom instance which has been stripped from header,
      * nav and footer
      *
-     * @param  {type} $link description
-     * @return {type}       description
+     * @param  string $link the link to check
+     * @return PHPDom
      */
     public static function getStrippedDom($link)
     {
@@ -101,7 +101,7 @@ class Dom
      * if versioning is enabled).
      *
      * @param  string $url the url to load
-     * @return void
+     * @return string
      */
     private static function loadContent($url)
     {
@@ -129,6 +129,8 @@ class Dom
         // $finally[] = function () use ($existingVars) {
         //     Environment::setVariables($existingVars);
         // };
+        $oldReadingMode = null;
+        $oldStage = null;
         if (class_exists(Versioned::class)) {
             $oldReadingMode = Versioned::get_reading_mode();
             $oldStage = Versioned::get_stage();

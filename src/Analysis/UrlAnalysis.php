@@ -72,6 +72,7 @@ class UrlAnalysis extends Analysis
         $slug = URLSegmentFilter::create()->filter($this->getFocus());
         $path = parse_url($this->link)['path'];
 
+        /** @var null|SiteTree $page */
         $page = ContentController::singleton()->Page('/');
         if ($page &&
             $page->URLSegment == 'home' &&

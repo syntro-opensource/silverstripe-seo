@@ -129,11 +129,6 @@ class SEOExtension extends DataExtension
         );
 
         $metaFieldDesc
-            ->setTargetLength(
-                $owner->config()->seo_desc_opt,
-                $owner->config()->seo_desc_min,
-                $owner->config()->seo_desc_max
-            )
             ->setRows(4)
             ->setRightTitle(
                 _t(
@@ -141,8 +136,13 @@ class SEOExtension extends DataExtension
                     "Search engines use this content for displaying search results (although it will not influence their ranking)."
                 )
             )
-            ->addExtraClass('help');
-        if ($owner->obj('ExtraMeta')) {
+            ->addExtraClass('help')
+            ->setTargetLength(
+                $owner->config()->seo_desc_opt,
+                $owner->config()->seo_desc_min,
+                $owner->config()->seo_desc_max
+            );
+        if ($owner->hasField('ExtraMeta')) {
             $fields->addFieldToTab(
                 'Root.SEO.SEORoot.Meta',
                 ToggleCompositeField::create(
@@ -177,20 +177,22 @@ class SEOExtension extends DataExtension
                 'MetaDescription'
             );
             $metatitle
-                ->setTargetLength(
-                    $owner->config()->seo_title_opt,
-                    $owner->config()->seo_title_min,
-                    $owner->config()->seo_title_max
-                )
                 ->setAttribute('placeholder', $owner->Title)
                 ->setRightTitle(
                     _t(
                         __CLASS__ . '.MetaTitleRightTitle',
                         "This is the title used by search engines for displaying search results. Make sure to keep it similar to the <h1> tag."
                     )
+                )
+                ->setTargetLength(
+                    $owner->config()->seo_title_opt,
+                    $owner->config()->seo_title_min,
+                    $owner->config()->seo_title_max
                 );
         } else {
-            $fields->fieldByName('Root.Main.Title')->setTargetLength(
+            /** @var TextField $titlefield */
+            $titlefield = $fields->fieldByName('Root.Main.Title');
+            $titlefield->setTargetLength(
                 $owner->config()->seo_title_opt,
                 $owner->config()->seo_title_min,
                 $owner->config()->seo_title_max
@@ -327,7 +329,7 @@ class SEOExtension extends DataExtension
      * getSEOTitle - returns a title for this object, which is derived from
      * MetaTitle > Title
      *
-     * @return string
+     * @return string|null
      */
     public function getSEOTitle()
     {

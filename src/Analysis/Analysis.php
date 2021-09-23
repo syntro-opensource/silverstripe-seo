@@ -62,6 +62,7 @@ abstract class Analysis extends ViewableData
      */
     function __construct($link, $keyword = null)
     {
+        parent::construct();
         $this->link = $link;
         $this->keyword = $keyword;
     }
