@@ -29,7 +29,8 @@ en:
       then the recommended minimum of {min}.
   Syntro\SEO\Analysis\DescriptionAnalysis:
     NO_FOCUS_KEYWORD: >
-      The metadescription does not contain the focus keyword.
+      The metadescription does not contain the focus keyword. A random and
+      possibly unwanted section of the content might be shown instead.
     SUCCESS: >
       the metadescription is perfect!
     TOO_LONG: >

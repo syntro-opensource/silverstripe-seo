@@ -10,6 +10,9 @@ Article:
   extensions:
     - Syntro\SEO\Extensions\SEOExtension
 ```
+In Order to work correctly, the object in question needs to provide a `Link()`
+method for the analysis to run. The extension will add the necessary Fields and
+analyses to the CMS-fields.
 
 Now, you have to tell the page controller which is rendering the object, where
 to get the metadata from:

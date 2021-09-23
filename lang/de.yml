@@ -32,7 +32,9 @@ de:
       empfohlene Minimum von {min} Wörter ist.
   Syntro\SEO\Analysis\DescriptionAnalysis:
     NO_FOCUS_KEYWORD: >
-      Die Metabeschreibung enthält das Fokus-Schlüsselwort nicht.
+      Die Metabeschreibung enthält das Fokus-Schlüsselwort nicht. Ein
+      möglicherweise unerwünschter Ausschnitt kann von der Seite genommen und
+      stattdessen angezeigt werden.
     SUCCESS: >
       Die Meta Beschreibung ist perfekt!
     TOO_LONG: >
@@ -40,7 +42,7 @@ de:
     TOO_SHORT: >
       Die Meta Beschreibung ist zu kurz.
     UNSET: >
-      Die Meta Beschreibung wurde nicht festgelegt; ein möglicherweise
+      Die Meta Beschreibung wurde nicht festgelegt. Ein möglicherweise
       unerwünschter Ausschnitt kann von der Seite genommen und stattdessen
       angezeigt werden.
   Syntro\SEO\Analysis\TitleAnalysis:
