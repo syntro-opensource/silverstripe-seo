@@ -53,7 +53,7 @@ class SEOExtension extends DataExtension
      */
     private static $db = [
         'MetaTitle' => 'Varchar',
-        'SEOFocusKeyword' => 'Varchar',
+        'FocusKeyword' => 'Varchar',
         'MetaDescription' => 'Text',
     ];
 
@@ -74,7 +74,7 @@ class SEOExtension extends DataExtension
         'MetaTitle',
         'MetaDescription',
         'ExtraMeta',
-        'SEOFocusKeyword'
+        'FocusKeyword'
     ];
 
     /**
@@ -90,7 +90,7 @@ class SEOExtension extends DataExtension
             'Metadata',
             'MetaDescription',
             'ExtraMeta',
-            'SEOFocusKeyword'
+            'FocusKeyword'
         ]);
         $fields->findOrMakeTab(
             "Root.SEO",
@@ -205,20 +205,20 @@ class SEOExtension extends DataExtension
                  'Root.SEO.SEORoot.KWAnalysis',
                  [
                      $focusKWField = TextField::create(
-                         'SEOFocusKeyword',
+                         'FocusKeyword',
                          _t(__CLASS__ . '.FocusKeyword', 'Focus Keyword')
                      ),
                      $SERPField = SERPField::create(
                          'SERP',
                          _t(__CLASS__.'.SERP', 'SERP'),
                          $owner->Link(),
-                         $owner->SEOFocusKeyword
+                         $owner->FocusKeyword
                      ),
                      $KWAnalysisField = KeywordAnalysisField::create(
                          'KWAnalysis',
                          _t(__CLASS__.'.KWAnalysis', 'Analysis results'),
                          $owner->Link(),
-                         $owner->SEOFocusKeyword
+                         $owner->FocusKeyword
                      ),
                      // ToggleCompositeField::create('Passed', 'Passed', []),
                      // ToggleCompositeField::create('NotApplicable', 'Not Applicable', []),

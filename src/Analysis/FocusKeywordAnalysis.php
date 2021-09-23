@@ -66,7 +66,7 @@ use Syntro\SEO\Analysis\Analysis;
         $output  = 0;
         foreach ($classes as $class) {
             if (in_array(SEOExtension::class, $class::config()->uninherited('extensions') ?? [])) {
-                $output += $class::get()->filter('SEOFocusKeyword', $this->getFocus())->count();
+                $output += $class::get()->filter('FocusKeyword', $this->getFocus())->count();
             }
         }
         if ($output > 1) {
