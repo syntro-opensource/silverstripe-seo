@@ -9,6 +9,7 @@ use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\DataExtension;
 use Syntro\SEO\Forms\SERPField;
 use Syntro\SEO\Forms\KeywordAnalysisField;
@@ -52,7 +53,8 @@ class SEOExtension extends DataExtension
      */
     private static $db = [
         'MetaTitle' => 'Varchar',
-        'SEOFocusKeyword' => 'Varchar'
+        'SEOFocusKeyword' => 'Varchar',
+        'MetaDescription' => 'Text',
     ];
 
     /**
@@ -119,16 +121,6 @@ class SEOExtension extends DataExtension
                     'MetaDescription',
                     _t(__CLASS__ . '.MetaDescription', 'Meta Description')
                 ),
-                ToggleCompositeField::create(
-                        'Metadata',
-                        _t(__CLASS__.'.ExtraMetadataToggle', 'Extra Metadata'),
-                        [
-                            $metaFieldExtra = new TextareaField(
-                                "ExtraMeta",
-                                $owner->fieldLabel('ExtraMeta')
-                            )
-                        ]
-                    )->setHeadingLevel(4),
                 // TextareaField::create(
                 //     'PageContent',
                 //     'PageContent',
@@ -150,14 +142,30 @@ class SEOExtension extends DataExtension
                 )
             )
             ->addExtraClass('help');
-        $metaFieldExtra
-            ->setRightTitle(
-                _t(
-                    'SilverStripe\\CMS\\Model\\SiteTree.METAEXTRAHELP',
-                    "HTML tags for additional meta information. For example <meta name=\"customName\" content=\"your custom content here\">"
+        if ($owner->obj('ExtraMeta')) {
+            $fields->addFieldToTab(
+                'Root.SEO.SEORoot.Meta',
+                ToggleCompositeField::create(
+                    'Metadata',
+                    _t(__CLASS__.'.ExtraMetadataToggle', 'Extra Metadata'),
+                    [
+                        $metaFieldExtra = new TextareaField(
+                            "ExtraMeta",
+                            $owner->fieldLabel('ExtraMeta')
+                        )
+                    ]
+                )->setHeadingLevel(4),
+            );
+            $metaFieldExtra
+                ->setRightTitle(
+                    _t(
+                        'SilverStripe\\CMS\\Model\\SiteTree.METAEXTRAHELP',
+                        "HTML tags for additional meta information. For example <meta name=\"customName\" content=\"your custom content here\">"
+                    )
                 )
-            )
-            ->addExtraClass('help');
+                ->addExtraClass('help');
+        }
+
 
         if ($owner->config()->seo_use_metatitle) {
             $fields->addFieldToTab(
@@ -192,33 +200,46 @@ class SEOExtension extends DataExtension
         /**
          * Add the keyword analysis fields
          */
-        $fields->addFieldsToTab(
-            'Root.SEO.SEORoot.KWAnalysis',
-            [
-                $focusKWField = TextField::create(
-                    'SEOFocusKeyword',
-                    _t(__CLASS__ . '.FocusKeyword', 'Focus Keyword')
-                ),
-                $SERPField = SERPField::create(
-                    'SERP',
-                    _t(__CLASS__.'.SERP', 'SERP'),
-                    $owner->Link(),
-                    $owner->SEOFocusKeyword
-                ),
-                $KWAnalysisField = KeywordAnalysisField::create(
-                    'KWAnalysis',
-                    _t(__CLASS__.'.KWAnalysis', 'Analysis results'),
-                    $owner->Link(),
-                    $owner->SEOFocusKeyword
-                ),
-                // ToggleCompositeField::create('Passed', 'Passed', []),
-                // ToggleCompositeField::create('NotApplicable', 'Not Applicable', []),
-            ]
-        );
-        $focusKWField
-            ->setRightTitle(_t(__CLASS__ . '.FocusKeywordRightTitle', 'Choose a Focus for this Page'));
-        $SERPField
-            ->setRightTitle(_t(__CLASS__ . '.SERPRightTitle', 'Google preview'));
+         if ($owner->hasMethod('Link')) {
+             $fields->addFieldsToTab(
+                 'Root.SEO.SEORoot.KWAnalysis',
+                 [
+                     $focusKWField = TextField::create(
+                         'SEOFocusKeyword',
+                         _t(__CLASS__ . '.FocusKeyword', 'Focus Keyword')
+                     ),
+                     $SERPField = SERPField::create(
+                         'SERP',
+                         _t(__CLASS__.'.SERP', 'SERP'),
+                         $owner->Link(),
+                         $owner->SEOFocusKeyword
+                     ),
+                     $KWAnalysisField = KeywordAnalysisField::create(
+                         'KWAnalysis',
+                         _t(__CLASS__.'.KWAnalysis', 'Analysis results'),
+                         $owner->Link(),
+                         $owner->SEOFocusKeyword
+                     ),
+                     // ToggleCompositeField::create('Passed', 'Passed', []),
+                     // ToggleCompositeField::create('NotApplicable', 'Not Applicable', []),
+                 ]
+             );
+             $focusKWField
+                 ->setRightTitle(_t(__CLASS__ . '.FocusKeywordRightTitle', 'Choose a Focus for this Page'));
+             $SERPField
+                 ->setRightTitle(_t(__CLASS__ . '.SERPRightTitle', 'Google preview'));
+
+         } else {
+             $noLinkMessage = _t(__CLASS__ . '.NOLINK','NO_LINK');
+             $fields->addFieldToTab(
+                 'Root.SEO.SEORoot.KWAnalysis',
+                 LiteralField::create('NoLink', <<<HTML
+                    <div class="alert alert-danger">
+                        $noLinkMessage
+                    </div>
+                 HTML)
+             );
+         }
         return $fields;
     }
 

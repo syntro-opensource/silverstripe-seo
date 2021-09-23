@@ -54,6 +54,7 @@ class SEOSiteTreeExtension extends DataExtension
      */
     public function MetaComponents(&$tags)
     {
+        $owner = $this->getOwner();
         $source = $this->getSEOSource();
         if (!$source->hasExtension(SEOExtension::class)) {
             return $tags;
@@ -61,8 +62,24 @@ class SEOSiteTreeExtension extends DataExtension
         // Add a title
         $tags['title'] = [
             'tag' => 'title',
-            'content' => $source->getSEOTitle()
+            'content' => $source->getSEOTitle() ?? $owner->getSEOTitle(),
         ];
+
+        if ($source->MetaDescription) {
+            $tags['description'] = [
+                'attributes' => [
+                    'name' => 'description',
+                    'content' => $source->MetaDescription,
+                ],
+            ];
+        } elseif ($owner->MetaDescription) {
+            $tags['description'] = [
+                'attributes' => [
+                    'name' => 'description',
+                    'content' => $owner->MetaDescription,
+                ],
+            ];
+        }
 
         return $tags;
     }
