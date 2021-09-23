@@ -5,9 +5,11 @@ namespace Syntro\SEO\Analysis;
 use Syntro\SEO\Analysis\Analysis;
 
 /**
- * checks the title
+ * checks the meta description
+ *
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
- class DescriptionAnalysis extends Analysis
+class DescriptionAnalysis extends Analysis
 {
     const GOOGLE_OPT_DESCRIPTION_LENGTH = 100;
     const GOOGLE_MAX_DESCRIPTION_LENGTH = 160;
@@ -93,6 +95,4 @@ use Syntro\SEO\Analysis\Analysis;
 
         return static::DESCRIPTION_SUCCESS;
     }
-
-
 }

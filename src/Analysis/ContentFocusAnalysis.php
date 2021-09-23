@@ -5,9 +5,11 @@ namespace Syntro\SEO\Analysis;
 use Syntro\SEO\Analysis\Analysis;
 
 /**
- * checks the title
+ * checks the content for the focus keyword
+ *
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
- class ContentFocusAnalysis extends Analysis
+class ContentFocusAnalysis extends Analysis
 {
     const CONTENT_FOCUS_NOT_FOUND = 'CONTENT_FOCUS_NOT_FOUND';
     const CONTENT_FOCUS_SUCCESS = 'CONTENT_FOCUS_SUCCESS';
@@ -49,10 +51,15 @@ use Syntro\SEO\Analysis\Analysis;
         ];
     }
 
+    /**
+     * getContent - returns the content of the Page
+     *
+     * @return string
+     */
     public function getContent()
     {
         $content = $this->getStrippedDom();
-        $body = $content->find('body', 0)->text(true);
+        $body = $content->find('p', 0)->text(true);
         return $body;
     }
 
@@ -88,6 +95,4 @@ use Syntro\SEO\Analysis\Analysis;
 
         return static::CONTENT_FOCUS_SUCCESS;
     }
-
-
 }

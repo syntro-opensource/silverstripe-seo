@@ -7,6 +7,8 @@ use Syntro\SEO\Dom;
 
 /**
  * allows the analysis of a link in response to a keyword
+ *
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
 abstract class Analysis extends ViewableData
 {
@@ -131,7 +133,7 @@ abstract class Analysis extends ViewableData
     {
         $state = $this->getState();
         if (!isset(self::STATE_COLOR_MAP[strval($state)])) {
-            throw new \Exception("Tha state '$state' returned from ".__CLASS__." is not valid.", 1);
+            throw new \Exception("Tha state '$state' returned from " . __CLASS__ . " is not valid.", 1);
         }
         $color =  self::STATE_COLOR_MAP[strval($state)];
         return <<<HTML
@@ -154,7 +156,7 @@ abstract class Analysis extends ViewableData
         $options = $this->getOptions();
         $result = $this->rememberedResult();
         if (!isset($options[$result])) {
-            throw new \Exception("Result '$result' is not valid for ".__CLASS__.".", 1);
+            throw new \Exception("Result '$result' is not valid for " . __CLASS__ . ".", 1);
         }
         $option = $options[$result];
         if (count($option) !== 2) {

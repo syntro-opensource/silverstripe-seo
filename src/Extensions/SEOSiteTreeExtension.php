@@ -38,7 +38,7 @@ class SEOSiteTreeExtension extends DataExtension
     /**
      * setSEOSource - set the source
      *
-     * @param  SiteTree|DataObject
+     * @param  SiteTree|DataObject $source the source
      * @return void
      */
     public function setSEOSource($source)
@@ -54,6 +54,7 @@ class SEOSiteTreeExtension extends DataExtension
      */
     public function MetaComponents(&$tags)
     {
+        /** @var SiteTree $owner */
         $owner = $this->getOwner();
         $source = $this->getSEOSource();
         if (!$source->hasExtension(SEOExtension::class)) {

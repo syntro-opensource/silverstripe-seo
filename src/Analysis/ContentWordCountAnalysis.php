@@ -5,9 +5,11 @@ namespace Syntro\SEO\Analysis;
 use Syntro\SEO\Analysis\Analysis;
 
 /**
- * checks the title
+ * checks the content length
+ *
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
- class ContentWordCountAnalysis extends Analysis
+class ContentWordCountAnalysis extends Analysis
 {
     const GOOGLE_OPT_CONTENT_LENGTH = 300;
 
@@ -43,6 +45,11 @@ use Syntro\SEO\Analysis\Analysis;
         ];
     }
 
+    /**
+     * getWordCount - counts the words
+     *
+     * @return int
+     */
     public function getWordCount()
     {
         $content = $this->getStrippedDom();
@@ -64,6 +71,4 @@ use Syntro\SEO\Analysis\Analysis;
 
         return static::CONTENT_WORDCOUNT_ABOVE_MIN;
     }
-
-
 }

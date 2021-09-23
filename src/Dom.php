@@ -36,9 +36,9 @@ class Dom
      *
      * @return void
      */
-    function __construct() {
-        throw new \Exception(__CLASS__." should only be used statically.", 1);
-
+    function __construct()
+    {
+        throw new \Exception(__CLASS__ . " should only be used statically.", 1);
     }
 
 

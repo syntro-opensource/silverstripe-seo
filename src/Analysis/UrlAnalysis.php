@@ -7,9 +7,11 @@ use SilverStripe\View\Parsers\URLSegmentFilter;
 use SilverStripe\CMS\Controllers\ContentController;
 
 /**
- * checks the title
+ * checks the url
+ *
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
- class UrlAnalysis extends Analysis
+class UrlAnalysis extends Analysis
 {
 
     const URL_KEYWORD_IRRELEVANT = 'URL_KEYWORD_IRRELEVANT';
@@ -71,8 +73,7 @@ use SilverStripe\CMS\Controllers\ContentController;
         $path = parse_url($this->link)['path'];
 
         $page = ContentController::singleton()->Page('/');
-        if (
-            $page &&
+        if ($page &&
             $page->URLSegment == 'home' &&
             !$page->ParentID &&
             $page->Link()==$path
@@ -86,6 +87,4 @@ use SilverStripe\CMS\Controllers\ContentController;
 
         return static::URL_KEYWORD_SUCCESS;
     }
-
-
 }

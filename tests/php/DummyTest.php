@@ -21,5 +21,4 @@ class DummyTest extends SapphireTest
     {
         $this->assertEquals(2, 1+1);
     }
-
 }

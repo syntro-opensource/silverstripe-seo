@@ -34,9 +34,9 @@ class SERPField extends DatalessField
     /**
      * __construct - constructor
      *
-     * @param  string $name         the name of the field
+     * @param  string $name  the name of the field
      * @param  string $title = null the title of the field
-     * @param  string $link         the link to analyze
+     * @param  string $link  the link to analyze
      * @param  string $focus = null an optional focus keyword
      * @return void
      */
@@ -174,5 +174,4 @@ class SERPField extends DatalessField
         }
         return ArrayList::create($crumbs);
     }
-
 }

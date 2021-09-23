@@ -9,12 +9,23 @@ use SilverStripe\ORM\ArrayList;
 
 /**
  * Renders a Field which analyzes the content of a Page using a keyword
+ *
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
 class KeywordAnalysisField extends DatalessField
 {
     protected $link = null;
     protected $focus = null;
 
+    /**
+     * __construct
+     *
+     * @param  string $name  the name of the field
+     * @param  string $title the title of the field
+     * @param  string $link  the link to analyse
+     * @param  string $focus = null the focus keyword to use
+     * @return void
+     */
     function __construct($name, $title, $link, $focus = null)
     {
         parent::__construct($name, $title);
@@ -22,6 +33,11 @@ class KeywordAnalysisField extends DatalessField
         $this->focus = $focus;
     }
 
+    /**
+     * getAnalyses - get the analyses which are applicable
+     *
+     * @return ArrayList|string
+     */
     public function getAnalyses()
     {
         $classes = ClassInfo::subclassesFor(Analysis::class);
@@ -32,7 +48,7 @@ class KeywordAnalysisField extends DatalessField
             if ($class == Analysis::class) {
                 continue;
             }
-            $output[] = $class::create($this->link,$this->focus);
+            $output[] = $class::create($this->link, $this->focus);
         }
 
         if (count($output) == 0) {

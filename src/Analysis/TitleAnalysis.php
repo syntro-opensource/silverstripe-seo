@@ -6,8 +6,10 @@ use Syntro\SEO\Analysis\Analysis;
 
 /**
  * checks the title
+ *
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
- class TitleAnalysis extends Analysis
+class TitleAnalysis extends Analysis
 {
     const GOOGLE_MAX_TITLE_LENGTH = 70;
     const GOOGLE_OPT_TITLE_LENGTH = 40;
@@ -86,8 +88,7 @@ use Syntro\SEO\Analysis\Analysis;
         $title = $dom->find('title')->text();
         $focus = $this->getFocus();
         $homeString = _t(__CLASS__ . '.HOME', 'home');
-        if (
-            strtolower($title) == $homeString ||
+        if (strtolower($title) == $homeString ||
             strpos(strtolower($title), $homeString) === 0
         ) {
             return static::TITLE_IS_HOME;
@@ -115,6 +116,4 @@ use Syntro\SEO\Analysis\Analysis;
 
         return static::TITLE_SUCCESS;
     }
-
-
 }

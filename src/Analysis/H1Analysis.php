@@ -5,9 +5,11 @@ namespace Syntro\SEO\Analysis;
 use Syntro\SEO\Analysis\Analysis;
 
 /**
- * checks the title
+ * checks the h1 title tag
+ *
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
- class H1Analysis extends Analysis
+class H1Analysis extends Analysis
 {
     const H1_NOT_FOUND = 'H1_NOT_FOUND';
     const H1_SUCCESS = 'H1_SUCCESS';
@@ -74,6 +76,4 @@ use Syntro\SEO\Analysis\Analysis;
 
         return static::H1_SUCCESS;
     }
-
-
 }

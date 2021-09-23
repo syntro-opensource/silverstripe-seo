@@ -102,10 +102,10 @@ class SEOExtension extends DataExtension
             TabSet::create('SEORoot')
         );
 
-       $fields->findOrMakeTab(
-           "Root.SEO.SEORoot.KWAnalysis",
-           $owner->fieldLabel('Root.SEO.SEORoot.KWAnalysis')
-       );
+        $fields->findOrMakeTab(
+            "Root.SEO.SEORoot.KWAnalysis",
+            $owner->fieldLabel('Root.SEO.SEORoot.KWAnalysis')
+        );
         $fields->findOrMakeTab(
             "Root.SEO.SEORoot.Meta",
             "{$this->getSEOMetaIcon()} {$owner->fieldLabel('Root.SEO.SEORoot.Meta')}"
@@ -147,7 +147,7 @@ class SEOExtension extends DataExtension
                 'Root.SEO.SEORoot.Meta',
                 ToggleCompositeField::create(
                     'Metadata',
-                    _t(__CLASS__.'.ExtraMetadataToggle', 'Extra Metadata'),
+                    _t(__CLASS__ . '.ExtraMetadataToggle', 'Extra Metadata'),
                     [
                         $metaFieldExtra = new TextareaField(
                             "ExtraMeta",
@@ -172,7 +172,7 @@ class SEOExtension extends DataExtension
                 'Root.SEO.SEORoot.Meta',
                 $metatitle = TextField::create(
                     'MetaTitle',
-                    _t(__CLASS__.'.MetaTitle', "Meta title")
+                    _t(__CLASS__ . '.MetaTitle', "Meta title")
                 ),
                 'MetaDescription'
             );
@@ -185,10 +185,10 @@ class SEOExtension extends DataExtension
                 ->setAttribute('placeholder', $owner->Title)
                 ->setRightTitle(
                     _t(
-                        __CLASS__.'.MetaTitleRightTitle',
+                        __CLASS__ . '.MetaTitleRightTitle',
                         "This is the title used by search engines for displaying search results. Make sure to keep it similar to the <h1> tag."
                     )
-            );
+                );
         } else {
             $fields->fieldByName('Root.Main.Title')->setTargetLength(
                 $owner->config()->seo_title_opt,
@@ -200,46 +200,45 @@ class SEOExtension extends DataExtension
         /**
          * Add the keyword analysis fields
          */
-         if ($owner->hasMethod('Link')) {
-             $fields->addFieldsToTab(
-                 'Root.SEO.SEORoot.KWAnalysis',
-                 [
-                     $focusKWField = TextField::create(
-                         'FocusKeyword',
-                         _t(__CLASS__ . '.FocusKeyword', 'Focus Keyword')
-                     ),
-                     $SERPField = SERPField::create(
-                         'SERP',
-                         _t(__CLASS__.'.SERP', 'SERP'),
-                         $owner->Link(),
-                         $owner->FocusKeyword
-                     ),
-                     $KWAnalysisField = KeywordAnalysisField::create(
-                         'KWAnalysis',
-                         _t(__CLASS__.'.KWAnalysis', 'Analysis results'),
-                         $owner->Link(),
-                         $owner->FocusKeyword
-                     ),
-                     // ToggleCompositeField::create('Passed', 'Passed', []),
-                     // ToggleCompositeField::create('NotApplicable', 'Not Applicable', []),
-                 ]
-             );
-             $focusKWField
-                 ->setRightTitle(_t(__CLASS__ . '.FocusKeywordRightTitle', 'Choose a Focus for this Page'));
-             $SERPField
-                 ->setRightTitle(_t(__CLASS__ . '.SERPRightTitle', 'Google preview'));
-
-         } else {
-             $noLinkMessage = _t(__CLASS__ . '.NOLINK','NO_LINK');
-             $fields->addFieldToTab(
-                 'Root.SEO.SEORoot.KWAnalysis',
-                 LiteralField::create('NoLink', <<<HTML
+        if ($owner->hasMethod('Link')) {
+            $fields->addFieldsToTab(
+                'Root.SEO.SEORoot.KWAnalysis',
+                [
+                    $focusKWField = TextField::create(
+                        'FocusKeyword',
+                        _t(__CLASS__ . '.FocusKeyword', 'Focus Keyword')
+                    ),
+                    $SERPField = SERPField::create(
+                        'SERP',
+                        _t(__CLASS__ . '.SERP', 'SERP'),
+                        $owner->Link(),
+                        $owner->FocusKeyword
+                    ),
+                    $KWAnalysisField = KeywordAnalysisField::create(
+                        'KWAnalysis',
+                        _t(__CLASS__ . '.KWAnalysis', 'Analysis results'),
+                        $owner->Link(),
+                        $owner->FocusKeyword
+                    ),
+                    // ToggleCompositeField::create('Passed', 'Passed', []),
+                    // ToggleCompositeField::create('NotApplicable', 'Not Applicable', []),
+                ]
+            );
+            $focusKWField
+                ->setRightTitle(_t(__CLASS__ . '.FocusKeywordRightTitle', 'Choose a Focus for this Page'));
+            $SERPField
+                ->setRightTitle(_t(__CLASS__ . '.SERPRightTitle', 'Google preview'));
+        } else {
+            $noLinkMessage = _t(__CLASS__ . '.NOLINK', 'NO_LINK');
+            $fields->addFieldToTab(
+                'Root.SEO.SEORoot.KWAnalysis',
+                LiteralField::create('NoLink', <<<HTML
                     <div class="alert alert-danger">
                         $noLinkMessage
                     </div>
                  HTML)
-             );
-         }
+            );
+        }
         return $fields;
     }
 
@@ -295,8 +294,7 @@ class SEOExtension extends DataExtension
         $state = 0;
         if (!$owner->MetaDescription || $owner->MetaDescription == '') {
             $state =  -3;
-        } elseif (
-            strlen(utf8_decode($owner->MetaDescription)) < $owner->config()->seo_desc_min ||
+        } elseif (strlen(utf8_decode($owner->MetaDescription)) < $owner->config()->seo_desc_min ||
             strlen(utf8_decode($owner->MetaDescription)) > $owner->config()->seo_desc_max
         ) {
             $state =  -1;
@@ -353,5 +351,4 @@ class SEOExtension extends DataExtension
         }
         return null;
     }
-
 }

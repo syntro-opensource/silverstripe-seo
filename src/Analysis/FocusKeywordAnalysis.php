@@ -9,9 +9,11 @@ use Syntro\SEO\Extensions\SEOExtension;
 use Syntro\SEO\Analysis\Analysis;
 
 /**
- * checks the title
+ * checks the focus keyword
+ *
+ * @author Matthias Leutenegger <hello@syntro.ch>
  */
- class FocusKeywordAnalysis extends Analysis
+class FocusKeywordAnalysis extends Analysis
 {
 
     const FOCUSKEYWORD_NOT_UNIQUE = 'FOCUSKEYWORD_NOT_UNIQUE';
@@ -75,6 +77,4 @@ use Syntro\SEO\Analysis\Analysis;
 
         return static::FOCUSKEYWORD_SUCCESS;
     }
-
-
 }
