@@ -86,7 +86,7 @@ class Dom
 
         $completeDom = static::getDom($link);
         $dom = new PHPDom;
-        $dom->loadStr($completeDom->__toString());
+        $dom->loadStr($completeDom->innerHtml);
         foreach ($dom->find('header,footer,nav') as $item) {
             $item->delete();
             unset($item);
@@ -161,10 +161,11 @@ class Dom
             ''
         );
 
-        $kernel = new CoreKernel(BASE_PATH);
-        $app = new HTTPApplication($kernel);
-        $response = $app->handle($request);
+        // $kernel = new CoreKernel(BASE_PATH);
+        // $app = new HTTPApplication($kernel);
+        // $response = $app->handle($request);
 
+        $response = Director::singleton()->handleRequest($request);
 
         SSViewer::set_themes($origThemes);
         Requirements::set_backend($origRequirements);
@@ -176,6 +177,6 @@ class Dom
             Versioned::set_stage($oldStage);
         }
 
-        return $response;
+        return $response->getBody();
     }
 }
