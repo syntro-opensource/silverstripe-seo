@@ -1,131 +1,119 @@
 <?php
-namespace Syntro\Seo\Analysis;
 
-use Syntro\Seo\Seo;
+namespace Syntro\SEO\Analysis;
+
+use Syntro\SEO\Analysis\Analysis;
 
 /**
- * Class TitleAnalysis
+ * checks the title
+ *
  * @author Matthias Leutenegger <hello@syntro.ch>
  */
 class TitleAnalysis extends Analysis
 {
-    const TITLE_FOCUS_KEYWORD_POSITION = 4;
-    const TITLE_IS_HOME                = -1;
-    const TITLE_NO_FOCUS_KEYWORD       = 3; // only checked if the focus keyword has been defined
-    const TITLE_OK_BUT_SHORT           = 1;
-    const TITLE_SUCCESS                = 5;
-    const TITLE_TOO_LONG               = 2;
-    const TITLE_TOO_SHORT              = 0;
+    const GOOGLE_MAX_TITLE_LENGTH = 70;
+    const GOOGLE_OPT_TITLE_LENGTH = 40;
+    const GOOGLE_MIN_TITLE_LENGTH = 30;
+
+    const TITLE_FOCUS_KEYWORD_POSITION = 'FOCUS_KEYWORD_POSITION';
+    const TITLE_IS_HOME = 'IS_HOME';
+    const TITLE_NO_FOCUS_KEYWORD = 'NO_FOCUS_KEYWORD';
+    const TITLE_OK_BUT_SHORT = 'OK_BUT_SHORT';
+    const TITLE_SUCCESS = 'SUCCESS';
+    const TITLE_TOO_LONG = 'TOO_LONG';
+    const TITLE_TOO_SHORT = 'TOO_SHORT';
 
     /**
+     * isHidden - if true, this analysis should be hidden
+     *
+     * @return boolean
+     */
+    public function isHidden()
+    {
+        return false;
+    }
+
+    /**
+     * getOptions - returns an array containing possible outcomes of this analysis
+     *
      * @return array
      */
-    public function responses()
+    public function getOptions()
     {
-        $metaTitle = $this->getDom()->find('title')->text();
-        $pageTitle = $this->getPage()->Title;
+        $dom = $this->getDom();
         return [
-            static::TITLE_IS_HOME => [
-                _t(
-                    __CLASS__ . '.IS_HOME',
-                    'The page title should be changed from "{metatitle}"; that title almost always reduces click-through rate. Please retain "{title}" as the Navigation Label, however.',
-                    [
-                        'metatitle' => $metaTitle,
-                        'title' => $pageTitle,
-                    ]
-                ),
-                'danger'
+            self::TITLE_FOCUS_KEYWORD_POSITION => [
+                self::STATE_WARN,
+                _t(__CLASS__ . '.FOCUS_KEYWORD_POSITION', 'TITLE_FOCUS_KEYWORD_POSITION')
             ],
-            static::TITLE_TOO_SHORT => [
-                _t(
-                    __CLASS__ . '.TOO_SHORT',
-                    'The page title is too short'
-                ),
-                 'danger'
-             ],
-            static::TITLE_OK_BUT_SHORT => [
-                _t(
-                    __CLASS__ . '.OK_BUT_SHORT',
-                    'The page title is a little short but is above the absolute character minimum of {min} characters.',
-                    [
-                        'min' => Seo::GOOGLE_MIN_TITLE_LENGTH
-                    ]
-                ),
-                'warning'
+            self::TITLE_IS_HOME => [
+                self::STATE_BAD,
+                _t(__CLASS__ . '.IS_HOME', 'TITLE_IS_HOME', [
+                    'metatitle' => $dom->find('title')->text(),
+                    'title' => "Home"
+                ])
             ],
-            static::TITLE_TOO_LONG => [
-                _t(
-                    __CLASS__ . '.TOO_LONG',
-                    'The page title is too long'
-                ),
-                'danger'
+            self::TITLE_NO_FOCUS_KEYWORD => [
+                self::STATE_BAD,
+                _t(__CLASS__ . '.NO_FOCUS_KEYWORD', 'TITLE_NO_FOCUS_KEYWORD')
             ],
-            static::TITLE_NO_FOCUS_KEYWORD => [
-                _t(
-                    __CLASS__ . '.NO_FOCUS_KEYWORD',
-                    'The page title does not contain the focus keyword'
-                ),
-                'warning'
+            self::TITLE_OK_BUT_SHORT => [
+                self::STATE_GOOD,
+                _t(__CLASS__ . '.OK_BUT_SHORT', 'TITLE_OK_BUT_SHORT', ['min' => self::GOOGLE_MIN_TITLE_LENGTH])
             ],
-            static::TITLE_FOCUS_KEYWORD_POSITION => [
-                _t(
-                    __CLASS__ . '.FOCUS_KEYWORD_POSITION',
-                    'The page title contains the focus keyword but is not at the beginning; consider moving it to the beginning'
-                ),
-                'warning'
+            self::TITLE_SUCCESS => [
+                self::STATE_GOOD,
+                _t(__CLASS__ . '.SUCCESS', 'TITLE_SUCCESS')
             ],
-            static::TITLE_SUCCESS => [
-                _t(
-                    __CLASS__ . '.SUCCES',
-                    'The page title is between the recommended {min} character count and the recommended {max} character maximum',
-                    [
-                        'min' => Seo::GOOGLE_MIN_TITLE_LENGTH,
-                        'max' => SEO::GOOGLE_MAX_TITLE_LENGTH
-                    ]
-                ),
-                'success'
-            ]
+            self::TITLE_TOO_LONG => [
+                self::STATE_BAD,
+                _t(__CLASS__ . '.TOO_LONG', 'TITLE_TOO_LONG')
+            ],
+            self::TITLE_TOO_SHORT => [
+                self::STATE_BAD,
+                _t(__CLASS__ . '.TOO_SHORT', 'TITLE_TOO_SHORT')
+            ],
         ];
     }
 
     /**
-     * You must override this in your subclass and perform your own checks. An integer must be returned
-     * that references an index of the array you return in your response() method override in your subclass.
+     * getResult - returns the result of this analysis. The result must correspond
+     * to a key in the getOptions() array.
      *
-     * @return int
+     * @return int|string
      */
-    public function run()
+    public function getResult()
     {
-        $metaTitle = $this->getDom()->find('title')->text();
-        $pageTitle = $this->getPage()->Title;
-        $keyword = $this->getKeyword();
-
-        if (strtolower($pageTitle) == 'home' ||
-            strtolower($pageTitle) == 'startseite'
+        $dom = $this->getDom();
+        $title = $dom->find('title')->text();
+        $focus = $this->getFocus();
+        $homeString = _t(__CLASS__ . '.HOME', 'home');
+        if (strtolower($title) == $homeString ||
+            strpos(strtolower($title), $homeString) === 0
         ) {
             return static::TITLE_IS_HOME;
         }
 
-        if (strlen($metaTitle) < Seo::GOOGLE_MIN_TITLE_LENGTH) {
+        if (strlen($title) < static::GOOGLE_MIN_TITLE_LENGTH) {
             return static::TITLE_TOO_SHORT;
         }
 
-        if (strlen($metaTitle) < Seo::GOOGLE_OPT_TITLE_LENGTH) {
-            return static::TITLE_OK_BUT_SHORT;
-        }
-
-        if (strlen($metaTitle) > SEO::GOOGLE_MAX_TITLE_LENGTH) {
+        if (strlen($title) > static::GOOGLE_MAX_TITLE_LENGTH) {
             return static::TITLE_TOO_LONG;
         }
 
-        if ($keyword && !strstr(strtolower($metaTitle), strtolower($keyword))) {
+        if ($focus && !strstr(strtolower($title), strtolower($focus))) {
             return static::TITLE_NO_FOCUS_KEYWORD;
         }
 
-        if ($keyword && strtolower(substr($metaTitle, 0, strlen($keyword))) !== strtolower($keyword)) {
+        if ($focus && strtolower(substr($title, 0, strlen($focus))) !== strtolower($focus)) {
             return static::TITLE_FOCUS_KEYWORD_POSITION;
         }
 
-        return 5;
+        if (strlen($title) < static::GOOGLE_OPT_TITLE_LENGTH) {
+            return static::TITLE_OK_BUT_SHORT;
+        }
+
+        return static::TITLE_SUCCESS;
     }
 }

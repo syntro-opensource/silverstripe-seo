@@ -1,76 +1,82 @@
 en:
-  Syntro\Seo\Extension\MetaSiteConfigExtension:
-    OGImageTitle: Default image when shared
-    TwitterSiteTitle: Twitter site
-    OGImageRight: This image will be rendered on posts, if no specific image has been defined on a page.
-    TwitterSiteRight: The name of your Twitter page.
-    TwitterSitePlaceholder: "@yourcompany"
-  Syntro\Seo\Extension\MetadataPageExtension:
-    Socialsharing: Social sharing
-    # Field titles
-    OGImageTitle: Shared image
-    OGTitleTitle: Shared title
-    OGDescriptionTitle: Shared description
-    OGTypeTitle: Shared type
-    TwitterTypeTitle: Twitter type
-    ExtraMetaTagsToggle: Extra meta tags
-    RENDERTYPES: Render types
-    # field descriptions
-    OGTitleRight: The title which is shown when you share this page
-    OGDescriptionRight: The summary which is shown when you share this page.
-    OGTypeRight: The type which is used to display this page when shared. Most of the time, you want this to be "website"
-    TwitterTypeRight: The type which is used to display this page when shared on Twitter. Most of the time, you want this to be "summary"
-    OGImageRight: The image which is shown when you share this page
-    # fallback indication
-    NODEAFAULTIMAGE: No default Image is set. This means, a crawler might select one at random.
-    DEFAULTIMAGE: The default image set in the siteconfig will be used.
-  Syntro\Seo\Extension\SEOPageExtension:
-    SEO_Analysis: SEO Analysis
-    SEO_Meta: SEO Metadata
-    # Field titles
-    FocusKeywordTitle: Focus Keyword
-    MetaTitleTitle: Page Title
-    # field descriptions
-    KeyWordRight: Set a Keyword which you want to focus this page around.
-    MetaTitleRight: The title of this page as displayed by search engines. Try to keep it similar to the page name.
-  Syntro\Seo\Metadata:
-    website: Website
-    article: Article
-    summary: Summary
-    summary_large_image: Summary with large image
-    app: App
-    player: Player
-  Syntro\Seo\Analysis\FocusKeywordContentAnalysis:
-    UNSET: The focus keyword has not been set; consider setting this to improve content analysis
-    NOTFOUND: The focus keyword was not found in the content of this page
-    SUCCESS: The focus keyword was found <strong>{occurences}</strong> times.
-  Syntro\Seo\Analysis\FocusKeywordUniqueAnalysis:
-    UNSET: The focus keyword has not been set, consider setting this to improve content analysis
-    INUSE: The focus keyword you want this page to rank for is already being used on another page; consider changing that if you truly want this page to rank
-    SUCCESS: The focus keyword has never been used before—nice!
-  Syntro\Seo\Analysis\FocusKeywordUrlAnalysis:
-    UNSET: The focus keyword has not been set; consider setting this to improve content analysis
-    NOT_IN_URL: The focus keyword is not in the url segment; consider changing this!
-  Syntro\Seo\Analysis\MetaDescAnalysis:
-    UNSET: The meta description has not been set; a potentially unwanted snippet may be taken from the page and displayed instead
-    TOO_SHORT: The meta description is too short
-    TOO_LONG: The meta description is too long
-    NO_FOCUS_KEYWORD: The meta description does not contain the focus keyword
-    SUCCESS: The meta description is perfect!
-  Syntro\Seo\Analysis\TitleAnalysis:
-    IS_HOME: The page title should be changed from "{metatitle}"; that title almost always reduces click-through rate. Please retain "{title}" as the Navigation Label, however.
-    TOO_SHORT: The page title is too short
-    OK_BUT_SHORT: The page title is a little short but is above the absolute character minimum of {min} characters.
-    TOO_LONG: The page title is too long
-    NO_FOCUS_KEYWORD: The page title does not contain the focus keyword
-    FOCUS_KEYWORD_POSITION: The page title contains the focus keyword but is not at the beginning; consider moving it to the beginning
-    SUCCES: The page title is between the recommended {min} character count and the recommended {max} character maximum
-  Syntro\Seo\Analysis\WordCountAnalysis:
-    BELOW_MIN: The content of this page contains {count} words which is less than the {min} recommended minimum.
-    ABOVE_MIN: The content of this page contains {count} words which is above the {min} recommended minimum.
-  Syntro\Seo\Preview\SERPPreview:
-    Title: SERP Preview
-    Description: SERP (Search Engine Result Page) snippets show how a user sees this page on Google
-  Syntro\Seo\Forms\SeoAnalysisField:
-    Title: SEO Analysis
-    Description: We have found these points on this page. Please try to correct any errors.
+  Syntro\SEO\Extensions\SEOExtension:
+    SEO: SEO
+    MetaTab: Metadata
+    KWAnalysisTab: Keyword analysis
+    MetaTitle: Meta Title
+    MetaTitleRightTitle: >
+      This is the title used by search engines for displaying search results
+      and is shown in the tab. Make sure to keep it similar to the <h1> tag.
+    MetaDescription: Meta Description
+    ExtraMetadataToggle: Extra Metadata
+    FocusKeyword: Focus Keyword
+    FocusKeywordRightTitle: Select a keyword on which the page is to be focused.
+    SERP: SERP
+    SERPRightTitle: This is how this page / item is displayed in a google search.
+    KWAnalysis: Analysis result
+  Syntro\SEO\Analysis\FocusKeywordAnalysis:
+    NOT_UNIQUE: >
+      The ocus keyword is already beeing used on this website. It is recommended
+      to only focus one page per website on a specific topic.
+    UNSET: >
+      No focus keyword was set. Consider setting one to unlock further checks.
+  Syntro\SEO\Analysis\ContentWordCountAnalysis:
+    WORDCOUNT_ABOVE_MIN: >
+      The content of this page contains <b>{count} words</b>, which is more
+      then the recommended minimum of {min}. Perfect!
+    WORDCOUNT_BELOW_MIN: >
+      The content of this page contains <b>{count} words</b>, which is less
+      then the recommended minimum of {min}.
+  Syntro\SEO\Analysis\DescriptionAnalysis:
+    NO_FOCUS_KEYWORD: >
+      The metadescription does not contain the focus keyword. A random and
+      possibly unwanted section of the content might be shown instead.
+    SUCCESS: >
+      the metadescription is perfect!
+    TOO_LONG: >
+      the metadescription is too long.
+    TOO_SHORT: >
+      the metadescription is too short.
+    UNSET: >
+      The metadescription was not set. A random and possibly unwanted section
+      of the content might be shown instead.
+  Syntro\SEO\Analysis\TitleAnalysis:
+    FOCUS_KEYWORD_POSITION: >
+      The page title contains the focus keyword, but not at the beginning;
+      Consider moving it to the beginning.
+    IS_HOME: >
+      The page title should be changed from "{metatitle}"; this title
+      almost always reduces the click-through rate. However, please keep
+      "{title}" as the navigation label.
+    NO_FOCUS_KEYWORD: >
+      The page title does not contain the focus keyword.
+    OK_BUT_SHORT: >
+      The page title is somewhat short, but is above the absolute
+      character minimum of {min} characters.
+    SUCCESS: >
+      The page title is perfect!
+    TOO_LONG: >
+      The page title is too long.
+    TOO_SHORT: >
+      The page title is too short.
+  Syntro\SEO\Analysis\H1Analysis:
+    NOT_FOUND: >
+      This page has no H1-title. Each page should have a unique H1-title.
+    FOCUS_NOT_FOUND: >
+      The H1-title does not contain the focus-keyword.
+    MULTIPLE: >
+      The page contains multiple H1-titles. Each page should contain only one,
+      unique H1-title.
+    SUCCESS: >
+      The H1-title is perfect!
+  Syntro\SEO\Analysis\ContentFocusAnalysis:
+    NOT_FOUND: >
+      The focus keyword was not found in the content of this page.
+    SUCCESS: >
+      The focus keyword was found <strong>{occurrences}</strong> times in the
+      Content of this page.
+  Syntro\SEO\Analysis\UrlAnalysis:
+    KEYWORD_NOT_IN_URL: >
+      The focus keyword was not found in the URL segment!
+    KEYWORD_SUCCESS: >
+      The focus keyword was found in the URL segment!
