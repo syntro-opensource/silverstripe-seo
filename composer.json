@@ -20,6 +20,10 @@
         "phpstan/phpstan-shim": "~0.11.0",
         "phpunit/phpunit": "^5.7"
     },
+    "suggest": {
+        "wilr/silverstripe-googlesitemaps": "Adds a sitemap to the page",
+        "syntro/silvershare": "Allows the user to fine-tune sharing links to social media"
+    },
     "keywords": [
         "silverstripe SEO",
         "silverstripe",
