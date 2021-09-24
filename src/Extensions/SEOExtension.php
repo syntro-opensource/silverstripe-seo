@@ -22,18 +22,6 @@ use PHPHtmlParser\Dom;
  */
 class SEOExtension extends DataExtension
 {
-    const STATE_ICON_MAP = [
-        '1' => '🟢',
-        '0' => '',
-        '-1' => '🟡',
-        '-2' => '🔴',
-        '-3' => '⚠️',
-        '-4' => '❌'
-    ];
-
-    protected $SEODom = null;
-
-    protected $state_keywordanalysis = 0;
 
     private static $seo_use_metatitle = true;
     private static $seo_title_fallback = 'Title';
@@ -94,7 +82,7 @@ class SEOExtension extends DataExtension
         ]);
         $fields->findOrMakeTab(
             "Root.SEO",
-            "{$this->getSEOIcon()} {$owner->fieldLabel('Root.SEO')}"
+            $owner->fieldLabel('Root.SEO')
         );
 
         $fields->addFieldToTab(
@@ -108,7 +96,7 @@ class SEOExtension extends DataExtension
         );
         $fields->findOrMakeTab(
             "Root.SEO.SEORoot.Meta",
-            "{$this->getSEOMetaIcon()} {$owner->fieldLabel('Root.SEO.SEORoot.Meta')}"
+            $owner->fieldLabel('Root.SEO.SEORoot.Meta')
         );
 
         /**
@@ -258,68 +246,6 @@ class SEOExtension extends DataExtension
         return $labels;
     }
 
-    /* --------------------------------------------------- */
-    /*                  icon Getter                        */
-    /* --------------------------------------------------- */
-
-    /**
-     * getSEOIcon - returns the icon displayed in the Root tab
-     *
-     * @return string
-     */
-    public function getSEOIcon()
-    {
-        $state = $this->getMetaState();
-        return $this->getIconFromState($state);
-    }
-
-    /**
-     * getSEOMetaIcon - returns the icon from the Metadata tab
-     *
-     * @return string
-     */
-    public function getSEOMetaIcon()
-    {
-        $state = $this->getMetaState();
-        return $this->getIconFromState($state);
-    }
-
-    /**
-     * getMetaState - returns the state integer which symbolizes the quality
-     * of the metadata
-     *
-     * @return int
-     */
-    public function getMetaState()
-    {
-        $owner = $this->getOwner();
-        $state = 0;
-        if (!$owner->MetaDescription || $owner->MetaDescription == '') {
-            $state =  -3;
-        } elseif (strlen(utf8_decode($owner->MetaDescription)) < $owner->config()->seo_desc_min ||
-            strlen(utf8_decode($owner->MetaDescription)) > $owner->config()->seo_desc_max
-        ) {
-            $state =  -1;
-        }
-
-        return $state;
-    }
-
-    /**
-     * getIconFromState - returns a string representation of the state
-     *
-     * @param  int $state the state value
-     * @return string
-     */
-    public function getIconFromState($state)
-    {
-        if (isset(self::STATE_ICON_MAP[strval($state)])) {
-            return self::STATE_ICON_MAP[strval($state)];
-        } elseif ($state < 0) {
-            return '🚫';
-        }
-        return '';
-    }
 
     /* --------------------------------------------------- */
     /*                  Getter methods for meta            */
