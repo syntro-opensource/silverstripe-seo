@@ -25,6 +25,11 @@ class DOMTest extends SapphireTest
      */
     protected static $use_draft_site = true;
 
+    /**
+     * set up
+     *
+     * @return void
+     */
     public function setUp()
     {
         parent::setUp();

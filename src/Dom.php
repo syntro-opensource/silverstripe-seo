@@ -86,7 +86,7 @@ class Dom
 
         $completeDom = static::getDom($link);
         $dom = new PHPDom;
-        $dom->loadStr($completeDom->innerHtml);
+        $dom->loadStr($completeDom->__toString());
         foreach ($dom->find('header,footer,nav') as $item) {
             $item->delete();
             unset($item);
