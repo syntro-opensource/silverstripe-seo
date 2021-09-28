@@ -53,8 +53,8 @@ class ContentWordCountAnalysis extends Analysis
     public function getWordCount()
     {
         $content = $this->getStrippedDom();
-        $body = $content->find('body', 0)->text(true);
-        return count(array_filter(explode(' ', $body)));
+        $body = $content->find('p', 0);
+        return $body ? count(array_filter(explode(' ', $body->text(true)))) : 0;
     }
 
     /**

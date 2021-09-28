@@ -59,8 +59,8 @@ class ContentFocusAnalysis extends Analysis
     public function getContent()
     {
         $content = $this->getStrippedDom();
-        $body = $content->find('p', 0)->text(true);
-        return $body;
+        $body = $content->find('p', 0);
+        return $body ? $body->text(true) : '';
     }
 
     /**
