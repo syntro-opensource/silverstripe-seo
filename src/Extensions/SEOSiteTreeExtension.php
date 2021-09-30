@@ -23,13 +23,13 @@ class SEOSiteTreeExtension extends DataExtension
     /**
      * getSEOSource - returns the set SEO source
      *
-     * @return SiteTree
+     * @return SiteTree|null
      */
     public function getSEOSource()
     {
         if ($this->source) {
             return $this->source;
-        } else if (Controller::curr()->getAction() == 'index') {
+        } elseif (Controller::curr()->getAction() == 'index') {
             $owner = $this->getOwner();
             $this->setSEOSource($owner);
             return $owner;
