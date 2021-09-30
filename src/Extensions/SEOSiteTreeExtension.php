@@ -3,6 +3,7 @@ namespace Syntro\SEO\Extensions;
 
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\Control\Controller;
 use SilverStripe\CMS\Model\SiteTree;
 use Syntro\SEO\Extensions\SEOExtension;
 
@@ -28,11 +29,12 @@ class SEOSiteTreeExtension extends DataExtension
     {
         if ($this->source) {
             return $this->source;
-        } else {
+        } else if (Controller::curr()->getAction() == 'index') {
             $owner = $this->getOwner();
             $this->setSEOSource($owner);
             return $owner;
         }
+        return null;
     }
 
     /**
@@ -57,7 +59,7 @@ class SEOSiteTreeExtension extends DataExtension
         /** @var SiteTree $owner */
         $owner = $this->getOwner();
         $source = $this->getSEOSource();
-        if (!$source->hasExtension(SEOExtension::class)) {
+        if (!$source || !$source->hasExtension(SEOExtension::class)) {
             return $tags;
         }
         // Add a title

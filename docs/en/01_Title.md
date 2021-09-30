@@ -4,13 +4,32 @@ are vital properties in order to be placed well in a google search.
 
 With silverstripe cms, you typically let the framework render the title tag
 automatically (which corresponds to the page name) or overwrite the default
-title in the `Page.ss` template. While both strategies work, we have found that,
-especially with page objects, the title tag is often different from the page name.
+title in the `Page.ss` template.
 
-We therefore add an additional field to the page object, the `meta title`, which
-lets an editor overwrite the title specifically. This is the default setup when
-installing this module, but you can change this behaviour by using the following
-configuration options:
+We have found that, especially with page objects, the title tag is often
+different from the page name. Therefore, this module adds an additional field to
+the page object, the `meta title`, which lets an editor overwrite the title
+specifically.
+
+While you can let Silverstripe handle the rendering of the title tag using the
+`$MetaTags` in the head section, this may become unwieldy when combined with
+controllers that try to overwrite the Title, as this Title is then not picked
+up by the module. We therefore recommend to render the title in your `Page.ss`
+template as follows:
+
+```html
+    $MetaTags(false)
+    <title>
+      <% if $SEOSource %>
+        $SEOSource.SEOTitle
+      <% else %>
+        $Title | $SiteConfig.Title
+      <% end_if %>
+    </title>
+```
+This will only render a specific title when a source has been set (in the DOAP
+case) or when the current controller action is `index` (in the normal case of
+rendering a page). Otherwise, the title will fall back to the normal behaviour.
 
 ## Disable the metatitle field
 
