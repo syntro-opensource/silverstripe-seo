@@ -97,6 +97,24 @@ class Dom
     }
 
     /**
+     * getTextualRepresentation - returns the content of the page as a single
+     * string, retaining spaces between tags
+     *
+     * @param  string $link the link to check
+     * @return string
+     */
+    public static function getTextualRepresentation($link)
+    {
+        $dom = static::getStrippedDom($link);
+        $body = $dom->find('body');
+        $string = $body->innerHtml();
+        $spaceString = str_replace( '<', ' <',$string );
+        $doubleSpace = strip_tags( $spaceString );
+        $singleSpace = str_replace( '  ', ' ', $doubleSpace );
+        return $singleSpace;
+    }
+
+    /**
      * loadContent - loads the content via a mock request (from the draft stage
      * if versioning is enabled).
      *

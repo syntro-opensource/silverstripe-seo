@@ -91,6 +91,17 @@ abstract class Analysis extends ViewableData
     }
 
     /**
+     * getPageContent - returns the content as a string
+     *
+     * @return string
+     */
+    public function getPageContent()
+    {
+        $content = Dom::getTextualRepresentation($this->link);
+        return $content;
+    }
+
+    /**
      * getFocus - return the focus this analysis should consider
      *
      * @return string

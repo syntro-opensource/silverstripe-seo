@@ -52,25 +52,13 @@ class ContentFocusAnalysis extends Analysis
     }
 
     /**
-     * getContent - returns the content of the Page
-     *
-     * @return string
-     */
-    public function getContent()
-    {
-        $content = $this->getStrippedDom();
-        $body = $content->find('p', 0);
-        return $body ? $body->text(true) : '';
-    }
-
-    /**
      * findOccurrences
      *
      * @return int
      */
     public function findOccurrences()
     {
-        $content = $this->getContent();
+        $content = $this->getPageContent();
         if (!strlen($content) || !$this->getFocus()) {
             return 0;
         }
@@ -89,7 +77,7 @@ class ContentFocusAnalysis extends Analysis
             return static::CONTENT_FOCUS_UNSET;
         }
 
-        if (!strstr(strtolower($this->getContent()), strtolower($this->getFocus()))) {
+        if (!strstr(strtolower($this->getPageContent()), strtolower($this->getFocus()))) {
             return static::CONTENT_FOCUS_NOT_FOUND;
         }
 
