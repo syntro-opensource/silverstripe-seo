@@ -52,9 +52,8 @@ class ContentWordCountAnalysis extends Analysis
      */
     public function getWordCount()
     {
-        $content = $this->getStrippedDom();
-        $body = $content->find('p', 0);
-        return $body ? count(array_filter(explode(' ', $body->text(true)))) : 0;
+        $content = $this->getPageContent();
+        return $content ? count(array_filter(explode(' ', $content))) : 0;
     }
 
     /**

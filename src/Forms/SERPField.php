@@ -5,7 +5,7 @@ namespace Syntro\SEO\Forms;
 use SilverStripe\Forms\DatalessField;
 use SilverStripe\View\ArrayData;
 use SilverStripe\ORM\ArrayList;
-use SilverStripe\ORM\FieldType\DBText;
+// use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use Syntro\SEO\Dom;
 use SilverStripe\Control\Director;
@@ -30,6 +30,15 @@ class SERPField extends DatalessField
      * @var string
      */
     protected $focus = null;
+
+    /**
+     * Ensures that the methods are wrapped in the correct type and
+     * values are safely escaped while rendering in the template.
+     * @var array
+     */
+    private static $casting = [
+        'MetaDescription' => 'HTMLVarchar'
+    ];
 
     /**
      * __construct - constructor
@@ -65,7 +74,7 @@ class SERPField extends DatalessField
         $title = !is_null($title)
             ? $title->text()
             : null;
-        $title = DBText::create('Title')
+        $title = DBHTMLText::create('Title')
             ->setValue($title)
             ->LimitCharacters(self::GOOGLE_MAX_TITLE_LENGTH, '...');
         if ($title && $this->focus) {
@@ -96,26 +105,23 @@ class SERPField extends DatalessField
         $description = !is_null($description)
             ? $description->getAttributes()['content']
             : null;
-        $body = $dom->find('body', 0);
-        $body = !is_null($body)
-            ? $body->text(true)
-            : null;
+        $body = Dom::getTextualRepresentation($this->link);
 
 
         if ($description && $this->contains($description, $this->focus)) {
-            $description = DBText::create('Description')
+            $description = DBHTMLText::create('Description')
                 ->setValue($description)
                 ->LimitCharacters(self::GOOGLE_MAX_DESCRIPTION_LENGTH, '...');
         } elseif ($body && $this->contains($body, $this->focus)) {
-            $description = DBText::create('Description')
+            $description = DBHTMLText::create('Description')
                 ->setValue($body)
                 ->ContextSummary(self::GOOGLE_MAX_DESCRIPTION_LENGTH, $this->focus, false, '', '...');
         } elseif ($description) {
-            $description = DBText::create('Description')
+            $description = DBHTMLText::create('Description')
                 ->setValue($description)
                 ->LimitCharacters(self::GOOGLE_MAX_DESCRIPTION_LENGTH, '...');
         } else {
-            $description = DBText::create('Description')
+            $description = DBHTMLText::create('Description')
                 ->setValue($body)
                 ->LimitCharacters(self::GOOGLE_MAX_DESCRIPTION_LENGTH, '...');
         }
