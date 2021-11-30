@@ -108,9 +108,9 @@ class Dom
         $dom = static::getStrippedDom($link);
         $body = $dom->find('body');
         $string = $body->innerHtml();
-        $spaceString = str_replace( '<', ' <',$string );
-        $doubleSpace = strip_tags( $spaceString );
-        $singleSpace = str_replace( '  ', ' ', $doubleSpace );
+        $spaceString = str_replace('<', ' <', $string);
+        $doubleSpace = strip_tags($spaceString);
+        $singleSpace = str_replace('  ', ' ', $doubleSpace);
         return $singleSpace;
     }
 
