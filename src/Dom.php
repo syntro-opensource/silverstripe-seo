@@ -4,19 +4,6 @@ namespace Syntro\SEO;
 
 use PHPHtmlParser\Dom as PHPDom;
 use SilverStripe\Control\Director;
-use SilverStripe\Control\HTTPApplication;
-use SilverStripe\Control\HTTPRequest;
-use SilverStripe\Control\HTTPRequestBuilder;
-use SilverStripe\View\Requirements;
-use SilverStripe\View\Requirements_Backend;
-use SilverStripe\View\SSViewer;
-use SilverStripe\ORM\DataObject;
-use SilverStripe\ORM\FieldType\DBDatetime;
-use SilverStripe\Core\CoreKernel;
-use SilverStripe\Core\Kernel;
-use SilverStripe\Core\Environment;
-use SilverStripe\Core\Injector\Injector;
-use SilverStripe\Versioned\Versioned;
 
 /**
  * Helper class used to retrieve the DOM of a page from its link and remembering
@@ -126,75 +113,12 @@ class Dom
         if (Director::is_relative_url($url)) {
             $url = Director::absoluteURL($url);
         }
-        $urlParts = parse_url($url);
-        if (!empty($urlParts['query'])) {
-            parse_str($urlParts['query'], $getVars);
-        } else {
-            $getVars = [];
-        }
-
-        $origRequirements = Requirements::backend();
-        Requirements::set_backend(Requirements_Backend::create());
-        $origThemes = SSViewer::get_themes();
-        $rawThemes = SSViewer::config()->uninherited('themes');
-        SSViewer::set_themes($rawThemes);
-        $origKernel = Injector::inst()->get(Kernel::class);
-        $origKernel->nest();
-        // $finally[] = function () use ($origKernel) {
-        //     $origKernel->activate();
-        // };
-        $existingVars = Environment::getVariables();
-        // $finally[] = function () use ($existingVars) {
-        //     Environment::setVariables($existingVars);
-        // };
-        $oldReadingMode = null;
-        $oldStage = null;
-        if (class_exists(Versioned::class)) {
-            $oldReadingMode = Versioned::get_reading_mode();
-            $oldStage = Versioned::get_stage();
-            Versioned::set_stage(Versioned::DRAFT);
-            // $finally[] = function () use ($oldReadingMode) {
-            //     Versioned::set_reading_mode($oldReadingMode);
-            // };
-        }
-
-
-
-        $request = HTTPRequestBuilder::createFromVariables(
-            [
-                '_SERVER' => [
-                    'REQUEST_URI' => isset($urlParts['path']) ? $urlParts['path'] : '',
-                    'REQUEST_METHOD' => 'GET',
-                    'REMOTE_ADDR' => '127.0.0.1',
-                    'HTTPS' => $urlParts['scheme'] == 'https' ? true : false,
-                    'QUERY_STRING' => isset($urlParts['query']) ? $urlParts['query'] : '',
-                    'REQUEST_TIME' => DBDatetime::now()->getTimestamp(),
-                    'REQUEST_TIME_FLOAT' => (float) DBDatetime::now()->getTimestamp(),
-                    'HTTP_HOST' => $urlParts['host'] . (isset($urlParts['port']) ? ':' . $urlParts['port'] : ''),
-                    'HTTP_USER_AGENT' => 'silverstripe/seocrawler',
-                ],
-                '_GET' => $getVars,
-                '_POST' => [],
-            ],
-            ''
-        );
-
-        // $kernel = new CoreKernel(BASE_PATH);
-        // $app = new HTTPApplication($kernel);
-        // $response = $app->handle($request);
-
-        $response = Director::singleton()->handleRequest($request);
-
-        SSViewer::set_themes($origThemes);
-        Requirements::set_backend($origRequirements);
-        DataObject::singleton()->flushCache();
-        $origKernel->activate();
-        Environment::setVariables($existingVars);
-        if (class_exists(Versioned::class)) {
-            Versioned::set_reading_mode($oldReadingMode);
-            Versioned::set_stage($oldStage);
-        }
-
-        return $response->getBody();
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_POST, 0);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return $result;
     }
 }
