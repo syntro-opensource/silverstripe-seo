@@ -113,12 +113,10 @@ class Dom
         if (Director::is_relative_url($url)) {
             $url = Director::absoluteURL($url);
         }
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_POST, 0);
-        $result = curl_exec($ch);
-        curl_close($ch);
+        $result = file_get_contents($url);
+        if (!$result) {
+            throw new \Exception("could not fetch content for {$url}.", 1);
+        }
         return $result;
     }
 }
