@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+<a name="2.1.0"></a>
+## [2.1.0] - 2022-02-11
+### 🔧 Changed
+- Content is loaded via curl to avoid tampering with session
+
+
 <a name="2.0.3"></a>
 ## [2.0.3] - 2021-11-30
 ### 🐞 Fixed
@@ -63,7 +69,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-05-25
 
-[Unreleased]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.0.3...HEAD
+[Unreleased]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.1.0...HEAD
+[2.1.0]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.0.3...2.1.0
 [2.0.3]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.0.2...2.0.3
 [2.0.2]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.0.1...2.0.2
 [2.0.1]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.0.0...2.0.1
