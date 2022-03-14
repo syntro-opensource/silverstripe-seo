@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+<a name="2.1.1"></a>
+## [2.1.1] - 2022-03-14
+### 🐞 Fixed
+- dom reads from stage using correct session ([#15](https://github.com/syntro-opensource/silverstripe-seo/issues/15))
+
+
 <a name="2.1.0"></a>
 ## [2.1.0] - 2022-02-11
 ### 🔧 Changed
@@ -69,7 +75,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-05-25
 
-[Unreleased]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.1.0...HEAD
+[Unreleased]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.1.1...HEAD
+[2.1.1]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.0.3...2.1.0
 [2.0.3]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.0.2...2.0.3
 [2.0.2]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.0.1...2.0.2
