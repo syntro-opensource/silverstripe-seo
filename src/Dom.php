@@ -149,6 +149,6 @@ class Dom
         // reset Stage
         Versioned::set_stage($origStage);
 
-        return null;$result;
+        return $result;
     }
 }
