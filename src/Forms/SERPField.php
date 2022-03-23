@@ -45,11 +45,11 @@ class SERPField extends DatalessField
      *
      * @param  string $name  the name of the field
      * @param  string $title = null the title of the field
-     * @param  string $link  the link to analyze
+     * @param  string $link  = '/' the link to analyze
      * @param  string $focus = null an optional focus keyword
      * @return void
      */
-    function __construct($name, $title = null, $link, $focus = null)
+    function __construct($name, $title = null, $link = '/', $focus = null)
     {
         parent::__construct($name, $title);
         $this->link = $link;
