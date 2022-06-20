@@ -41,7 +41,7 @@ class MetaTest extends SapphireTest
      *
      * @returnvoid
      */
-    public function testGeneratesRobotTagWhenShown()
+    public function testGeneratesRobotTagWhenNotShown()
     {
         $page = $this->objFromFixture(SiteTree::class, 'notInSearch');
         $page->copyVersionToStage('Stage', 'Live');
