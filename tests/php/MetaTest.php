@@ -32,7 +32,7 @@ class MetaTest extends FunctionalTest
 
         $response = $this->get('inSearch/');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertcontains('<meta name="robots" content="index, follow, max-snippet:-1">', $response->getBody());
+        $this->assertcontains('<meta name="robots" content="index, follow, max-snippet:-1" />', $response->getBody());
 
     }
 
@@ -48,7 +48,7 @@ class MetaTest extends FunctionalTest
 
         $response = $this->get('notInSearch/');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertcontains('<meta name="robots" content="noindex, nofollow">', $response->getBody());
+        $this->assertcontains('<meta name="robots" content="noindex, nofollow" />', $response->getBody());
 
     }
 
