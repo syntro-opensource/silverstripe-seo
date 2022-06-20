@@ -30,7 +30,7 @@ class DOMTest extends SapphireTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         Versioned::set_stage(Versioned::DRAFT);
