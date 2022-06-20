@@ -12,7 +12,7 @@ use Syntro\SEO\DOM;
  *
  * @author Matthias Leutenegger <hello@syntro.ch>
  */
-class MetaTest extends SapphireTest
+class MetaTest extends FunctionalTest
 {
     /**
      * Defines the fixture file to use for this test class
