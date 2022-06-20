@@ -1,0 +1,9 @@
+SilverStripe\CMS\Model\SiteTree:
+  inSearch:
+    URLSegment: inSearch
+    Title: I am in Search
+    ShowInSearch: true
+  notInSearch:
+    URLSegment: notInSearch
+    Title: I am not in Search
+    ShowInSearch: false

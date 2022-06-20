@@ -62,6 +62,27 @@ class SEOSiteTreeExtension extends DataExtension
         if (!$source || !$source->hasExtension(SEOExtension::class)) {
             return $tags;
         }
+        // Add robots snippet
+        // We respect the "ShowInSearch" Setting for SiteTree objects, for everything
+        // else we assume a free pass
+        if ($source->ShowInSearch || !($source instanceof SiteTree)) {
+            $tags['robots'] = [
+                'tag' => 'meta',
+                'attributes' => [
+                    'name' => 'robots',
+                    'content' => 'index, follow, max-snippet:-1'
+                ],
+            ];
+        } else {
+            $tags['robots'] = [
+                'tag' => 'meta',
+                'attributes' => [
+                    'name' => 'robots',
+                    'content' => 'noindex'
+                ],
+            ];
+        }
+
         // Add a title
         $tags['title'] = [
             'tag' => 'title',
