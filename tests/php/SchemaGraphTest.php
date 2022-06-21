@@ -21,6 +21,11 @@ class SchemaGraphTest extends FunctionalTest
      */
     protected static $fixture_file = './SchemaGraphFixture.yml';
 
+    /**
+     * testSchemaScriptTagIsRendered
+     *
+     * @return void
+     */
     public function testSchemaScriptTagIsRendered()
     {
         $page = $this->objFromFixture(\Page::class, 'child');
