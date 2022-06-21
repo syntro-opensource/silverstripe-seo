@@ -1,0 +1,10 @@
+---
+Name: siteconfig-seo
+Before:
+  - 'tractorcow/silverstripe-fluent'
+  - syntro/silvershare
+---
+
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - Syntro\SEO\Extensions\SiteConfigExtension

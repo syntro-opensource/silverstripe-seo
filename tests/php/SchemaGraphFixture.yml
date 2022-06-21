@@ -1,0 +1,11 @@
+Page:
+  home:
+    URLSegment: home
+    Title: I am home
+  aboutus:
+    URLSegment: about-us
+    Title: I am about-us
+  child:
+    URLSegment: child
+    Title: I am child
+    Parent: =>Page.aboutus
