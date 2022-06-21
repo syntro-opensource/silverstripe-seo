@@ -1,6 +1,8 @@
 <?php
 namespace Syntro\SEO\Extensions;
 
+use SilverStripe\Control\Director;
+use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\TextareaField;
@@ -11,9 +13,11 @@ use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\CMS\Model\SiteTree;
 use Syntro\SEO\Forms\SERPField;
 use Syntro\SEO\Forms\KeywordAnalysisField;
 use PHPHtmlParser\Dom;
+use SilverStripe\i18n\i18n;
 
 /**
  * The SEO extension adds a n SEO analysis Tab
@@ -278,5 +282,110 @@ class SEOExtension extends DataExtension
             return $titleObj->forTemplate();
         }
         return null;
+    }
+
+    /**
+     * getSchemaGraph - returns the schema graph for this page or item
+     *
+     * @param  SiteTree $originalPage the page to create this graph from. Important if current object is not a page
+     * @return string
+     */
+    public function getSchemaGraph(SiteTree $originalPage)
+    {
+        $owner = $this->getOwner();
+        $siteconfig = SiteConfig::current_site_config();
+        $generatedGraph = [
+            '@context' => 'https://schema.org',
+            '@graph' => [
+                $siteconfig->getOrganisationSchema(),
+                $siteconfig->getWebsiteSchema(),
+                $this->getWebPageSchema(),
+                $this->getBreadcrumbListSchema($originalPage),
+            ]
+        ];
+        $owner->extend('updateSchemaGraph', $generatedGraph);
+        return json_encode($generatedGraph);
+    }
+
+
+    /**
+     * getWebPageSchema - generates the WebPage part of the schema
+     *
+     * @return array
+     */
+    public function getWebPageSchema()
+    {
+        $owner = $this->getOwner();
+        $baseURL = Director::absoluteBaseURL();
+        $currentURL = $owner->AbsoluteLink();
+        return [
+            "@type" => "WebPage",
+            "@id" => "$currentURL#webpage",
+            "url" => "$currentURL",
+            "inLanguage" => i18n::get_locale(),
+            "name" => $this->getSEOTitle(),
+            "isPartOf" => [
+                "@id" => "$baseURL#website"
+            ],
+            "datePublished" => $owner->Created,
+            "dateModified" => $owner->LastEdited,
+            "breadcrumb" => [
+                "@id" => "$currentURL#breadcrumb"
+            ],
+            "potentialAction" => [
+                [
+                    "@type" => "ReadAction",
+                    "target" => [
+                        "$currentURL"
+                    ]
+                ]
+            ],
+        ];
+    }
+
+    /**
+     * getBreadcrumbListSchema - generates the breadcrumb part of the schema
+     *
+     * @param  SiteTree $page the page to create the crumbs from. Important if current object is not a page
+     * @return array
+     */
+    public function getBreadcrumbListSchema(SiteTree $page)
+    {
+        $owner = $this->getOwner();
+        $baseURL = Director::absoluteBaseURL();
+        $currentURL = $owner->AbsoluteLink();
+        $breadCrumbs = [];
+        foreach ($page->getBreadcrumbItems() as $item) {
+            $breadCrumbs[] = [
+                "@type" => "ListItem",
+                "name" => $item->getSEOTitle(),
+                "item" => $item->AbsoluteLink()
+            ];
+        }
+        if (!$owner->isHomePage()) {
+            $breadCrumbs[] = [
+                "@type" => "ListItem",
+                "name" => SiteTree::get_by_link(null)->getSEOTitle(),
+                "item" => $baseURL
+            ];
+        }
+        $breadCrumbs = array_reverse($breadCrumbs);
+        if (!($owner instanceof SiteTree)) {
+            $breadCrumbs[] = [
+                $breadCrumbs[] = [
+                    "@type" => "ListItem",
+                    "name" => $owner->getSEOTitle(),
+                    "item" => $owner->AbsoluteLink()
+                ]
+            ];
+        }
+        for ($i=0; $i < count($breadCrumbs); $i++) {
+            $breadCrumbs[$i]['position'] = $i+1;
+        }
+        return [
+            "@type" => "BreadcrumbList",
+            "@id" => "$currentURL#breadcrumb",
+            "itemListElement" => $breadCrumbs,
+        ];
     }
 }

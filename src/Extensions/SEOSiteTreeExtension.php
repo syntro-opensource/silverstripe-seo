@@ -105,6 +105,15 @@ class SEOSiteTreeExtension extends DataExtension
             ];
         }
 
+        $tags['graphld'] = [
+            'tag' => 'script',
+            'attributes' => [
+                'type' => 'application/ld+json',
+                'class' => 'ss-schema-graph'
+            ],
+            'content' => $source->getSchemaGraph($owner)
+        ];
+
         return $tags;
     }
 }
