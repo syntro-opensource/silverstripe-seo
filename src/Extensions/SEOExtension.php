@@ -369,7 +369,7 @@ class SEOExtension extends DataExtension
                 "item" => $baseURL
             ];
         }
-        $breadCrumbs = array_reverse($breadCrumbs);
+        // $breadCrumbs = array_reverse($breadCrumbs);
         if (!($owner instanceof SiteTree)) {
             $breadCrumbs[] = [
                 $breadCrumbs[] = [

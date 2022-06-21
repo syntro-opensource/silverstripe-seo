@@ -26,7 +26,7 @@ class SchemaGraphTest extends FunctionalTest
         $page = $this->objFromFixture(\Page::class, 'child');
         $page->copyVersionToStage('Stage', 'Live');
 
-        $response = $this->get('contact-us/child/');
+        $response = $this->get('about-us/child/');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertcontains('<script type="application/ld+json" class="ss-schema-graph">', $response->getBody());
     }
