@@ -21,6 +21,16 @@ class SchemaGraphTest extends FunctionalTest
      */
     protected static $fixture_file = './SchemaGraphFixture.yml';
 
+    public function testSchemaScriptTagIsRendered()
+    {
+        $page = $this->objFromFixture(\Page::class, 'child');
+        $page->copyVersionToStage('Stage', 'Live');
+
+        $response = $this->get('contact-us/child/');
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertcontains('<script type="application/ld+json" class="ss-schema-graph">', $response->getBody());
+    }
+
     /**
      * testOrganizationSchemaName
      *
@@ -169,7 +179,7 @@ class SchemaGraphTest extends FunctionalTest
         $this->assertArrayHasKey('@id', $schema);
         $this->assertArrayHasKey('itemListElement', $schema);
         $bcList = $schema['itemListElement'];
-        $this->assertEquals(2, count($bcList));
+        $this->assertEquals(3, count($bcList));
 
         $this->assertEquals('ListItem', $bcList[0]['@type']);
         $this->assertEquals('I am home', $bcList[0]['name']);
