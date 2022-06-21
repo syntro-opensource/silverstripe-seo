@@ -28,10 +28,10 @@ class SchemaGraphTest extends FunctionalTest
      */
     public function testSchemaScriptTagIsRendered()
     {
-        $page = $this->objFromFixture(\Page::class, 'child');
+        $page = $this->objFromFixture(\Page::class, 'home');
         $page->copyVersionToStage('Stage', 'Live');
 
-        $response = $this->get('about-us/child/');
+        $response = $this->get('/');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertcontains('<script type="application/ld+json" class="ss-schema-graph">', $response->getBody());
     }
