@@ -127,9 +127,9 @@ class Dom
      * if versioning is enabled).
      *
      * @param  string $url the url to load
-     * @return string|null
+     * @return string
      */
-    private static function loadContent($url)
+    public static function loadContent($url)
     {
         if (Director::is_relative_url($url)) {
             $url = Director::absoluteURL($url);

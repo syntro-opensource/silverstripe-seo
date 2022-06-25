@@ -47,6 +47,7 @@ abstract class Analysis extends ViewableData
     /**
      * Ensures that the methods are wrapped in the correct type and
      * values are safely escaped while rendering in the template.
+     * @config
      * @var array
      */
     private static $casting = [
