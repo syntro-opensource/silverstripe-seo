@@ -53,6 +53,7 @@ jobs:
         uses: syntro-opensource/workflows/actions/silverstripe-module-phpunit@master
         with:
           dir: tests/
+          coverage: ${{ matrix.php_version == '7.4' }}
   phpstan:
     name: 🔺 PHPStan
     strategy:
