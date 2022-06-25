@@ -1,3 +1,4 @@
+
 <phpunit
     bootstrap="vendor/silverstripe/framework/tests/bootstrap.php"
 	colors="true"
@@ -14,13 +15,12 @@
         <directory>tests/php</directory>
     </testsuite>
 
-	<filter>
-        <blacklist>
+    <coverage>
+        <exclude>
             <directory suffix=".php">vendor/</directory>
-        </blacklist>
-
-		<whitelist>
-			<directory suffix=".php">src</directory>
-		</whitelist>
-	</filter>
+        </exclude>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </coverage>
 </phpunit>
