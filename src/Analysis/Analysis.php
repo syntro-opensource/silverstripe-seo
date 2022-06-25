@@ -132,7 +132,7 @@ abstract class Analysis extends ViewableData
      */
     public function getRememberedHidden()
     {
-        if (!$this->hidden || $this->hidden !== false) {
+        if (!$this->hidden) {
             $this->hidden = $this->isHidden();
         }
         return $this->hidden;
