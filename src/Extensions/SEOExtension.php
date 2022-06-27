@@ -27,20 +27,56 @@ use SilverStripe\i18n\i18n;
 class SEOExtension extends DataExtension
 {
 
+    /**
+     * @config
+     */
     private static $seo_use_metatitle = true;
+
+    /**
+     * @config
+     */
     private static $seo_title_fallback = 'Title';
+
+    /**
+     * @config
+     */
     private static $seo_title_template = null;
 
+
+    /**
+     * @config
+     */
     private static $seo_title_min = 40;
+
+    /**
+     * @config
+     */
     private static $seo_title_opt = 50;
+
+    /**
+     * @config
+     */
     private static $seo_title_max = 60;
 
+
+    /**
+     * @config
+     */
     private static $seo_desc_min = 100;
+
+    /**
+     * @config
+     */
     private static $seo_desc_opt = 120;
+
+    /**
+     * @config
+     */
     private static $seo_desc_max = 158;
 
     /**
      * Database fields
+     * @config
      * @var array
      */
     private static $db = [
@@ -51,6 +87,7 @@ class SEOExtension extends DataExtension
 
     /**
      * Add default values to database
+     * @config
      *  @var array
      */
     private static $defaults = [
@@ -58,6 +95,7 @@ class SEOExtension extends DataExtension
 
     /**
      * fields to be translated by fluent
+     * @config
      * @var array
      */
     private static $field_include = [

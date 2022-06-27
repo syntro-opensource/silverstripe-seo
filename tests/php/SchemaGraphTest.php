@@ -33,7 +33,7 @@ class SchemaGraphTest extends FunctionalTest
 
         $response = $this->get('/');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertcontains('<script type="application/ld+json" class="ss-schema-graph">', $response->getBody());
+        $this->assertStringContainsString('<script type="application/ld+json" class="ss-schema-graph">', $response->getBody());
     }
 
     /**
