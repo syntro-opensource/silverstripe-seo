@@ -14,6 +14,8 @@ use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\CMS\Model\RedirectorPage;
+use SilverStripe\CMS\Model\VirtualPage;
 use Syntro\SEO\Forms\SERPField;
 use Syntro\SEO\Forms\KeywordAnalysisField;
 use PHPHtmlParser\Dom;
@@ -116,6 +118,9 @@ class SEOExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $owner = $this->owner;
+        if ($owner instanceof RedirectorPage || $owner instanceof VirtualPage) {
+            return $fields;
+        }
         $fields->removeByName([
             'Metadata',
             'MetaDescription',
