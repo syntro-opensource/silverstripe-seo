@@ -16,9 +16,7 @@ use SilverStripe\ORM\DataExtension;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\CMS\Model\RedirectorPage;
 use SilverStripe\CMS\Model\VirtualPage;
-use Syntro\SEO\Forms\SERPField;
-use Syntro\SEO\Forms\KeywordAnalysisField;
-use PHPHtmlParser\Dom;
+use Syntro\SEO\Forms\SEOAnalysisField;
 use SilverStripe\i18n\i18n;
 
 /**
@@ -245,15 +243,9 @@ class SEOExtension extends DataExtension
                         'FocusKeyword',
                         _t(__CLASS__ . '.FocusKeyword', 'Focus Keyword')
                     ),
-                    $SERPField = SERPField::create(
-                        'SERP',
-                        _t(__CLASS__ . '.SERP', 'SERP'),
-                        $owner->Link(),
-                        $owner->FocusKeyword
-                    ),
-                    $KWAnalysisField = KeywordAnalysisField::create(
-                        'KWAnalysis',
-                        _t(__CLASS__ . '.KWAnalysis', 'Analysis results'),
+                    SEOAnalysisField::create(
+                        'SEOAnalysis',
+                        '',
                         $owner->Link(),
                         $owner->FocusKeyword
                     ),
@@ -263,8 +255,6 @@ class SEOExtension extends DataExtension
             );
             $focusKWField
                 ->setRightTitle(_t(__CLASS__ . '.FocusKeywordRightTitle', 'Choose a Focus for this Page'));
-            $SERPField
-                ->setRightTitle(_t(__CLASS__ . '.SERPRightTitle', 'Google preview'));
         } else {
             $noLinkMessage = _t(__CLASS__ . '.NOLINK', 'NO_LINK');
             $fields->addFieldToTab(

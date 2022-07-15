@@ -19,6 +19,12 @@
         "syntro/silverstripe-phpstan": "^1",
         "phpunit/phpunit": "^9.5"
     },
+    "extra": {
+        "expose": [
+            "client/dist",
+            "client/lang"
+        ]
+    },
     "suggest": {
         "wilr/silverstripe-googlesitemaps": "Adds a sitemap to the page",
         "syntro/silvershare": "Allows the user to fine-tune sharing links to social media"

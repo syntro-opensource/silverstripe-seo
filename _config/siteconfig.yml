@@ -4,6 +4,13 @@ Before:
   - 'tractorcow/silverstripe-fluent'
   - syntro/silvershare
 ---
+---
+Name: textdropdownfield
+---
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_javascript:
+    - 'syntro/silverstripe-seo:client/dist/seo-field/main.js'
+
 
 SilverStripe\SiteConfig\SiteConfig:
   extensions:
