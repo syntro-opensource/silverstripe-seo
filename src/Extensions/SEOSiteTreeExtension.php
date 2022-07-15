@@ -65,7 +65,7 @@ class SEOSiteTreeExtension extends DataExtension
         // Add robots snippet
         // We respect the "ShowInSearch" Setting for SiteTree objects, for everything
         // else we assume a free pass
-        if ($source->ShowInSearch || !($source instanceof SiteTree)) {
+        if ($source->ShowInSearch && $source instanceof SiteTree) {
             $tags['robots'] = [
                 'tag' => 'meta',
                 'attributes' => [
