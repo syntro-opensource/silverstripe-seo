@@ -40,7 +40,7 @@ class SEOAnalysisField extends FormField
      * @param  string $keyword = null optional keyword to use for analysis
      * @return void
      */
-    function __construct($name, $title, $link, $keywor = null)
+    function __construct($name, $title, $link, $keyword = null)
     {
         parent::__construct($name, $title);
         $this->analysisLink = $link;
