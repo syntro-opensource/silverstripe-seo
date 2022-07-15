@@ -44,7 +44,8 @@ class MetaTest extends FunctionalTest
     {
         $page = $this->objFromFixture(SiteTree::class, 'notInSearch');
         $page->copyVersionToStage('Stage', 'Live');
-
+        $page->ShowInSearch = false;
+        $page->write();
         $response = $this->get('notInSearch/');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertStringContainsString('<meta name="robots" content="noindex" />', $response->getBody());
