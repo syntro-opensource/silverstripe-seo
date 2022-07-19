@@ -16,6 +16,7 @@ use SilverStripe\ORM\DataExtension;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\CMS\Model\RedirectorPage;
 use SilverStripe\CMS\Model\VirtualPage;
+use SilverStripe\ErrorPage\ErrorPage;
 use Syntro\SEO\Forms\SEOAnalysisField;
 use SilverStripe\i18n\i18n;
 
@@ -116,7 +117,7 @@ class SEOExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $owner = $this->owner;
-        if ($owner instanceof RedirectorPage || $owner instanceof VirtualPage) {
+        if ($owner instanceof RedirectorPage || $owner instanceof VirtualPage || $owner instanceof ErrorPage) {
             return $fields;
         }
         $fields->removeByName([
