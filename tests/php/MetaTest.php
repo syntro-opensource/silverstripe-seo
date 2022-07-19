@@ -27,7 +27,7 @@ class MetaTest extends FunctionalTest
      */
     public function testGeneratesRobotTagWhenShown()
     {
-        $page = $this->objFromFixture(SiteTree::class, 'inSearch');
+        $page = $this->objFromFixture(\Page::class, 'inSearch');
         $page->copyVersionToStage('Stage', 'Live');
 
         $response = $this->get('inSearch/');
@@ -42,7 +42,7 @@ class MetaTest extends FunctionalTest
      */
     public function testGeneratesRobotTagWhenNotShown()
     {
-        $page = $this->objFromFixture(SiteTree::class, 'notInSearch');
+        $page = $this->objFromFixture(\Page::class, 'notInSearch');
         $page->copyVersionToStage('Stage', 'Live');
 
         $response = $this->get('notInSearch/');

@@ -1,4 +1,4 @@
-SilverStripe\CMS\Model\SiteTree:
+Page:
   inSearch:
     URLSegment: inSearch
     Title: I am in Search

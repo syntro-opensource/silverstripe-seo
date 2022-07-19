@@ -1,0 +1,14 @@
+extends: "@syntro-opensource/eslint-config-base"
+parser: "@babel/eslint-parser"
+parserOptions:
+  babelOptions:
+    presets:
+      - "@babel/preset-react"
+settings:
+  import/resolver:
+    alias:
+      map:
+        - ['Components', './client/src/seo-field/components']
+        - ['Hooks', './client/src/seo-field/hooks']
+        - ['Analysis', './client/src/seo-field/analysis']
+      extensions: ['.js', '.jsx']

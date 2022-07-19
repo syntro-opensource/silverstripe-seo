@@ -1,0 +1,42 @@
+{
+  "analyseContentFocus": {
+    "FOUND": "Das Fokus-Schlüsselwort wurde <strong>{{matches}}</strong> mal im Inhalt dieser Seite gefunden.",
+    "NOTFOUND": "Das Fokus-Schlüsselwort wurde im Inhalt dieser Seite nicht gefunden."
+  },
+  "analyseContentWordCount": {
+    "COUNTLOW": "Der Inhalt dieser Seite enthält {{wordCount}} Wörter, was weniger als das empfohlene Minimum von {{GOOGLE_OPT_CONTENT_LENGTH}} Wörter ist.",
+    "COUNTOK": "Der Inhalt dieser Seite enthält <b>{{wordCount}} Wörter</b>"
+  },
+  "analyseDescription": {
+    "NODESC": "Die Meta Beschreibung wurde nicht festgelegt. Ein möglicherweise unerwünschter Ausschnitt kann von der Seite genommen und stattdessen angezeigt werden.",
+    "NOKEYWORD": "Die Metabeschreibung enthält das Fokus-Schlüsselwort nicht. Ein möglicherweise unerwünschter Ausschnitt kann von der Seite genommen und stattdessen angezeigt werden.",
+    "SUCCESS": "Die Meta Beschreibung ist perfekt!",
+    "TOOLONG": "Die Meta Beschreibung ist zu lang.",
+    "TOOSHORT": "Die Meta Beschreibung ist zu kurz."
+  },
+  "analyseFocusKeyword": {
+    "NOKEYWORD": "Es wurde kein Fokus-Schlüsselwort für diese Seite gesetzt. Setzen Sie ein Fokus-Schlüsselwort, um zusätzliche Tests freizuschalten."
+  },
+  "analyseH1Title": {
+    "MANYTITLES": "Die Seite hat mehrere H1-Titel. Jede Seite sollte nur einen, einzigartigen H1-Titel besitzen.",
+    "NOKEYWORD": "Der H1-Titel enthält das Fokus-Schslüselwort nicht.",
+    "NOTITLE": "Die Seite hat keinen H1-Titel. Jede Seite sollte einen eigenen, einzigartigen H1-Titel besitzen.",
+    "SUCCESS": "Der H1-Titel ist perfekt!"
+  },
+  "analyseTitle": {
+    "CONTAINSHOME": "Der Seitentitel sollte von \"{{title}}\" abgeändert werden; Titel mit {{HOME_WORD}} führen fast immer zu einer reduzierten Klickrate.",
+    "KEYWORDNOTSTART": "Der Seitentitel enthält das Fokus-Schlüsselwort, jedoch nicht am Anfang; Ziehen Sie in Betracht, dieses an den Anfang zu verschieben.",
+    "NOKEYWORD": "Der Seitentitel enthält das Fokus-Schlüsselwort nicht.",
+    "SHORT": "Der Seitentitel ist etwas kurz, liegt aber über dem absoluten Zeichenminimum von {{GOOGLE_MIN_TITLE_LENGTH}} Zeichen.",
+    "SUCCESS": "Der Seitentitel ist perfekt!",
+    "TOOLONG": "Der Seitentitel ist zu lang.",
+    "TOOSHORT": "Der Seitentitel ist zu kurz."
+  },
+  "analyseURL": {
+    "NOFOCUS": "Das Fokus-Schlüsselwort wurde nicht im URL-Segment gefunden!"
+  },
+  "tabs": {
+    "ANALYSIS": "Analyse",
+    "SERP": "SERP"
+  }
+}

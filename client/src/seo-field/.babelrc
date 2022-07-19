@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    "@babel/plugin-proposal-export-default-from",
+    ["i18next-extract", {
+        "locales": [
+            "en",
+            "de",
+        ],
+        "useI18nextDefaultValue": true,
+        "outputPath": "client/lang/{{locale}}/{{ns}}.json"
+    }],
+  ]
+}

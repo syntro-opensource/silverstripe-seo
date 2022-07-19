@@ -19,6 +19,12 @@
         "syntro/silverstripe-phpstan": "^1",
         "phpunit/phpunit": "^9.5"
     },
+    "extra": {
+        "expose": [
+            "client/dist",
+            "client/lang"
+        ]
+    },
     "suggest": {
         "wilr/silverstripe-googlesitemaps": "Adds a sitemap to the page",
         "syntro/silvershare": "Allows the user to fine-tune sharing links to social media"
@@ -44,6 +50,13 @@
         "phpstan": "../../bin/phpstan analyse src/ --memory-limit=1G -c phpstan-dev.neon -a ../../symbiote/silverstripe-phpstan/bootstrap.php --no-ansi --level 4",
         "phpunit": "../../bin/phpunit",
         "phpunit-flush": "../../bin/phpunit . '' flush=1"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "silverstripe/vendor-plugin": true,
+            "silverstripe/recipe-plugin": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
