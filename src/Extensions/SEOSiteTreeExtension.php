@@ -18,7 +18,11 @@ use Syntro\SEO\Extensions\SEOExtension;
  */
 class SEOSiteTreeExtension extends DataExtension
 {
-    protected $source = null;
+
+    /**
+     * @var array
+     */
+    protected $source = [];
 
     /**
      * getSEOSource - returns the set SEO source
@@ -27,11 +31,11 @@ class SEOSiteTreeExtension extends DataExtension
      */
     public function getSEOSource()
     {
-        if ($this->source) {
-            return $this->source;
+        $owner = $this->getOwner();
+        if (isset($this->source[$owner->Link()])) {
+            return $this->source[$owner->Link()];
         } elseif (Controller::curr()->getAction() == 'index') {
-            $owner = $this->getOwner();
-            $this->setSEOSource($owner);
+            $owner->setSEOSource($owner);
             return $owner;
         }
         return null;
@@ -45,7 +49,8 @@ class SEOSiteTreeExtension extends DataExtension
      */
     public function setSEOSource($source)
     {
-        $this->source = $source;
+        $owner = $this->getOwner();
+        $this->source[$owner->Link()] = $source;
     }
 
     /**
@@ -58,7 +63,7 @@ class SEOSiteTreeExtension extends DataExtension
     {
         /** @var SiteTree $owner */
         $owner = $this->getOwner();
-        $source = $this->getSEOSource();
+        $source = $owner->getSEOSource();
         if (!$source || !$source->hasExtension(SEOExtension::class)) {
             return $tags;
         }

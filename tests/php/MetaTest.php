@@ -27,7 +27,7 @@ class MetaTest extends FunctionalTest
      */
     public function testGeneratesRobotTagWhenShown()
     {
-        $page = $this->objFromFixture(SiteTree::class, 'inSearch');
+        $page = $this->objFromFixture(\Page::class, 'inSearch');
         $page->copyVersionToStage('Stage', 'Live');
 
         $response = $this->get('inSearch/');
@@ -42,10 +42,9 @@ class MetaTest extends FunctionalTest
      */
     public function testGeneratesRobotTagWhenNotShown()
     {
-        $page = $this->objFromFixture(SiteTree::class, 'notInSearch');
+        $page = $this->objFromFixture(\Page::class, 'notInSearch');
         $page->copyVersionToStage('Stage', 'Live');
-        $page->ShowInSearch = false;
-        $page->write();
+
         $response = $this->get('notInSearch/');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertStringContainsString('<meta name="robots" content="noindex" />', $response->getBody());
