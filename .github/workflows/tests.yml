@@ -26,58 +26,22 @@ on:
       - master
 
 jobs:
-  phpunit:
-    name: 🧩 PHPUnit
-    services:
-      database:
-        image: mysql:5.7
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-    strategy:
-      matrix:
-        php_version: [ '7.4', '8.0' ]
-        silverstripe_version: [ '4.10' ]
-    container: syntrocontainer/silverstripe-dev:${{ matrix.php_version }}-apache-buster
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Prep Module
-        uses: syntro-opensource/workflows/actions/silverstripe-module-prep@master
-        with:
-          silverstripe_version: ${{ matrix.silverstripe_version }}
-      - name: Run PHPUnit
-        uses: syntro-opensource/workflows/actions/silverstripe-module-phpunit@master
-        with:
-          dir: tests/
-          coverage: ${{ matrix.php_version == '7.4' }}
-  phpstan:
-    name: 🔺 PHPStan
-    strategy:
-      matrix:
-        php_version: [ '7.4', '8.0' ]
-        silverstripe_version: [ '4.9', '4.10' ]
-        exclude:
-          - php_version: '8.0'
-            silverstripe_version: '4.9'
-    container: syntrocontainer/silverstripe-dev:${{ matrix.php_version }}-apache-buster
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Prep Module
-        uses: syntro-opensource/workflows/actions/silverstripe-module-prep@master
-        with:
-          silverstripe_version: ${{ matrix.silverstripe_version }}
-      - name: Run PHPStan
-        uses: syntro-opensource/workflows/actions/silverstripe-module-phpstan@master
-        with:
-          dir: src/
-  phpcs:
-    name: 🔮 PHPcs - src
-    uses: syntro-opensource/workflows/.github/workflows/silverstripe-phpcs.yml@master
+  silverstripe-module:
+    name: 🧰 Silverstripe Module Testsuite
+    uses: syntro-opensource/workflows/.github/workflows/silverstripe-module.yml@master
     with:
-      dir: src/
+      phpunit: true
+      phpstan: true
+      phpcs: true
+  silverstripe-client:
+    name: 📦 Client Testsuite
+    uses: syntro-opensource/workflows/.github/workflows/client.yml@master
+    with:
+      eslint: true
+      eslint_dir: client/src/seo-field/
+      eslint_configfile: client/src/seo-field/.eslintrc
+      # eslint_ext:
+      # eslint_max-warnings:
+      # stylelint: true
+      # stylelint_glob: client/src/seo-field/**/*.scss
+      # stylelint_max-warnings:
