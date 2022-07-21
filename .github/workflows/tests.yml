@@ -27,7 +27,7 @@ on:
 
 jobs:
   silverstripe-module:
-    name: 🧰 Silverstripe Testsuite
+    name: 🧰 Silverstripe Module Testsuite
     uses: syntro-opensource/workflows/.github/workflows/silverstripe-module.yml@master
     with:
       phpunit: true
