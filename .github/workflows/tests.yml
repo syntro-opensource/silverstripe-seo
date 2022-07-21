@@ -33,6 +33,18 @@ jobs:
       phpunit: true
       phpstan: true
       phpcs: true
+  silverstripe-client:
+    name: 📦 Assets Testsuite
+    uses: syntro-opensource/workflows/.github/workflows/client.yml@master
+    with:
+      eslint: true
+      eslint_dir: client/src/seo-field/
+      eslint_configfile: client/src/seo-field/.eslintrc
+      # eslint_ext:
+      # eslint_max-warnings:
+      stylelint: true
+      stylelint_glob: client/src/seo-field/**/*.scss
+      # stylelint_max-warnings:
   # phpunit:
   #   name: 🧩 PHPUnit
   #   services:
