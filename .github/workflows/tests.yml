@@ -34,7 +34,7 @@ jobs:
       phpstan: true
       phpcs: true
   silverstripe-client:
-    name: 📦 Assets Testsuite
+    name: 📦 Client Testsuite
     uses: syntro-opensource/workflows/.github/workflows/client.yml@master
     with:
       eslint: true
