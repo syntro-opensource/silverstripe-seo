@@ -31,7 +31,6 @@ jobs:
     uses: syntro-opensource/workflows/.github/workflows/silverstripe-module.yml@master
     with:
       phpunit: true
-
   # phpunit:
   #   name: 🧩 PHPUnit
   #   services:
