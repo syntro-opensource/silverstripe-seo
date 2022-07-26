@@ -6,7 +6,7 @@ import HighlightedText from 'Components/HighlightedText';
 /**
  * Renders the breadcrumb part of the SERP
  */
-const SERPBreadcrumbs = (props) => {
+function SERPBreadcrumbs(props) {
   const { breadcrumbs, keyword } = props;
   return (
     <div
@@ -27,7 +27,7 @@ const SERPBreadcrumbs = (props) => {
       ))}
     </div>
   );
-};
+}
 
 SERPBreadcrumbs.defaultProps = {
   keyword: '',
