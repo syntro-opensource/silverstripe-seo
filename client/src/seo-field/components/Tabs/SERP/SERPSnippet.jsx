@@ -5,7 +5,7 @@ import HighlightedText from 'Components/HighlightedText';
 /**
  * renders the snippet part of the SERP
  */
-const SERPSnippet = (props) => {
+function SERPSnippet(props) {
   const { snippet, keyword } = props;
   return (
     <div
@@ -19,7 +19,7 @@ const SERPSnippet = (props) => {
       <HighlightedText content={snippet} keyword={keyword} />
     </div>
   );
-};
+}
 
 SERPSnippet.defaultProps = {
   keyword: '',

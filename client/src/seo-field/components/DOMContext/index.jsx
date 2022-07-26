@@ -4,7 +4,7 @@ import Loader from 'Components/Loader';
 
 export const DOMContext = React.createContext(null);
 
-const DOMContextProvider = (props) => {
+function DOMContextProvider(props) {
   const { link, children } = props;
   const [body, setBody] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +36,7 @@ const DOMContextProvider = (props) => {
       {children}
     </DOMContext.Provider>
   );
-};
+}
 
 DOMContextProvider.defaultProps = {
   children: null,

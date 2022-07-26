@@ -8,7 +8,7 @@ import SERPSnippet from './SERPSnippet';
 /**
  * Renders a SERP preview
  */
-const SERP = (props) => {
+function SERP(props) {
   const { rootUrl, link, keyword } = props;
 
   const { breadcrumbs, title, snippet } = useSERP(rootUrl, link, keyword);
@@ -27,7 +27,7 @@ const SERP = (props) => {
       </div>
     </div>
   );
-};
+}
 
 SERP.defaultProps = {
   rootUrl: 'localhost',

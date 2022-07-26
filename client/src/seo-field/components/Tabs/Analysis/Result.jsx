@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 /* eslint-disable react/no-danger */
 
-const Result = (props) => {
+function Result(props) {
   const {
     show, state, message, index,
   } = props;
@@ -29,7 +29,7 @@ const Result = (props) => {
       </div>
     </>
   );
-};
+}
 
 Result.defaultProps = {
   show: true,
