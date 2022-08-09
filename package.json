@@ -22,7 +22,7 @@
     "babel-plugin-i18next-extract": "^0.8.3",
     "classnames": "^2.3.1",
     "eslint-import-resolver-alias": "^1.1.2",
-    "i18next": "^21.8.14",
+    "i18next": "^21.9.0",
     "i18next-browser-languagedetector": "^6.1.4",
     "i18next-xhr-backend": "^3.2.2",
     "prop-types": "^15.8.1",
