@@ -29,6 +29,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^11.18.1",
-    "reactstrap": "^8.10.1"
+    "reactstrap": "^9.1.4"
   }
 }
