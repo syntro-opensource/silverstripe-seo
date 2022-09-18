@@ -8,6 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+<a name="2.2.1"></a>
+## [2.2.1] - 2022-09-18
+### 🍰 Added
+- standardized module testsuites ([#24](https://github.com/syntro-opensource/silverstripe-seo/issues/24))
+
+### 🐞 Fixed
+- Form template is correctly named
+
+### 🧬 Dependencies
+- Bump terser from 5.14.1 to 5.14.2 ([#23](https://github.com/syntro-opensource/silverstripe-seo/issues/23))
+- Bump [@syntro](https://github.com/syntro)-opensource/webpack-config from 1.3.1 to 1.3.2 ([#22](https://github.com/syntro-opensource/silverstripe-seo/issues/22))
+
+
 <a name="2.2.0"></a>
 ## [2.2.0] - 2022-07-19
 ### 🍰 Added
@@ -91,7 +104,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-05-25
 
-[Unreleased]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.2.0...HEAD
+[Unreleased]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.2.1...HEAD
+[2.2.1]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.2.0...2.2.1
 [2.2.0]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.0.3...2.1.0
