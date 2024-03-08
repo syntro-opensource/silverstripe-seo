@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+<a name="2.2.2"></a>
+## [2.2.2] - 2024-03-08
+### 🐞 Fixed
+- robot tag actually assumes free pass for DataObjects
+
+
 <a name="2.2.1"></a>
 ## [2.2.1] - 2022-09-18
 ### 🍰 Added
@@ -104,7 +110,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-05-25
 
-[Unreleased]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.2.1...HEAD
+[Unreleased]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.2.2...HEAD
+[2.2.2]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.2.1...2.2.2
 [2.2.1]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.2.0...2.2.1
 [2.2.0]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.1.0...2.1.1
