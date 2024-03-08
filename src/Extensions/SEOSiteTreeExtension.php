@@ -78,12 +78,20 @@ class SEOSiteTreeExtension extends DataExtension
                     'content' => 'index, follow, max-snippet:-1'
                 ],
             ];
-        } else {
+        } elseif (!$source->ShowInSearch && $source instanceof SiteTree) {
             $tags['robots'] = [
                 'tag' => 'meta',
                 'attributes' => [
                     'name' => 'robots',
                     'content' => 'noindex'
+                ],
+            ];
+        } else {
+            $tags['robots'] = [
+                'tag' => 'meta',
+                'attributes' => [
+                    'name' => 'robots',
+                    'content' => 'index, follow, max-snippet:-1'
                 ],
             ];
         }
