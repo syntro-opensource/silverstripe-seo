@@ -406,11 +406,9 @@ class SEOExtension extends DataExtension
         // $breadCrumbs = array_reverse($breadCrumbs);
         if (!($owner instanceof SiteTree)) {
             $breadCrumbs[] = [
-                $breadCrumbs[] = [
-                    "@type" => "ListItem",
-                    "name" => $owner->getSEOTitle(),
-                    "item" => $owner->AbsoluteLink()
-                ]
+                "@type" => "ListItem",
+                "name" => $owner->getSEOTitle(),
+                "item" => $owner->AbsoluteLink()
             ];
         }
         for ($i=0; $i < count($breadCrumbs); $i++) {
