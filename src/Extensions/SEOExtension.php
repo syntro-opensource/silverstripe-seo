@@ -389,7 +389,11 @@ class SEOExtension extends DataExtension
         $baseURL = Director::absoluteBaseURL();
         $currentURL = $owner->AbsoluteLink();
         $breadCrumbs = [];
-        if (!$owner->isHomePage() && $homePage = SiteTree::get_by_link(null)) {
+        $pagedummy = $page;
+        if ($owner instanceof SiteTree) {
+            $pagedummy = $owner;
+        }
+        if (!$pagedummy->isHomePage() && $homePage = SiteTree::get_by_link(null)) {
             $breadCrumbs[] = [
                 "@type" => "ListItem",
                 "name" => $homePage->getSEOTitle(),
