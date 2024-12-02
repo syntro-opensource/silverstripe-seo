@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const HighlightedText = (props) => {
+function HighlightedText(props) {
   const { content, keyword } = props;
   let highlighted = content;
   if (keyword && keyword !== '') {
@@ -9,7 +9,7 @@ const HighlightedText = (props) => {
     highlighted = highlighted.replace(re, '<b><span style="background-color: #fffe79;">$&</span></b>');
   }
   return (<span dangerouslySetInnerHTML={{ __html: highlighted }} />); // eslint-disable-line react/no-danger,max-len
-};
+}
 
 HighlightedText.defaultProps = {
   keyword: null,

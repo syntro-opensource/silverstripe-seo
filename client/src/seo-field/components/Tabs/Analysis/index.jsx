@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import useAnalysis from 'Hooks/useAnalysis';
 import Result from './Result';
 
-const Analysis = (props) => {
+function Analysis(props) {
   const { rootUrl, link, keyword } = props;
   const { results } = useAnalysis(rootUrl, link, keyword);
   const order = ['danger', 'warning', 'success', 'secondary'];
@@ -24,7 +24,7 @@ const Analysis = (props) => {
       ))}
     </div>
   );
-};
+}
 
 Analysis.defaultProps = {
   rootUrl: 'localhost',

@@ -5,7 +5,7 @@ import HighlightedText from 'Components/HighlightedText';
 /**
  * The title part of the SERP preview
  */
-const SERPTitle = (props) => {
+function SERPTitle(props) {
   const { title, link, keyword } = props;
   return (
     <div
@@ -29,7 +29,7 @@ const SERPTitle = (props) => {
       </a>
     </div>
   );
-};
+}
 
 SERPTitle.defaultProps = {
   keyword: '',

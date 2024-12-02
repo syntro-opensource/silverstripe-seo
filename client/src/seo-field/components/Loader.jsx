@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Spinner } from 'reactstrap';
 
-const Loader = (props) => {
+function Loader(props) {
   const { color, cover } = props;
   const loader = (
     <div className="d-flex justify-content-center align-items-center h-100">
@@ -28,7 +28,7 @@ const Loader = (props) => {
     );
   }
   return loader;
-};
+}
 
 Loader.defaultProps = {
   color: 'dark',
