@@ -2,7 +2,7 @@
 namespace Syntro\SEO\Extensions;
 
 use SilverStripe\ORM\DataObject;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\Control\Controller;
 use SilverStripe\CMS\Model\SiteTree;
 use Syntro\SEO\Extensions\SEOExtension;
@@ -16,7 +16,7 @@ use Syntro\SEO\Extensions\SEOExtension;
  *
  * @author Matthias Leutenegger <hello@syntro.ch>
  */
-class SEOSiteTreeExtension extends DataExtension
+class SEOSiteTreeExtension extends Extension
 {
 
     /**

@@ -12,7 +12,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\LiteralField;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\CMS\Model\RedirectorPage;
 use SilverStripe\CMS\Model\VirtualPage;
@@ -25,7 +25,7 @@ use SilverStripe\i18n\i18n;
  *
  * @author Matthias Leutenegger <hello@syntro.ch>
  */
-class SEOExtension extends DataExtension
+class SEOExtension extends Extension
 {
 
     /**
