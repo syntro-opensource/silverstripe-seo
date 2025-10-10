@@ -54,7 +54,7 @@ class SEOSiteTreeExtension extends Extension
     }
 
     /**
-     * MetaComponents - updates the MetaComponents with all necessary stuff.
+     * updateMetaComponents - updates the MetaComponents with all necessary stuff.
      *
      * @param  array $tags the original tags
      * @return array
