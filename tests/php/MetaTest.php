@@ -45,6 +45,8 @@ class MetaTest extends FunctionalTest
         $page = $this->objFromFixture(\Page::class, 'notInSearch');
         $page->copyVersionToStage('Stage', 'Live');
 
+        throw new \Exception(var_dump($page), 1);
+
         $response = $this->get('notInSearch/');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertStringContainsString('<meta name="robots" content="noindex" />', $response->getBody());
