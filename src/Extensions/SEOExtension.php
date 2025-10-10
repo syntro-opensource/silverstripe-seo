@@ -389,8 +389,7 @@ class SEOExtension extends Extension
         /** @var SiteTree|DataObject $owner */
         $owner = $this->getOwner();
         $baseURL = Director::absoluteBaseURL();
-        $currentURL = $owner->AbsoluteLink();
-        // @phpstan-ignore method.notFound
+        $currentURL = $owner->AbsoluteLink(); // @phpstan-ignore method.notFound
         $breadCrumbs = [];
         $pagedummy = $page;
         if ($owner instanceof SiteTree) {
