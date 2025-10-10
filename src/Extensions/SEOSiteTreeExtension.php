@@ -63,7 +63,7 @@ class SEOSiteTreeExtension extends Extension
     {
         /** @var SiteTree|DataObject $owner */
         $owner = $this->getOwner();
-        $source = $owner->getSEOSource();
+        $source = $owner->getSEOSource(); // @phpstan-ignore method.notFound
         if (!$source || !$source->hasExtension(SEOExtension::class)) {
             return $tags;
         }
@@ -99,7 +99,7 @@ class SEOSiteTreeExtension extends Extension
         // Add a title
         $tags['title'] = [
             'tag' => 'title',
-            'content' => $source->getSEOTitle() ?? $owner->getSEOTitle(),
+            'content' => $source->getSEOTitle() ?? $owner->getSEOTitle(), // @phpstan-ignore method.notFound
         ];
 
         if ($source->MetaDescription) {
