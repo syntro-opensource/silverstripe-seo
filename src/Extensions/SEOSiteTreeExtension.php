@@ -61,7 +61,7 @@ class SEOSiteTreeExtension extends Extension
      */
     public function updateMetaComponents(&$tags)
     {
-        /** @var SiteTree $owner */
+        /** @var SiteTree|DataObject $owner */
         $owner = $this->getOwner();
         $source = $owner->getSEOSource();
         if (!$source || !$source->hasExtension(SEOExtension::class)) {
