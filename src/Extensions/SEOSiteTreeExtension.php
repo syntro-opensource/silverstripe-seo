@@ -79,8 +79,6 @@ class SEOSiteTreeExtension extends Extension
                 ],
             ];
         } elseif (!$source->ShowInSearch && $source instanceof SiteTree) {
-            throw new \Exception("Error Processing Request", 1);
-
             $tags['robots'] = [
                 'tag' => 'meta',
                 'attributes' => [
