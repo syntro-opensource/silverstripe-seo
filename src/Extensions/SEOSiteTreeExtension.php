@@ -59,7 +59,7 @@ class SEOSiteTreeExtension extends Extension
      * @param  array $tags the original tags
      * @return array
      */
-    public function MetaComponents(&$tags)
+    public function updateMetaComponents(&$tags)
     {
         /** @var SiteTree $owner */
         $owner = $this->getOwner();
