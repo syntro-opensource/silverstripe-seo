@@ -183,7 +183,7 @@ class SEOExtension extends Extension
                     'Metadata',
                     _t(__CLASS__ . '.ExtraMetadataToggle', 'Extra Metadata'),
                     [
-                        $metaFieldExtra = new TextareaField(
+                        $metaFieldExtra = TextareaField::create(
                             "ExtraMeta",
                             $owner->fieldLabel('ExtraMeta')
                         )
