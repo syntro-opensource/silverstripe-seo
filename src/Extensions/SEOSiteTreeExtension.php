@@ -87,8 +87,6 @@ class SEOSiteTreeExtension extends Extension
                 ],
             ];
         } else {
-            throw new \Exception("Error Processing Request", 1);
-
             $tags['robots'] = [
                 'tag' => 'meta',
                 'attributes' => [
