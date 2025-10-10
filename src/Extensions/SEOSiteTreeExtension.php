@@ -59,7 +59,7 @@ class SEOSiteTreeExtension extends Extension
      * @param  array $tags the original tags
      * @return array
      */
-    public function MetaComponents(&$tags)
+    public function updateMetaComponents(&$tags)
     {
         /** @var SiteTree $owner */
         $owner = $this->getOwner();
@@ -71,8 +71,6 @@ class SEOSiteTreeExtension extends Extension
         // We respect the "ShowInSearch" Setting for SiteTree objects, for everything
         // else we assume a free pass
         if ($source->ShowInSearch && $source instanceof SiteTree) {
-            throw new \Exception("Error Processing Request", 1);
-
             $tags['robots'] = [
                 'tag' => 'meta',
                 'attributes' => [
@@ -89,6 +87,8 @@ class SEOSiteTreeExtension extends Extension
                 ],
             ];
         } else {
+            throw new \Exception("Error Processing Request", 1);
+
             $tags['robots'] = [
                 'tag' => 'meta',
                 'attributes' => [
