@@ -298,8 +298,8 @@ class SEOExtension extends Extension
     public function getSEOTitle()
     {
         $owner = $this->getOwner();
-        $titleField = $owner->config()->seo_title_fallback;
-        $useMetaTitle = $owner->config()->seo_use_metatitle;
+        $titleField = $owner->config()->get('seo_title_fallback');
+        $useMetaTitle = $owner->config()->get('seo_use_metatitle');
         $titleObj = null;
         if ($titleField) {
             if ($useMetaTitle && $owner->MetaTitle && $owner->MetaTitle != '') {
@@ -308,7 +308,7 @@ class SEOExtension extends Extension
                 $titleObj = $owner->obj($titleField);
             }
         }
-        $titleTemplate = $owner->config()->seo_title_template;
+        $titleTemplate = $owner->config()->get('seo_title_template');
         if ($titleObj) {
             if ($titleTemplate) {
                 return $titleObj->renderWith($titleTemplate);
