@@ -385,6 +385,7 @@ class SEOExtension extends Extension
      */
     public function getBreadcrumbListSchema(SiteTree $page)
     {
+        /** @var SiteTree|DataObject $owner */
         $owner = $this->getOwner();
         $baseURL = Director::absoluteBaseURL();
         $currentURL = $owner->AbsoluteLink();
