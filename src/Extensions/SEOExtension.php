@@ -389,6 +389,7 @@ class SEOExtension extends Extension
         /** @var SiteTree|DataObject $owner */
         $owner = $this->getOwner();
         $baseURL = Director::absoluteBaseURL();
+        // @phpstan-ignore method.NotFound
         $currentURL = $owner->AbsoluteLink();
         $breadCrumbs = [];
         $pagedummy = $page;
@@ -413,7 +414,9 @@ class SEOExtension extends Extension
         if (!($owner instanceof SiteTree)) {
             $breadCrumbs[] = [
                 "@type" => "ListItem",
+                // @phpstan-ignore method.NotFound
                 "name" => $owner->getSEOTitle(),
+                // @phpstan-ignore method.NotFound
                 "item" => $owner->AbsoluteLink()
             ];
         }
