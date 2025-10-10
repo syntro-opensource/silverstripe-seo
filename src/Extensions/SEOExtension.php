@@ -1,24 +1,25 @@
 <?php
 namespace Syntro\SEO\Extensions;
 
-use SilverStripe\Control\Director;
-use SilverStripe\SiteConfig\SiteConfig;
-use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\TextareaField;
-use SilverStripe\Forms\ToggleCompositeField;
-use SilverStripe\Forms\HeaderField;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\TabSet;
-use SilverStripe\Forms\Tab;
-use SilverStripe\Forms\LiteralField;
-use SilverStripe\Core\Extension;
-use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\CMS\Model\RedirectorPage;
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\CMS\Model\VirtualPage;
+use SilverStripe\Control\Director;
+use SilverStripe\Core\Extension;
 use SilverStripe\ErrorPage\ErrorPage;
-use Syntro\SEO\Forms\SEOAnalysisField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\TabSet;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\i18n\i18n;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\SiteConfig\SiteConfig;
+use Syntro\SEO\Forms\SEOAnalysisField;
 
 /**
  * The SEO extension adds a n SEO analysis Tab
