@@ -302,7 +302,7 @@ class SEOExtension extends Extension
         $useMetaTitle = $owner->config()->get('seo_use_metatitle');
         $titleObj = null;
         if ($titleField) {
-            if ($useMetaTitle && $owner->MetaTitle && $owner->MetaTitle != '') {
+            if ($useMetaTitle && $owner->MetaTitle && !empty($owner->MetaTitle)) {
                 $titleObj = $owner->obj('MetaTitle');
             } else {
                 $titleObj = $owner->obj($titleField);
