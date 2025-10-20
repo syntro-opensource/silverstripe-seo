@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 
+<a name="6.0.0"></a>
+## [6.0.0] - 2025-10-20
+### 🍰 Added
+- SS6 support ([#72](https://github.com/syntro-opensource/silverstripe-seo/issues/72))
+
+
 <a name="2.2.4"></a>
 ## [2.2.4] - 2024-08-07
 ### 🐞 Fixed
@@ -122,7 +128,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-05-25
 
-[Unreleased]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.2.4...HEAD
+[Unreleased]: https://github.com/syntro-opensource/silverstripe-seo/compare/6.0.0...HEAD
+[6.0.0]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.2.4...6.0.0
 [2.2.4]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.2.3...2.2.4
 [2.2.3]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.2.2...2.2.3
 [2.2.2]: https://github.com/syntro-opensource/silverstripe-seo/compare/2.2.1...2.2.2
