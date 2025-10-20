@@ -117,7 +117,7 @@ class SEOExtension extends Extension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $owner = $this->owner;
+        $owner = $this->getOwner();
         if ($owner instanceof RedirectorPage || $owner instanceof VirtualPage || $owner instanceof ErrorPage) {
             return $fields;
         }
