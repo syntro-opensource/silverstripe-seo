@@ -56,7 +56,7 @@ class SiteConfigExtension extends Extension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $owner = $this->owner;
+        $owner = $this->getOwner();
         $fields->addFieldToTab(
             'Root.Main',
             $logoField = UploadField::create(
