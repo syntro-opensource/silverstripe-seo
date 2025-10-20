@@ -2,7 +2,7 @@
 namespace Syntro\SEO\Extensions;
 
 use SilverStripe\ORM\DataObject;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\Control\Controller;
 use SilverStripe\CMS\Model\SiteTree;
 use Syntro\SEO\Extensions\SEOExtension;
@@ -16,7 +16,7 @@ use Syntro\SEO\Extensions\SEOExtension;
  *
  * @author Matthias Leutenegger <hello@syntro.ch>
  */
-class SEOSiteTreeExtension extends DataExtension
+class SEOSiteTreeExtension extends Extension
 {
 
     /**
@@ -54,16 +54,16 @@ class SEOSiteTreeExtension extends DataExtension
     }
 
     /**
-     * MetaComponents - updates the MetaComponents with all necessary stuff.
+     * updateMetaComponents - updates the MetaComponents with all necessary stuff.
      *
      * @param  array $tags the original tags
      * @return array
      */
-    public function MetaComponents(&$tags)
+    public function updateMetaComponents(&$tags)
     {
-        /** @var SiteTree $owner */
+        /** @var SiteTree|DataObject $owner */
         $owner = $this->getOwner();
-        $source = $owner->getSEOSource();
+        $source = $owner->getSEOSource(); // @phpstan-ignore method.notFound
         if (!$source || !$source->hasExtension(SEOExtension::class)) {
             return $tags;
         }
@@ -99,7 +99,7 @@ class SEOSiteTreeExtension extends DataExtension
         // Add a title
         $tags['title'] = [
             'tag' => 'title',
-            'content' => $source->getSEOTitle() ?? $owner->getSEOTitle(),
+            'content' => $source->getSEOTitle() ?? $owner->getSEOTitle(), // @phpstan-ignore method.notFound
         ];
 
         if ($source->MetaDescription) {

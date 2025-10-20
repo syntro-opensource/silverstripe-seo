@@ -7,7 +7,7 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Assets\Image;
 use SilverStripe\SiteConfig\SiteConfig;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\i18n\i18n;
 
@@ -16,7 +16,7 @@ use SilverStripe\i18n\i18n;
  *
  * @author Matthias Leutenegger <hello@syntro.ch>
  */
-class SiteConfigExtension extends DataExtension
+class SiteConfigExtension extends Extension
 {
     /**
      * Database fields

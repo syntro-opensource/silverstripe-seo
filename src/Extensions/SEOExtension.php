@@ -1,31 +1,32 @@
 <?php
 namespace Syntro\SEO\Extensions;
 
-use SilverStripe\Control\Director;
-use SilverStripe\SiteConfig\SiteConfig;
-use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\TextareaField;
-use SilverStripe\Forms\ToggleCompositeField;
-use SilverStripe\Forms\HeaderField;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\TabSet;
-use SilverStripe\Forms\Tab;
-use SilverStripe\Forms\LiteralField;
-use SilverStripe\ORM\DataExtension;
-use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\CMS\Model\RedirectorPage;
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\CMS\Model\VirtualPage;
+use SilverStripe\Control\Director;
+use SilverStripe\Core\Extension;
 use SilverStripe\ErrorPage\ErrorPage;
-use Syntro\SEO\Forms\SEOAnalysisField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\TabSet;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\i18n\i18n;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\SiteConfig\SiteConfig;
+use Syntro\SEO\Forms\SEOAnalysisField;
 
 /**
  * The SEO extension adds a n SEO analysis Tab
  *
  * @author Matthias Leutenegger <hello@syntro.ch>
  */
-class SEOExtension extends DataExtension
+class SEOExtension extends Extension
 {
 
     /**
@@ -183,7 +184,7 @@ class SEOExtension extends DataExtension
                     'Metadata',
                     _t(__CLASS__ . '.ExtraMetadataToggle', 'Extra Metadata'),
                     [
-                        $metaFieldExtra = new TextareaField(
+                        $metaFieldExtra = TextareaField::create(
                             "ExtraMeta",
                             $owner->fieldLabel('ExtraMeta')
                         )
@@ -298,17 +299,17 @@ class SEOExtension extends DataExtension
     public function getSEOTitle()
     {
         $owner = $this->getOwner();
-        $titleField = $owner->config()->seo_title_fallback;
-        $useMetaTitle = $owner->config()->seo_use_metatitle;
+        $titleField = $owner->config()->get('seo_title_fallback');
+        $useMetaTitle = $owner->config()->get('seo_use_metatitle');
         $titleObj = null;
         if ($titleField) {
-            if ($useMetaTitle && $owner->MetaTitle && $owner->MetaTitle != '') {
+            if ($useMetaTitle && $owner->MetaTitle && !empty($owner->MetaTitle)) {
                 $titleObj = $owner->obj('MetaTitle');
             } else {
                 $titleObj = $owner->obj($titleField);
             }
         }
-        $titleTemplate = $owner->config()->seo_title_template;
+        $titleTemplate = $owner->config()->get('seo_title_template');
         if ($titleObj) {
             if ($titleTemplate) {
                 return $titleObj->renderWith($titleTemplate);
@@ -385,9 +386,10 @@ class SEOExtension extends DataExtension
      */
     public function getBreadcrumbListSchema(SiteTree $page)
     {
+        /** @var SiteTree|DataObject $owner */
         $owner = $this->getOwner();
         $baseURL = Director::absoluteBaseURL();
-        $currentURL = $owner->AbsoluteLink();
+        $currentURL = $owner->AbsoluteLink(); // @phpstan-ignore method.notFound
         $breadCrumbs = [];
         $pagedummy = $page;
         if ($owner instanceof SiteTree) {
@@ -411,7 +413,9 @@ class SEOExtension extends DataExtension
         if (!($owner instanceof SiteTree)) {
             $breadCrumbs[] = [
                 "@type" => "ListItem",
+                // @phpstan-ignore method.notFound
                 "name" => $owner->getSEOTitle(),
+                // @phpstan-ignore method.notFound
                 "item" => $owner->AbsoluteLink()
             ];
         }
