@@ -42,7 +42,7 @@ SilverStripe\CMS\Model\SiteTree:
 # Or with DataObjects:
 Article:
   extensions:
-    - Syntro\SEO\Extensions\SEOExtension
+    - Syntro\Seo\Extensions\SEOExtension
   seo_use_metatitle: false
 ```
 
@@ -63,7 +63,7 @@ SilverStripe\CMS\Model\SiteTree:
 # Or with DataObjects:
 Article:
   extensions:
-    - Syntro\SEO\Extensions\SEOExtension
+    - Syntro\Seo\Extensions\SEOExtension
   seo_title_template: Includes/BlogTitle
 ```
 
@@ -84,7 +84,7 @@ SilverStripe\CMS\Model\SiteTree:
 # Or with DataObjects:
 Article:
   extensions:
-    - Syntro\SEO\Extensions\SEOExtension
+    - Syntro\Seo\Extensions\SEOExtension
   seo_title_template: Includes/BlogTitle
   seo_title_fallback: Title
 ```

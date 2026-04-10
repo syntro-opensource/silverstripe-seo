@@ -1,11 +1,11 @@
 <?php
 
-namespace Syntro\SEO\Tests;
+namespace Syntro\Seo\Tests;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\CMS\Model\SiteTree;
-use Syntro\SEO\DOM;
+use Syntro\Seo\DOM;
 
 /**
  * Tests that the extension correctly applies meta tags to the page

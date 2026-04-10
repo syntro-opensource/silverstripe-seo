@@ -6,7 +6,7 @@ function analyseContentFocus(dom, keyword, t) { // eslint-disable-line no-unused
     };
   }
 
-  const bodyText = dom.querySelector('body').innerText.replace(/^( *)$/gm, '').replace(/^( +)/gm, ' ').replace(/(\r\n|\n|\r)/gm, '');
+  const bodyText = dom.querySelector('body').textContent.replace(/^( *)$/gm, '').replace(/^( +)/gm, ' ').replace(/(\r\n|\n|\r)/gm, '');
 
   const re = new RegExp(keyword, 'gi');
   const matches = bodyText.match(re);

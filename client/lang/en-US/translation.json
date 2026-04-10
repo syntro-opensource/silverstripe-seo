@@ -1,0 +1,42 @@
+{
+  "analyseContentFocus": {
+    "FOUND": "The focus keyword was found <strong>{{matches}}</strong> times in the Content of this page.",
+    "NOTFOUND": "The focus keyword was not found in the content of this page."
+  },
+  "analyseContentWordCount": {
+    "COUNTLOW": "The content of this page contains <b>{{wordCount}} words</b>, which is less than the recommended {{GOOGLE_OPT_CONTENT_LENGTH}} words.",
+    "COUNTOK": "The content of this page contains <b>{{wordCount}} words</b>"
+  },
+  "analyseDescription": {
+    "NODESC": "The metadescription was not set. A random and possibly unwanted section of the content might be shown instead.",
+    "NOKEYWORD": "The metadescription does not contain the focus keyword. A random and possibly unwanted section of the content might be shown instead.",
+    "SUCCESS": "the metadescription is perfect!",
+    "TOOLONG": "the metadescription is too long.",
+    "TOOSHORT": "the metadescription is too short."
+  },
+  "analyseFocusKeyword": {
+    "NOKEYWORD": "No focus keyword was set. Consider setting one to unlock further checks."
+  },
+  "analyseH1Title": {
+    "MANYTITLES": "The page contains multiple H1-titles. Each page should contain only one, unique H1-title.",
+    "NOKEYWORD": "The H1-title does not contain the focus-keyword.",
+    "NOTITLE": "This page has no H1-title. Each page should have a unique H1-title.",
+    "SUCCESS": "The H1-title is perfect!"
+  },
+  "analyseTitle": {
+    "CONTAINSHOME": "The page title should be changed from \"{{title}}\"; titles containing {{HOME_WORD}} almost always reduces the click-through rate.",
+    "KEYWORDNOTSTART": "The page title contains the focus keyword, but not at the beginning; Consider moving it to the beginning.",
+    "NOKEYWORD": "The page title does not contain the focus keyword.",
+    "SHORT": "The page title is somewhat short, but is above the absolute character minimum of {{GOOGLE_MIN_TITLE_LENGTH}} characters.",
+    "SUCCESS": "The page title is perfect!",
+    "TOOLONG": "The page title is too long.",
+    "TOOSHORT": "The page title is too short."
+  },
+  "analyseURL": {
+    "NOFOCUS": "The focus keyword was not found in the URL segment!"
+  },
+  "tabs": {
+    "ANALYSIS": "Analysis",
+    "SERP": "SERP"
+  }
+}

@@ -1,12 +1,12 @@
 <?php
 
-namespace Syntro\SEO\Tests;
+namespace Syntro\Seo\Tests;
 
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\CMS\Model\SiteTree;
-use Syntro\SEO\DOM;
+use Syntro\Seo\DOM;
 
 /**
  * Tests that a page has a correct schema graph applied

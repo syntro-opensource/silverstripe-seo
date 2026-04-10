@@ -8,7 +8,7 @@ in question:
 ```yaml
 Article:
   extensions:
-    - Syntro\SEO\Extensions\SEOExtension
+    - Syntro\Seo\Extensions\SEOExtension
   seo_title_fallback: Title
 ```
 In Order to work correctly, the object in question needs to provide a `Link()`

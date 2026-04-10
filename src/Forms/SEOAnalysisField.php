@@ -1,6 +1,6 @@
 <?php
 
-namespace Syntro\SEO\Forms;
+namespace Syntro\Seo\Forms;
 
 use SilverStripe\Forms\DatalessField;
 use SilverStripe\Forms\FormField;
@@ -59,7 +59,8 @@ class SEOAnalysisField extends FormField
         $state['title'] = $this->Title();
         $state['link'] = $this->analysisLink;
         $state['keyword'] = $this->analysisKeyword;
-        $state['rootUrl'] = Director::host();
+        $state['rootUrl'] = Director::absoluteBaseURL();
+
         return $state;
     }
 }

@@ -17,7 +17,7 @@ function analyseH1Title(dom, keyword, t) { // eslint-disable-line no-unused-vars
 
   if (keyword) {
     const re = new RegExp(keyword, 'gi');
-    if (dom.querySelector('h1').innerText.match(re)) {
+    if (dom.querySelector('h1').textContent.match(re)) {
       return {
         show: true,
         state: 'success',

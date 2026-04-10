@@ -1,11 +1,11 @@
 <?php
-namespace Syntro\SEO\Extensions;
+namespace Syntro\Seo\Extensions;
 
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Core\Extension;
 use SilverStripe\Control\Controller;
 use SilverStripe\CMS\Model\SiteTree;
-use Syntro\SEO\Extensions\SEOExtension;
+use Syntro\Seo\Extensions\SEOExtension;
 
 /**
  * The SEOSiteTreeExtension class adds the ability to render SEO specific

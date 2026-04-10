@@ -8,7 +8,9 @@ import '../i18n';
 import { useTranslation } from 'react-i18next';
 
 const SEOAnalysisField = (props) => {
-  const { link, rootUrl, keyword } = props;
+  const {
+    link, rootUrl, keyword,
+  } = props;
   const [openTab, setOpenTab] = useState('1');
   const { t } = useTranslation();
   const handleTabClick = (newTab) => setOpenTab(newTab);
@@ -52,12 +54,18 @@ SEOAnalysisField.defaultProps = {
   link: '',
   rootUrl: '',
   keyword: '',
+  data: {},
 };
 
 SEOAnalysisField.propTypes = {
   link: PropTypes.string,
   rootUrl: PropTypes.string,
   keyword: PropTypes.string,
+  data: PropTypes.shape({
+    link: PropTypes.string,
+    rootUrl: PropTypes.string,
+    keyword: PropTypes.string,
+  }),
 };
 
 export default SEOAnalysisField;
