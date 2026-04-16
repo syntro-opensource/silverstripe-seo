@@ -36,6 +36,7 @@
     "NOFOCUS": "Das Fokus-Schlüsselwort wurde nicht im URL-Segment gefunden!"
   },
   "tabs": {
+    "AI": "AI Suggest",
     "ANALYSIS": "Analyse",
     "SERP": "SERP"
   }

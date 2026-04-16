@@ -251,7 +251,9 @@ class SEOExtension extends Extension
                         '',
                         $analysisLink,
                         $owner->FocusKeyword
-                    ),
+                    )
+                    ->setPageId((int) $owner->ID)
+                    ->setCurrentTitle((string) ($owner->MetaTitle ?: $owner->Title)),
                     // ToggleCompositeField::create('Passed', 'Passed', []),
                     // ToggleCompositeField::create('NotApplicable', 'Not Applicable', []),
                 ]
