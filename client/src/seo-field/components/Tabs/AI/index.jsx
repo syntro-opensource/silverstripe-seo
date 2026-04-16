@@ -9,7 +9,7 @@ import { Button, Spinner, Alert } from 'reactstrap';
  * receives { metaTitle, metaDescription, focusKeyword }, and offers
  * one-click Apply buttons to populate the sibling form fields.
  */
-const AITab = ({ pageId, pageHtml, currentTitle }) => {
+const AITab = ({ pageId, currentTitle }) => {
   const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState(null);
   const [error, setError] = useState(null);
@@ -31,7 +31,6 @@ const AITab = ({ pageId, pageHtml, currentTitle }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           pageId,
-          pageHtml,
           currentTitle,
           SecurityID: tokenField?.value ?? '',
           SecurityToken: tokenName?.value ?? '',
@@ -162,13 +161,11 @@ const SuggestionRow = ({
 
 AITab.defaultProps = {
   pageId: 0,
-  pageHtml: '',
   currentTitle: '',
 };
 
 AITab.propTypes = {
   pageId: PropTypes.number,
-  pageHtml: PropTypes.string,
   currentTitle: PropTypes.string,
 };
 

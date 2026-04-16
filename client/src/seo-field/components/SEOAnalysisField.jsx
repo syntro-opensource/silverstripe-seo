@@ -12,45 +12,41 @@ import { useTranslation } from 'react-i18next';
  */
 const SEOAnalysisFieldInner = ({
   link, rootUrl, keyword, pageId, currentTitle, openTab, handleTabClick, t,
-}) => {
-  const pageHtml = useContext(DOMContext) || '';
-
-  return (
-    <>
-      <Nav tabs>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: openTab === '1' })}
-            onClick={() => handleTabClick('1')}
-          >
-            {t('tabs.ANALYSIS', 'Analysis')}
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: openTab === '3' })}
-            onClick={() => handleTabClick('3')}
-          >
-            {t('tabs.SERP', 'SERP')}
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink
-            className={classnames({ active: openTab === 'ai' })}
-            onClick={() => handleTabClick('ai')}
-          >
-            {t('tabs.AI', 'AI Suggest')}
-          </NavLink>
-        </NavItem>
-      </Nav>
-      {openTab === '1' && <Analysis link={link} keyword={keyword} rootUrl={rootUrl} />}
-      {openTab === '3' && <SERP link={link} keyword={keyword} rootUrl={rootUrl} />}
-      {openTab === 'ai' && (
-        <AI pageId={pageId} pageHtml={pageHtml} currentTitle={currentTitle} />
-      )}
-    </>
-  );
-};
+}) => (
+  <>
+    <Nav tabs>
+      <NavItem>
+        <NavLink
+          className={classnames({ active: openTab === '1' })}
+          onClick={() => handleTabClick('1')}
+        >
+          {t('tabs.ANALYSIS', 'Analysis')}
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink
+          className={classnames({ active: openTab === '3' })}
+          onClick={() => handleTabClick('3')}
+        >
+          {t('tabs.SERP', 'SERP')}
+        </NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink
+          className={classnames({ active: openTab === 'ai' })}
+          onClick={() => handleTabClick('ai')}
+        >
+          {t('tabs.AI', 'AI Suggest')}
+        </NavLink>
+      </NavItem>
+    </Nav>
+    {openTab === '1' && <Analysis link={link} keyword={keyword} rootUrl={rootUrl} />}
+    {openTab === '3' && <SERP link={link} keyword={keyword} rootUrl={rootUrl} />}
+    {openTab === 'ai' && (
+    <AI pageId={pageId} currentTitle={currentTitle} />
+    )}
+  </>
+);
 
 const SEOAnalysisField = (props) => {
   const {
