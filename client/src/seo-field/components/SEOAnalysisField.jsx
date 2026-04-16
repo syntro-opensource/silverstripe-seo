@@ -93,7 +93,6 @@ SEOAnalysisField.propTypes = {
 };
 
 SEOAnalysisFieldInner.defaultProps = {
-  pageHtml: '',
   currentTitle: '',
   pageId: 0,
 };
