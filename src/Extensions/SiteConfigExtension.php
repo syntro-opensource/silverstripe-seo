@@ -1,5 +1,5 @@
 <?php
-namespace Syntro\SEO\Extensions;
+namespace Syntro\Seo\Extensions;
 
 use SilverStripe\Control\Director;
 use SilverStripe\Forms\TextField;
@@ -56,7 +56,7 @@ class SiteConfigExtension extends Extension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $owner = $this->owner;
+        $owner = $this->getOwner();
         $fields->addFieldToTab(
             'Root.Main',
             $logoField = UploadField::create(

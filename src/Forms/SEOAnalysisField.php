@@ -1,6 +1,6 @@
 <?php
 
-namespace Syntro\SEO\Forms;
+namespace Syntro\Seo\Forms;
 
 use SilverStripe\Forms\DatalessField;
 use SilverStripe\Forms\FormField;
@@ -31,6 +31,10 @@ class SEOAnalysisField extends FormField
 
     private $analysisKeyword = null;
 
+    private ?int $pageId = null;
+
+    private ?string $currentTitle = null;
+
     /**
      * __construct
      *
@@ -48,6 +52,18 @@ class SEOAnalysisField extends FormField
         $this->addExtraClass('seo-analysis-field');
     }
 
+    public function setPageId(int $pageId): static
+    {
+        $this->pageId = $pageId;
+        return $this;
+    }
+
+    public function setCurrentTitle(string $title): static
+    {
+        $this->currentTitle = $title;
+        return $this;
+    }
+
     /**
      * getSchemaStateDefaults
      *
@@ -59,7 +75,10 @@ class SEOAnalysisField extends FormField
         $state['title'] = $this->Title();
         $state['link'] = $this->analysisLink;
         $state['keyword'] = $this->analysisKeyword;
-        $state['rootUrl'] = Director::host();
+        $state['rootUrl'] = Director::absoluteBaseURL();
+        $state['pageId'] = $this->pageId ?? 0;
+        $state['currentTitle'] = $this->currentTitle ?? '';
+
         return $state;
     }
 }

@@ -30,5 +30,8 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^11.18.1",
     "reactstrap": "^8.10.1"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.10.0"
   }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Syntro\SEO\Extensions;
+namespace Syntro\Seo\Extensions;
 
 use SilverStripe\CMS\Model\RedirectorPage;
 use SilverStripe\CMS\Model\SiteTree;
@@ -19,7 +19,7 @@ use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\i18n\i18n;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\SiteConfig\SiteConfig;
-use Syntro\SEO\Forms\SEOAnalysisField;
+use Syntro\Seo\Forms\SEOAnalysisField;
 
 /**
  * The SEO extension adds a n SEO analysis Tab
@@ -159,7 +159,7 @@ class SEOExtension extends Extension
                 // TextareaField::create(
                 //     'PageContent',
                 //     'PageContent',
-                // )->setReadOnly(true)->setValue(file_get_contents($owner->AbsoluteLink()))
+                // )->setReadOnly(true)->setValue(file_get_contents($owner->AbsoluteLink() ?: Director::absoluteURL($owner->Link())))
             ]
         );
 
@@ -238,6 +238,7 @@ class SEOExtension extends Extension
          * Add the keyword analysis fields
          */
         if ($owner->hasMethod('Link')) {
+            $analysisLink = $owner->AbsoluteLink() ?: \SilverStripe\Control\Director::absoluteURL($owner->Link());
             $fields->addFieldsToTab(
                 'Root.SEO.SEORoot.KWAnalysis',
                 [
@@ -248,9 +249,11 @@ class SEOExtension extends Extension
                     SEOAnalysisField::create(
                         'SEOAnalysis',
                         '',
-                        $owner->Link(),
+                        $analysisLink,
                         $owner->FocusKeyword
-                    ),
+                    )
+                    ->setPageId((int) $owner->ID)
+                    ->setCurrentTitle((string) ($owner->MetaTitle ?: $owner->Title)),
                     // ToggleCompositeField::create('Passed', 'Passed', []),
                     // ToggleCompositeField::create('NotApplicable', 'Not Applicable', []),
                 ]
@@ -352,7 +355,7 @@ class SEOExtension extends Extension
     {
         $owner = $this->getOwner();
         $baseURL = Director::absoluteBaseURL();
-        $currentURL = $owner->AbsoluteLink();
+        $currentURL = $owner->AbsoluteLink() ?: Director::absoluteURL($owner->Link());
         return [
             "@type" => "WebPage",
             "@id" => "$currentURL#webpage",
@@ -389,7 +392,7 @@ class SEOExtension extends Extension
         /** @var SiteTree|DataObject $owner */
         $owner = $this->getOwner();
         $baseURL = Director::absoluteBaseURL();
-        $currentURL = $owner->AbsoluteLink(); // @phpstan-ignore method.notFound
+        $currentURL = $owner->AbsoluteLink() ?: Director::absoluteURL($owner->Link()); // @phpstan-ignore method.notFound
         $breadCrumbs = [];
         $pagedummy = $page;
         if ($owner instanceof SiteTree) {
@@ -416,7 +419,7 @@ class SEOExtension extends Extension
                 // @phpstan-ignore method.notFound
                 "name" => $owner->getSEOTitle(),
                 // @phpstan-ignore method.notFound
-                "item" => $owner->AbsoluteLink()
+                "item" => $owner->AbsoluteLink() ?: Director::absoluteURL($owner->Link())
             ];
         }
         for ($i=0; $i < count($breadCrumbs); $i++) {
