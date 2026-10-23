@@ -14,4 +14,4 @@ SilverStripe\Admin\LeftAndMain:
 
 SilverStripe\SiteConfig\SiteConfig:
   extensions:
-    - Syntro\SEO\Extensions\SiteConfigExtension
+    - Syntro\Seo\Extensions\SiteConfigExtension

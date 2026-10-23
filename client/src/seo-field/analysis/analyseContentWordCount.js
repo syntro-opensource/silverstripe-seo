@@ -1,7 +1,7 @@
 const GOOGLE_OPT_CONTENT_LENGTH = 300;
 
 function analyseContentWordCount(dom, keyword, t) { // eslint-disable-line no-unused-vars
-  const bodyText = dom.querySelector('body').innerText.replace(/^( *)$/gm, '').replace(/^( +)/gm, ' ').replace(/(\r\n|\n|\r)/gm, '');
+  const bodyText = dom.querySelector('body').textContent.replace(/^( *)$/gm, '').replace(/^( +)/gm, ' ').replace(/(\r\n|\n|\r)/gm, '');
   const wordCount = (bodyText.length && bodyText.split(/\s+\b/).length) || 0;
 
   if (wordCount > GOOGLE_OPT_CONTENT_LENGTH) {

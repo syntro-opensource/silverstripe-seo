@@ -47,6 +47,9 @@ const config = [
     module: modules(ENV, PATHS),
     plugins: plugins(ENV, PATHS),
     externals: {
+      react: 'React',
+      'react-dom': 'ReactDom',
+      'react-dom/client': 'ReactDomClient',
       jquery: 'jQuery',
       'lib/Injector': 'Injector',
     },

@@ -7,7 +7,7 @@ const HOME_WORDS = [
 ];
 
 function analyseTitle(dom, keyword, t) { // eslint-disable-line no-unused-vars
-  const title = dom.title.toLowerCase();
+  const title = (dom.title || '').toLowerCase();
 
   if (keyword && title.indexOf(keyword.toLowerCase()) < 0) {
     return {
