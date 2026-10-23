@@ -339,9 +339,17 @@ class SEOExtension extends Extension
             ]
         ];
         $owner->extend('updateSchemaGraph', $generatedGraph);
-        return json_encode($generatedGraph);
-    }
 
+        return json_encode(
+            $generatedGraph, 
+            JSON_UNESCAPED_SLASHES | 
+            JSON_UNESCAPED_UNICODE | 
+            JSON_HEX_TAG | 
+            JSON_HEX_AMP | 
+            JSON_HEX_APOS | 
+            JSON_HEX_QUOT
+        );
+    }
 
     /**
      * getWebPageSchema - generates the WebPage part of the schema
